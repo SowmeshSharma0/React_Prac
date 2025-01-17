@@ -1,4 +1,4 @@
 1. Pokemon cards gallery app built
 2. Slot machine exercise to practice prop passing
 3. Rental properties exercise to practice prop passing
-4. useState hook learnt and built random color picker exercise
+4. useState hook learnt and built random color picker exercise (Color box containing 25 divs, each with own state using useState)
