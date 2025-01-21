@@ -6,3 +6,10 @@
     * C1: MultiCounter State management using useState
     * C2: created different file for list ele, passing setState as prop
     * C3: multi counter with complex object mapping and setStates
+6. Crud App of adding and deleting inventory items using a form.
+      * AddItemForm takes 3 inputs : name, qty, price and generates a custom id using uuid and adds this to an array of objects.
+      * The addition/setstate change is done in a parent widget via a callback.
+      * deletion of each list element is also done via a callback
+      * Display of elements of the array of objects via a map
+      * Decomposition of components done properly
+      * Neat UI
