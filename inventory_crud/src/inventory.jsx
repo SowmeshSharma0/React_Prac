@@ -14,7 +14,7 @@ function Inventory({items, deleteItemCallback}){
                     <InventoryItem 
                         key={item.id} 
                         itemID={item.id}
-                        itemName={item.name} 
+                        itemName={item.name} s
                         qty={item.qty} 
                         price={item.price} 
                         deleteItemCallback={deleteItemCallback}
