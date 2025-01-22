@@ -13,3 +13,9 @@
       * Display of elements of the array of objects via a map
       * Decomposition of components done properly
       * Neat UI
+7. password generator uses around 4 hooks
+   1. Single div flexbox which contains a h1, password inpout field, copy btn and (length, hasNum, hasSpecialCharacter options which is a seperate component)
+   2. 4 states: password, length, hasNumber, hasSpecialCharacter
+   3. useCallback used for length, hasNum, hasSpecialCharacter passed to useCallback
+   4. useEffect used to generate passwords on any length, hasNum, hasSpecialChar changes
+   5. useRef used to highlight and copy password to clipboard.
