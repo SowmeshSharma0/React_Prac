@@ -1,0 +1,16 @@
+.CurrencyContainer{
+    display: flex;
+    /* justify-content: center;
+    align-items: center; */
+    flex-direction: column;
+    background-color: #afafaf;
+    height: 40vh;
+    width: 40vw;
+    margin: 5%;
+}
+
+.CurrencyContainer div{
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+}
