@@ -19,3 +19,20 @@
    3. useCallback used for length, hasNum, hasSpecialCharacter passed to useCallback
    4. useEffect used to generate passwords on any length, hasNum, hasSpecialChar changes
    5. useRef used to highlight and copy password to clipboard.
+8. Project Overview: Currency converter web app using React, allowing real-time currency conversion between different currencies.
+   * State Management: Used multiple states (FromVal, ToVal, FromCurrency, ToCurrency, Options) to track user inputs, selected currencies, and exchange rates.
+   * Hooks Utilized:
+     * useState for state management
+     * useEffect for side effects like data fetching
+     * Custom useOptions hook for modular currency data retrieval
+   
+   * Learning Objectives:
+     * React state and prop handling
+     * Asynchronous data fetching
+     * Custom hook creation
+     * Event handling in React components
+
+   * Key Challenges:
+     * Synchronizing currency selection
+     * Managing dynamic exchange rate calculations
+     * Implementing clean, modular component architecture
