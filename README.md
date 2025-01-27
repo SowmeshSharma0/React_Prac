@@ -36,3 +36,6 @@
      * Synchronizing currency selection
      * Managing dynamic exchange rate calculations
      * Implementing clean, modular component architecture
+9. Basic design made : a simple panel of cards with some design and css
+   * toggling done on the basis of prop drilling and propogating states : on pressing toggle button can toggle between night mode and day mode
+   * theme context added : no more prop drilling. Direct access thru context api aka dependency injection
