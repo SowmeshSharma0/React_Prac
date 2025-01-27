@@ -1,0 +1,33 @@
+.main-card{
+    height: 30%;
+    width: 30%;
+    margin: 5% auto;
+    padding: 2%;
+    border-radius: 10px;
+    border: 1px solid #000;
+    display: flex;
+    flex-direction: column;
+}
+
+.main-card-dark{
+    background-color: #000;
+    color: #fff;
+    height: 30%;
+    width: 30%;
+    margin: 5% auto;
+    padding: 2%;
+    border-radius: 10px;
+    border: 1px solid #000;
+    display: flex;
+    flex-direction: column;
+}
+
+.main-card:hover{
+    box-shadow: 0 0 8px 3px #7e7e7e;
+    transition: 0.5s;
+}
+
+.main-card img{
+    object-fit: contain;
+    width: 100%;
+}

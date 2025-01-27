@@ -1,0 +1,17 @@
+.card-info{
+    display: flex;
+    flex-direction: column;
+    word-spacing: 0.3rem;
+}
+
+.card-info h1{
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+}
+
+.card-info span{
+    font-size: 1rem;
+    font-weight: bold;
+    margin: 0.5rem 0;
+}
