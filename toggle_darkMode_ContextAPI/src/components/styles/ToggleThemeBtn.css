@@ -1,5 +1,19 @@
-.toggle-theme-btn{
+.toggle-btn{
     background-color: #f1f1f1;
+    border: 1px solid #f1f1f1;
+    border-radius: 5px;
+    padding: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    position: absolute;
+    right: 2rem;
+    top: 2rem;
+}
+
+.toggle-btn-dark{
+    background-color: #000;
+    color: #fff;
     border: 1px solid #f1f1f1;
     border-radius: 5px;
     padding: 1rem;

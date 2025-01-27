@@ -1,8 +1,11 @@
 import "./styles/ToggleThemeBtn.css"
 
-function ToggleThemeBtn() {
+function ToggleThemeBtn({handleToggle, Dark}) {
   return (
-    <button className="toggle-theme-btn">
+    <button 
+      className={Dark? `toggle-btn-dark` : `toggle-btn`}
+      onClick={handleToggle}
+    >
         Toggle Theme
     </button>
   )
