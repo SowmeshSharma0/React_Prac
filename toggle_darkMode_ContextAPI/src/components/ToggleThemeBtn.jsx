@@ -1,10 +1,14 @@
+import { useContext } from "react"
+import { ThemeContext } from "../contexts/theme"
 import "./styles/ToggleThemeBtn.css"
 
-function ToggleThemeBtn({handleToggle, Dark}) {
+function ToggleThemeBtn() {
+  const {dark, toggle} = useContext(ThemeContext)
+
   return (
     <button 
-      className={Dark? `toggle-btn-dark` : `toggle-btn`}
-      onClick={handleToggle}
+      className={dark? `toggle-btn-dark` : `toggle-btn`}
+      onClick={toggle}
     >
         Toggle Theme
     </button>

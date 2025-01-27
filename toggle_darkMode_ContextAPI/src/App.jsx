@@ -2,19 +2,19 @@ import CardPanel from '../CardPanel'
 import './App.css'
 import ToggleThemeBtn from './components/ToggleThemeBtn'
 import { useState } from 'react'
+import { ThemeProvider } from './contexts/theme'
 
 function App() {
   const [Dark, setDark] = useState(false)
   const handleToggle = () => {
-    console.log('Dark:', Dark)
     setDark(!Dark)
   }
 
   return (
-    <>
-      <ToggleThemeBtn handleToggle={handleToggle} Dark={Dark}/>
-      <CardPanel Dark={Dark}/>
-    </>
+    <ThemeProvider value={{dark: Dark, toggle: handleToggle}}>
+      <ToggleThemeBtn/>
+      <CardPanel/>
+    </ThemeProvider>
   )
 }
 
