@@ -11,7 +11,7 @@ function ToggleThemeBtn() {
       onClick={toggle}
     >
         Toggle Theme
-    </button>
+    </button> 
   )
 }
 
