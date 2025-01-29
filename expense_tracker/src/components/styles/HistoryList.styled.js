@@ -25,12 +25,32 @@ export const StyledHistoryList = styled.div`
         background-color: #f9f9f9;
     }
 
-    h2:after{
-        content: '';
-        display: block;
-        width: 100%;
-        height: 1px;
-        background-color: #ccc;
-        margin-top: 0.5rem;
+    .history-header {
+        display: flex;
+        justify-content: space-between;
+        h2 {
+            width: 100%; /* Ensure h2 takes full width */
+            position: relative; /* Required for the pseudo-element positioning */
+        }
+        
+        h2:after
+        {
+            content: '';
+            display: block;
+            width: 100%;
+            height: 1px;
+            background-color: #ccc;
+            margin-top: 0.5rem;
+        }
+
+        button{
+            background-color: transparent;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #333;
+            margin-bottom: 0.5rem;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
     }
 `

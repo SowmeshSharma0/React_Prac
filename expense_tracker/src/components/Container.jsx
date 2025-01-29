@@ -8,6 +8,7 @@ function Container() {
   const [TransList, setTransList] = useState([])
   const [Income, setIncome] = useState(0)
   const [Exp, setExp] = useState(0)
+  const [isExpanded, setIsExpanded] = useState(false)
 
   const addToList = (item) => {
     console.log(item)
@@ -17,6 +18,7 @@ function Container() {
       setExp(prevExp => prevExp + Math.abs(item.amount))
 
     setTransList(prevList => [...prevList, item])
+    setIsExpanded(true)
   }
 
   return (
@@ -25,7 +27,7 @@ function Container() {
       <h2>Your Balance</h2>
       <h2>Rs{Income - Exp}</h2>
       <IncomeExpense income={Income} exp={Exp}/>
-      <HistoryList TransList={TransList}/>
+      <HistoryList TransList={TransList} isExpanded={isExpanded} setIsExpanded={setIsExpanded}/>
       <AddTransactionForm addToTransList={addToList}/>
     </StyledContainer>
   )
