@@ -1,9 +1,10 @@
-import { useState } from "react"
+import { useContext } from "react"
 import HistoryItem from "./HistoryItem"
 import { StyledHistoryList } from "./styles/HistoryList.styled"
+import { ListContext } from "../context/GlobalContext"
 
-function HistoryList({TransList, isExpanded, setIsExpanded, isOpenItems, toggleItemOpen}) {
-    
+function HistoryList() {
+    const { TransList, isOpenItems, toggleItemOpen, isExpanded, setIsExpanded } = useContext(ListContext)
     return (
         <StyledHistoryList>
             <div className="history-header">

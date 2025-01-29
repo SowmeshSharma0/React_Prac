@@ -1,6 +1,10 @@
+import { useContext } from "react"
 import { StyledAddTransactionForm } from "./styles/AddTransactionForm.styled"
+import { FormContext, ListContext } from "../context/GlobalContext"
 
-function AddTransactionForm({addToTransList, FormData, setFormData}) {
+function AddTransactionForm() {
+  const { FormData, setFormData } = useContext(FormContext)
+  const { addToList } = useContext(ListContext)
 
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -10,7 +14,7 @@ function AddTransactionForm({addToTransList, FormData, setFormData}) {
     TransData.id = crypto.randomUUID()
     TransData.type = (TransData.amount<0) ? 'E' : 'I'
     
-    addToTransList(TransData)
+    addToList(TransData)
     setFormData({title:"", amount:0, description: ""})
   }
 
