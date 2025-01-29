@@ -45,4 +45,9 @@
    * State Management: Utilizes Context API for centralized state management.
    * Component Structure:[Container], [HistoryList], [HistoryItem], [AddTransactionForm], [IncomeExpense]
    * Key Features: Add, view, and manage transactions; with expandable cards and scrollable/ expandable transaction history; Calculate and display total income, expenses, and balance.
-   * C1: expense tracker static design ; C2: working expense tracker; C3: added more functionalities and more states; C4: pushed all states to app.jsx and prop drilling states; C5: Central context with 2 providers
+   * Commits:
+      * C1: expense tracker static design ;
+      * C2: working expense tracker;
+      * C3: added more functionalities and more states;
+      * C4: pushed all states to app.jsx and prop drilling states;
+      * C5: Central context with 2 providers
