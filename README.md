@@ -39,3 +39,10 @@
 9. Basic design made : a simple panel of cards with some design and css
    * toggling done on the basis of prop drilling and propogating states : on pressing toggle button can toggle between night mode and day mode
    * theme context added : no more prop drilling. Direct access thru context api aka dependency injection
+
+10. An Expense Tracker application to manage and track income and expenses.
+   * Built with React for the frontend, Styled-components for styling.
+   * State Management: Utilizes Context API for centralized state management.
+   * Component Structure:[Container], [HistoryList], [HistoryItem], [AddTransactionForm], [IncomeExpense]
+   * Key Features: Add, view, and manage transactions; with expandable cards and scrollable/ expandable transaction history; Calculate and display total income, expenses, and balance.
+   * C1: expense tracker static design ; C2: working expense tracker; C3: added more functionalities and more states; C4: pushed all states to app.jsx and prop drilling states; C5: Central context with 2 providers
