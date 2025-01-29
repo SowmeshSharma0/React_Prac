@@ -2,7 +2,7 @@ import { useState } from "react"
 import HistoryItem from "./HistoryItem"
 import { StyledHistoryList } from "./styles/HistoryList.styled"
 
-function HistoryList({TransList, isExpanded, setIsExpanded}){
+function HistoryList({TransList, isExpanded, setIsExpanded, isOpenItems, toggleItemOpen}) {
     
     return (
         <StyledHistoryList>
@@ -19,7 +19,9 @@ function HistoryList({TransList, isExpanded, setIsExpanded}){
                         title={title} 
                         amount={amount} 
                         type={type} 
-                        description={description} 
+                        description={description}
+                        IsOpen={isOpenItems[id]}
+                        toggleOpen={toggleItemOpen}
                     />
                 )}
             </section>

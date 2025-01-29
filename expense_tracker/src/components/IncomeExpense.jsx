@@ -5,11 +5,11 @@ function IncomeExpense({income, exp}) {
     <StyledIncomeExpense>
       <div>
         <h3>INCOME</h3>
-        <h3>Rs{income}</h3>
+        <h3 style={{color: "green"}}>Rs{income}</h3>
       </div>
       <div>
         <h3>EXPENSE</h3>
-        <h3>Rs{exp}</h3>
+        <h3 style={{color: "red"}}>Rs{exp}</h3>
       </div>
     </StyledIncomeExpense>
   )

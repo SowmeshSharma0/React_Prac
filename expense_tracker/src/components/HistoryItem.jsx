@@ -1,12 +1,9 @@
-import { useState } from "react"
 import { StyledHistoryItem } from "./styles/HistoryItem.styled"
 
-function HistoryItem({id, title, amount, type, description}) {
-
-    const [IsOpen, setIsOpen] = useState(false)
+function HistoryItem({id, title, amount, type, description, IsOpen, toggleOpen}) {
 
     return (
-        <StyledHistoryItem key={id} type={type} onClick={() => setIsOpen(prevState => !prevState)}>
+        <StyledHistoryItem key={id} type={type} onClick={() => toggleOpen(id)}>
             <div>
                 <h4>{title}</h4>
                 <p>{amount}</p>

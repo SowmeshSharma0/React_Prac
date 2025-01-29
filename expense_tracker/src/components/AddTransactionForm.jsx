@@ -1,9 +1,6 @@
-
-import { useState } from "react"
 import { StyledAddTransactionForm } from "./styles/AddTransactionForm.styled"
 
-function AddTransactionForm({addToTransList}) {
-  const [FormData, setFormData] = useState({title:"", amount:0, description: ""})
+function AddTransactionForm({addToTransList, FormData, setFormData}) {
 
   const handleSubmit = (e) => {
     e.preventDefault()
