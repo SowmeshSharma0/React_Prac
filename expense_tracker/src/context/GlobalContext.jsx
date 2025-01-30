@@ -1,4 +1,4 @@
-import { createContext, useReducer } from "react";
+import { createContext, useReducer, useEffect} from "react";
 
 export const TransactionActions = {
     ADD_TRANSACTION: 'ADD_TRANSACTION',
@@ -51,7 +51,9 @@ const UiReducer = (state, action) => {
         case UiActions.TOGGLE_OPEN_ITEMS:
             return {
                 ...state,
-                isOpenItems: !state.isOpenItems,
+                isOpenItems: state.isOpenItems.includes(action.payload)
+                    ? state.isOpenItems.filter(item => item !== action.payload) // Remove if exists
+                    : [...state.isOpenItems, action.payload] // Add if doesn't exist
             };
         case UiActions.TOGGLE_EXPANDED:
             return {
@@ -68,9 +70,10 @@ export const GlobalContext = createContext()
 //provider component:
 export const GlobalProvider = ({children}) => {
 
-    const initTransactionState = {
-        transactions: [],
-    };
+    const getInitState = () => {
+        const transactions = localStorage.getItem('transactions')
+        return transactions ? {transactions: JSON.parse(transactions)} : {transactions: []}
+    }
     
     const initUiState = {
         formData: {
@@ -78,12 +81,16 @@ export const GlobalProvider = ({children}) => {
             amount: '',
             description: ''
         },
-        isOpenItems: false,
+        isOpenItems: [],
         isExpanded: false,
     };
 
-    const [TransactionState, TransactionDispatch] = useReducer(transactionReducer, initTransactionState)
+    const [TransactionState, TransactionDispatch] = useReducer(transactionReducer, getInitState())
     const [UiState, UiDispatch] = useReducer(UiReducer, initUiState)
+
+    useEffect(() => {
+        localStorage.setItem('transactions', JSON.stringify(TransactionState.transactions))
+    }, [TransactionState.transactions])
 
     return (
         <GlobalContext.Provider 

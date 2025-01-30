@@ -21,7 +21,6 @@ function HistoryList() {
                         amount={amount} 
                         type={type} 
                         description={description}
-                        IsOpen={UiState.isOpenItems}
                     />
                 }
                 )}
