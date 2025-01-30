@@ -1,29 +1,29 @@
 import { useContext } from "react"
 import HistoryItem from "./HistoryItem"
 import { StyledHistoryList } from "./styles/HistoryList.styled"
-import { ListContext } from "../context/GlobalContext"
+import { GlobalContext, UiActions } from "../context/GlobalContext"
 
 function HistoryList() {
-    const { TransList, isOpenItems, toggleItemOpen, isExpanded, setIsExpanded } = useContext(ListContext)
+    const { TransactionState, UiState, UiDispatch } = useContext(GlobalContext)
     return (
         <StyledHistoryList>
             <div className="history-header">
                 <h2>History</h2>
-                <button onClick={() => setIsExpanded(prevState => !prevState)}>{isExpanded ? '-' : '+'}</button>
+                <button onClick={() => UiDispatch({type: UiActions.TOGGLE_EXPANDED})}>{UiState.isExpanded ? '-' : '+'}</button>
             </div>
             {/* below component is scrollable and must be expandable */}
             <section>
-                {isExpanded && TransList.map(({id, title, amount, type, description}) => 
-                    <HistoryItem 
+                {UiState.isExpanded && TransactionState.transactions.map(({id, title, amount, type, description}) => {
+                   return  <HistoryItem 
                         key={id} 
                         id={id} 
                         title={title} 
                         amount={amount} 
                         type={type} 
                         description={description}
-                        IsOpen={isOpenItems[id]}
-                        toggleOpen={toggleItemOpen}
+                        IsOpen={UiState.isOpenItems}
                     />
+                }
                 )}
             </section>
         </StyledHistoryList>

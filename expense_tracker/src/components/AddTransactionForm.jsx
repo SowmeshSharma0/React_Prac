@@ -1,29 +1,28 @@
-import { useContext } from "react"
+import { useContext,} from "react"
 import { StyledAddTransactionForm } from "./styles/AddTransactionForm.styled"
-import { FormContext, ListContext } from "../context/GlobalContext"
+import { GlobalContext, UiActions, TransactionActions} from "../context/GlobalContext"
 
 function AddTransactionForm() {
-  const { FormData, setFormData } = useContext(FormContext)
-  const { addToList } = useContext(ListContext)
+  const { TransactionDispatch, UiDispatch, UiState} = useContext(GlobalContext)
 
   const handleSubmit = (e) => {
     e.preventDefault()
     const TransData = {
-      ...FormData,
+      ...UiState.formData,
     }
     TransData.id = crypto.randomUUID()
     TransData.type = (TransData.amount<0) ? 'E' : 'I'
-    
-    addToList(TransData)
-    setFormData({title:"", amount:0, description: ""})
+
+    TransactionDispatch({type: TransactionActions.ADD_TRANSACTION, payload: TransData})
+    UiDispatch({type: UiActions.RESET_FORM_DATA})
   }
 
   const handleOnChange = (e) => {
     const {name, value} = e.target;
-    setFormData({
-      ...FormData,
-      [name] : value
-    })
+    UiDispatch({
+      type: UiActions.SET_FORM_DATA, 
+      payload: {field: name, value}}
+    )
   }
 
   return (
@@ -36,7 +35,7 @@ function AddTransactionForm() {
           name="title" 
           id="title"
           onChange={handleOnChange}
-          value={FormData.title}
+          value={UiState.formData.title}
         />
 
         <label htmlFor="amount">Amount (negative - expense; positive - income)</label>
@@ -45,7 +44,7 @@ function AddTransactionForm() {
           name="amount" 
           id="amount"
           onChange={handleOnChange}
-          value={FormData.amount}
+          value={UiState.formData.amount}
         />
 
         <label htmlFor="description">Description</label>
@@ -54,7 +53,7 @@ function AddTransactionForm() {
           name="description" 
           id="description"
           onChange={handleOnChange}
-          value={FormData.description}
+          value={UiState.formData.description}
         />
         
         <button type="submit">Add transaction</button>

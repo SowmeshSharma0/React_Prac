@@ -1,12 +1,12 @@
 import './App.css'
 import Container from './components/Container'
-import { ListProvider } from './context/GlobalContext'
+import { GlobalProvider } from './context/GlobalContext'
 
 function App() {
   return (
-    <ListProvider>
+    <GlobalProvider>
       <Container/>
-    </ListProvider>
+    </GlobalProvider>
   )
 }
 
