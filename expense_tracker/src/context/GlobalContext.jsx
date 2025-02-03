@@ -51,9 +51,7 @@ const UiReducer = (state, action) => {
         case UiActions.TOGGLE_OPEN_ITEMS:
             return {
                 ...state,
-                isOpenItems: state.isOpenItems.includes(action.payload)
-                    ? state.isOpenItems.filter(item => item !== action.payload) // Remove if exists
-                    : [...state.isOpenItems, action.payload] // Add if doesn't exist
+                isOpenItems: state.isOpenItems.filter(item => item !== action.payload)
             };
         case UiActions.TOGGLE_EXPANDED:
             return {
