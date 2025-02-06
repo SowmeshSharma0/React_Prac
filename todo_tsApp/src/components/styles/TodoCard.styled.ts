@@ -2,10 +2,10 @@ import styled from "styled-components";
 
 export const StyledTodoCard = styled.li`
     width: 30vw;
-    margin: 0.5rem 0;
+    margin: 1rem 0;
     .card{
         background-color: #f9f9f9;
-        padding: 1rem;
+        padding: 1.5rem;
         border-radius: 5px;
         display: flex;
         justify-content: space-between;
@@ -40,6 +40,15 @@ export const StyledTodoCard = styled.li`
                 background-color: #2ecc71;
                 color: white;
             }
+        }
+        h3{
+            color: #333;
+            font-size: 1.5rem;
+            margin: 0;
+        }
+        s{
+            font-size: 1.5rem;
+            margin: 0;
         }
     }
 `

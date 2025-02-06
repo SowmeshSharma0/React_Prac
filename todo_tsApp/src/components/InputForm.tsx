@@ -24,6 +24,11 @@ const InputForm = ({todo, setTodo, addToList} : Props) => {
   const handleSubmit = (e : React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     addToList()
+    setTodo({
+      id: "",
+      text: "",
+      isDone: false
+    })
   }
   return (
     <StyledInputForm onSubmit={handleSubmit}>
