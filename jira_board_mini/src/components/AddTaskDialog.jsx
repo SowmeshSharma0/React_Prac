@@ -35,7 +35,7 @@ function AddTaskDialog({ openModal, closeModal }) {
     }
 
     const [FormData, setFormData] = useState(initFormData)
-    const {addHTodoCard, addMTodoCard, addLTodoCard}= useContext(CardContext)
+    const {addCard}= useContext(CardContext)
 
     const handleChange = (e) =>{
         setFormData({
@@ -46,23 +46,8 @@ function AddTaskDialog({ openModal, closeModal }) {
 
     const handleSubmit = (e) =>{
         e.preventDefault();
-        FormData.priority = Number(FormData.priority);
-        FormData.id = crypto.randomUUID();
-        FormData.cross_status = 0;
 
-        console.log(FormData);
-
-        switch(FormData.priority){
-            case 2:
-                addHTodoCard(FormData);
-                break;
-            case 1:
-                addMTodoCard(FormData);
-                break;
-            case 0:
-                addLTodoCard(FormData);
-                break;
-        }
+        addCard(FormData, FormData.priority, 0)
         setFormData(initFormData());
         closeModal();
     }
