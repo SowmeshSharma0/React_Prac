@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const StyledHorizontalListView = styled.section`
+export const StyledHorizontalListViewExpandable = styled.section`
     height: 100%;
     margin-bottom: 1.5rem;
     /* border: 1px solid #dfe1e6; */

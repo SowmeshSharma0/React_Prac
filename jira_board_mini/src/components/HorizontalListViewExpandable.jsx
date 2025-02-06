@@ -1,20 +1,20 @@
 import { useContext, useState } from "react"
-import { StyledHorizontalListView } from "./styles/HorizontalListView.styled"
 import TaskList from "./TaskList"
 import { GlobalContext } from "../context/GlobalContext"
+import { StyledHorizontalListViewExpandable } from "./styles/HorizontalListViewExpandable.styled"
 
-function HorizontalListView({state}) {
+function HorizontalListViewExpandable({state}) {
 
-  const {main_axis_state_mapping, main_axis_expanded_init} = useContext(GlobalContext)
+  const {main_axis_state_mapping} = useContext(GlobalContext)
 
-  const [isExpanded, setIsExpanded] = useState(main_axis_expanded_init[state])
+  const [isExpanded, setIsExpanded] = useState(false)
 
   const toggleExpand = () => {
     setIsExpanded(!isExpanded)
   }
   
   return (
-    <StyledHorizontalListView>
+    <StyledHorizontalListViewExpandable>
       <div className="section-header">
         <h2>{main_axis_state_mapping[state]}</h2>
         <button onClick={toggleExpand}>&#x25BC;</button>
@@ -24,8 +24,8 @@ function HorizontalListView({state}) {
               <TaskList key={idx} main_state={state} cross_state={idx}/>
             )}
         </div>}
-    </StyledHorizontalListView>
+    </StyledHorizontalListViewExpandable>
   )
 }
 
-export default HorizontalListView
+export default HorizontalListViewExpandable

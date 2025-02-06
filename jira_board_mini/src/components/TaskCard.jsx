@@ -6,11 +6,17 @@ function TaskCard({card}) {
 
     const {setDraggedCard} = useContext(CardContext)
 
-    const handleDrag = (e) => {
-        setDraggedCard(card)
-    }
     return (
-        <StyledTaskCard draggable onDrag={handleDrag}>
+        <StyledTaskCard draggable onDrag={() => setDraggedCard(card)} onDragStart={(e) => {
+            // e.dataTransfer.setData("text/plain", card.id);
+            setTimeout(() => {
+                e.target.style.visibility = "hidden";
+            }, 0);
+        }}
+        onDragEnd={(e) => {
+            e.target.style.visibility = "visible";
+        }}
+        >
             <div className="cardHeader">
                 <h3>{card.title}</h3>
                 <p>{card.priority}</p>

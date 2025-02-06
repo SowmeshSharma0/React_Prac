@@ -15,17 +15,17 @@ export const GlobalProvider = ({children}) => {
         3: "Done"
     }
 
-    const main_axis_expanded_init = {
-        2: true,
-        1: true,
-        0: false
+    const main_axis_IsExpandable_init = {
+        2: false,
+        1: false,
+        0: true
     }
 
     return (<GlobalContext.Provider
         value={{
             main_axis_state_mapping,
             cross_axis_state_mapping,
-            main_axis_expanded_init
+            main_axis_IsExpandable_init
         }}>
         {children}
     </GlobalContext.Provider>)
