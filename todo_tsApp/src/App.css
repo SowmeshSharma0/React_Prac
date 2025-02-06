@@ -1,0 +1,24 @@
+/* #root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+} */
+
+#root{
+  width: 100vw;
+  height: 100vh;
+}
+
+.Todo-App{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+}
+
+.Todo-App h1{
+  font-size: 3.2em;
+  line-height: 1.1;
+  z-index: 1;
+}
