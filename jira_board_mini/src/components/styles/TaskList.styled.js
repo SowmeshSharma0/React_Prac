@@ -43,8 +43,14 @@ export const StyledTaskList = styled.div`
   }};
   transition: all 0.3s ease;
   transition-property: background, border;
-  &:active{
+  /* &:active:not(:focus-within) {
     opacity: 0.8;
     transform: scale(0.98);
-  }
+  } */
+   ${({ isDragActive }) => isDragActive && `
+    opacity: 0.8;
+    transform: scale(0.98);
+   `}
 `
+
+// learnt that completely conditional styling can be done in styled components

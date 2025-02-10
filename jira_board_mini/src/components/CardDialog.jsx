@@ -1,5 +1,6 @@
 import { useEffect, useRef } from "react";
 import { StyledCardDialog } from "./styles/CardDialog.styled";
+import { keyframes } from "styled-components";
 
 const CardDialog = ({IsOpenModal, closeModal, card}) => {
     const ref = useRef();
@@ -27,8 +28,11 @@ const CardDialog = ({IsOpenModal, closeModal, card}) => {
             ref={ref}
             onCancel={closeModal}
             style={
-                {border: "1px solid black", padding: "1rem", borderRadius: "0.5rem"}
+                {
+                    border: "1px solid black", padding: "1rem", borderRadius: "0.5rem",
+                }
             }
+            className="cardDialog"
         >
             <div
                 ref={wrapperRef}

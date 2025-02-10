@@ -57,4 +57,8 @@ export const StyledTaskCard = styled.div`
     p{
         font-size: 1.2rem;
     }
+    &:active{
+        transform: scale(0.95);
+        transition: transform 0.2s ease-in-out;
+    }
 `

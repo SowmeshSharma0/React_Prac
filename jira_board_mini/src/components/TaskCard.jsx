@@ -13,7 +13,10 @@ function TaskCard({card}) {
 
     return (
         <>
-            <StyledTaskCard draggable onDrag={() => setDraggedCard(card)} onDragStart={(e) => {
+            <StyledTaskCard 
+                draggable 
+                onDrag={() => setDraggedCard(card)} 
+                onDragStart={(e) => {
                 setIsDragActive(true)
                 // e.dataTransfer.setData("text/plain", card.id);
                 setTimeout(() => {
@@ -51,7 +54,9 @@ function TaskCard({card}) {
                 e.target.style.visibility = "visible";
             }}
             cardprio = {card.priority}
-            onClick={() => setIsExpanded(!isExpanded)}
+            onClick={(e) => {
+                setIsExpanded(!isExpanded)
+            }}
             >
                 <div className="cardHeader">
                     <div></div>
