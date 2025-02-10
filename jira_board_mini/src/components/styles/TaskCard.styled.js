@@ -19,27 +19,27 @@ export const StyledTaskCard = styled.div`
         }
 
         .priority{
-            background-color: ${({cardPrio}) => {
-                if(cardPrio === 2){
+            color: white;
+            background-color: ${({cardprio}) => {
+                if(cardprio === 2){
                     return "red"
-                }else if(cardPrio === 1){
+                }else if(cardprio === 1){
                     return "yellow"
-                }else if(cardPrio === 0){
-                    return "blue"
+                }else if(cardprio === 0){
+                    return "green"
                 }else{
                     return "#f0f0f0"
                 }
             }};
-            /* background-color:rgba(255, 255, 255, 0.14);
-            color: ${({cardPrio}) => {
-                if(cardPrio === 2){
-                    return "red"
-                }else if(cardPrio === 1){
-                    return "yellow"
-                }else if(cardPrio === 0){
-                    return "blue"
-                }else{
-                    return "#f0f0f0"
+            /* background: ${({cardprio}) => {
+                if(cardprio === 2){
+                    return "url('../../assets/high.png')"
+                }
+                else if(cardprio === 1){
+                    return "url('../../assets/medium.png')"
+                }
+                else{
+                    return "url('../../assets/low.png')"
                 }
             }}; */
             font-weight: 600;

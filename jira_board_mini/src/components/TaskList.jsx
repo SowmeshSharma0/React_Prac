@@ -17,7 +17,7 @@ function TaskList({main_state, cross_state}) {
 
     if(DraggedCard.cross_status === cross_state && DraggedCard.priority === main_state) return
 
-  
+    deleteCard(DraggedCard.id)
     addCard(DraggedCard, main_state, cross_state)
 
     //i did addFirst and then delete it was behaving wierdly, but then then reversed the order and it worked fine

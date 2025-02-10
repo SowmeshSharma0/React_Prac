@@ -15,7 +15,7 @@ export const StyledHorizontalListViewExpandable = styled.section`
         }
         transition: max-height 0.3s ease-in-out;
         max-height: ${({expanded}) => expanded ? "45vh" : "0"};
-        overflow-x: auto;
+        /* overflow-x: hidden; */
     }
     .task-list{
         margin-top: 0.5rem;

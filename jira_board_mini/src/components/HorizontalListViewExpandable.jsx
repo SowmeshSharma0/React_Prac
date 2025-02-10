@@ -2,7 +2,7 @@ import { useContext, useState } from "react"
 import TaskList from "./TaskList"
 import { GlobalContext } from "../context/GlobalContext"
 import { StyledHorizontalListViewExpandable } from "./styles/HorizontalListViewExpandable.styled"
-import HorizontalStatePanel from "./HorizontalStatePanel"
+// import HorizontalStatePanel from "./HorizontalStatePanel"
 
 function HorizontalListViewExpandable({state}) {
 
@@ -21,7 +21,7 @@ function HorizontalListViewExpandable({state}) {
         <button onClick={toggleExpand}>&#x25BC;</button>
       </div>
       <div className="task-list-wrapper">
-        <HorizontalStatePanel/>
+        {/* <HorizontalStatePanel/> */}
         <div className="task-list">
               {/* <HorizontalStatePanel/> */}
               {Array.from({length: 4}).map((_, idx) => 

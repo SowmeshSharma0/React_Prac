@@ -2,6 +2,7 @@ import { useContext, useState } from "react"
 import { StyledTaskCard } from "./styles/TaskCard.styled"
 import { CardContext } from "../context/CardContext"
 import CardDialog from "./CardDialog"
+import PriorityHighIcon from '@mui/icons-material/PriorityHigh';
 
 function TaskCard({card}) {
 
@@ -19,15 +20,13 @@ function TaskCard({card}) {
             onDragEnd={(e) => {
                 e.target.style.visibility = "visible";
             }}
-            cardPrio = {card.priority}
+            cardprio = {card.priority}
             onClick={() => setIsExpanded(!isExpanded)}
             >
                 <div className="cardHeader">
                     <div></div>
                     <h3>{card.title}</h3>
-                    <div className="priority">
-                        {/* <p>{card.priority}</p> */}
-                    </div>
+                    <PriorityHighIcon className="priority" />
                 </div>
                 {/* <p>{card.description}</p>
                 <p>{card.assignee}</p>

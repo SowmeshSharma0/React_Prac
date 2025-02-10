@@ -13,7 +13,7 @@ export const StyledHorizontalListView_NonExpandable = styled.div`
         &::-webkit-scrollbar {
             height: 0.5rem;
         }
-        overflow-x: auto;
+        /* overflow-x: hidden; */
     }
     .task-list{
         display: flex;
