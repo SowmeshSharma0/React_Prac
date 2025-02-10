@@ -7,9 +7,9 @@ export const CardProvider = ({children}) => {
     const [Cards, setCards] = useState([])
 
     const addCard = (card, _priority, _cross_status) => {
-        const newCard = {...card, priority: Number(_priority), cross_status: Number(_cross_status), id: crypto.randomUUID()}
+        const newCard = {...card, priority: Number(_priority), cross_status: Number(_cross_status)}
         // console.log("Current Cards: ", Cards)
-        // console.log("Adding: ", newCard)
+        console.log("Adding: ", newCard)
         setCards(prevCards => [...prevCards, newCard])
     }
 

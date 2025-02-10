@@ -56,6 +56,9 @@ function AddTaskDialog({ openModal, closeModal }) {
       <dialog
         ref={ref}
         onCancel={closeModal}
+        style={
+            {border: "1px solid black", padding: "1rem", borderRadius: "0.5rem", width: "30%", height: "50%"}
+        }
       >
         <div ref={wrapperRef}>
             <StyledForm onSubmit={handleSubmit}>
@@ -64,7 +67,8 @@ function AddTaskDialog({ openModal, closeModal }) {
                 <input type="text" name="title" id="title" value={FormData.title} onChange={handleChange}/>
 
                 <label htmlFor="description">Description</label>
-                <input type="text" name="description" id="description" value={FormData.description} onChange={handleChange}/>
+                {/* <input type="text" name="description" id="description" value={FormData.description} onChange={handleChange}/> */}
+                <textarea name="description" id="description" value={FormData.description} onChange={handleChange} className="input"></textarea>
 
                 <label htmlFor="priority">Priority</label>
                 <select name="priority" id="priority" value={Number(FormData.priority)} onChange={handleChange}>

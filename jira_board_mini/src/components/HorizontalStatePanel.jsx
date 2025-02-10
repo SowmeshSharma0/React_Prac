@@ -9,7 +9,9 @@ function HorizontalStatePanel() {
     return (
       <StyledHorizontalStatePanel>
           {cross_axis_states.map((state, idx) => 
-              <div key={idx}>{state}</div>
+                <div key={idx}>
+                    <h2>{state}</h2>
+                </div>
           )}
       </StyledHorizontalStatePanel>
     )

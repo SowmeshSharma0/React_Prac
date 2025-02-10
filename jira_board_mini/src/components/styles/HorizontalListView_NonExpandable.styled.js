@@ -7,9 +7,17 @@ export const StyledHorizontalListView_NonExpandable = styled.div`
     h2{
         margin: 0.5rem;
     }
+    .task-list-wrapper{
+        height: 45vh;
+        overflow-y: hidden;
+        &::-webkit-scrollbar {
+            height: 0.5rem;
+        }
+        overflow-x: auto;
+    }
     .task-list{
         display: flex;
         flex-direction: row;
-        height: 45vh;
+        height: 100%;
     }
 `
