@@ -9,8 +9,9 @@ export const StyledAddTask = styled.div`
     /* height: 3%; */
     border-radius: 30%;
     text-align: center;
-    position: relative;
+    position: fixed;
     left: 95%;
+    bottom: 5%;
     font-size: 1.5rem;
     &:hover{
         background-color: #0052cc;

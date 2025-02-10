@@ -9,7 +9,7 @@ export const CardProvider = ({children}) => {
     const addCard = (card, _priority, _cross_status) => {
         const newCard = {...card, priority: Number(_priority), cross_status: Number(_cross_status)}
         // console.log("Current Cards: ", Cards)
-        console.log("Adding: ", newCard)
+        // console.log("Adding: ", newCard)
         setCards(prevCards => [...prevCards, newCard])
     }
 
@@ -20,6 +20,8 @@ export const CardProvider = ({children}) => {
     }
 
     const [DraggedCard, setDraggedCard] = useState(null)
+    const [IsDragActive, setIsDragActive] = useState(false)
+    const [DraggableStates, setDraggableStates] = useState({})
 
     return (
         <CardContext.Provider
@@ -28,7 +30,11 @@ export const CardProvider = ({children}) => {
                 setDraggedCard,
                 Cards,
                 addCard,
-                deleteCard
+                deleteCard,
+                DraggableStates,
+                setDraggableStates,
+                IsDragActive,
+                setIsDragActive
             }}
         >
             {children}

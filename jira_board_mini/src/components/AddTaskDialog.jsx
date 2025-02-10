@@ -84,7 +84,17 @@ function AddTaskDialog({ openModal, closeModal }) {
                 <input type="text" name="reporter" id="reporter" value={FormData.reporter} onChange={handleChange}/>
 
                 <label htmlFor="due_date">Due Date</label>
-                <input type="date" name="due_date" id="due_date" value={FormData.due_date} onChange={handleChange}/>
+                {/* <input type="date" name="due_date" id="due_date" value={FormData.due_date} onChange={handleChange}/> */}
+                <input type="date" onFocus = {
+                    (e) => {
+                        e.currentTarget.setAttribute(
+                            "min",
+                            new Date().toISOString().slice(0, 10)
+                        );
+                    }
+                }
+                name="due_date" id="due_date" value={FormData.due_date} onChange={handleChange}
+                />
 
                 <button type="submit">Add Task</button>
             </StyledForm>

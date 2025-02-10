@@ -13,7 +13,8 @@ export const StyledHorizontalListViewExpandable = styled.section`
         &::-webkit-scrollbar {
             height: 0.5rem;
         }
-        transition: max-height 0.3s ease-in-out;
+        transition: all 0.3s ease-in-out;
+        transition-property: max-height;
         max-height: ${({expanded}) => expanded ? "45vh" : "0"};
         /* overflow-x: hidden; */
     }

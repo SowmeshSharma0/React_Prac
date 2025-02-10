@@ -2,7 +2,8 @@ import styled from "styled-components";
 
 export const StyledHorizontalStatePanel = styled.header`
     display: flex;
-    justify-content: space-between;
+    /* justify-content: space-between; */
+    justify-content: center;
     align-items: baseline;
     margin-bottom: 1rem;
 
@@ -13,7 +14,7 @@ export const StyledHorizontalStatePanel = styled.header`
     box-shadow: 0 1px 2px rgba(0,0,0,0.1); */
     div{
         /* flex-grow: 1; */
-        min-width: 450px;
+        min-width: 430px;
         margin-right: 0.5rem;
         text-align: center;
         font-weight: 600;
