@@ -13,7 +13,8 @@ function TaskList({main_state, cross_state}) {
     deleteCard,
     DraggableStates,
     IsDragActive,
-    setIsDragActive
+    setIsDragActive,
+    Assignees
   } = useContext(CardContext)
 
   const handleDrop = (e) => {
@@ -31,7 +32,19 @@ function TaskList({main_state, cross_state}) {
     //i did addFirst and then delete it was behaving wierdly, but then then reversed the order and it worked fine
   }
 
-  const renderCards = Cards.filter(card => card.cross_status === cross_state && card.priority === main_state)
+  let renderCards = Cards.filter(card => card.cross_status === cross_state && card.priority === main_state)
+
+  //go over assignees and see what all are active : filter stage 2
+  renderCards = renderCards.filter(card => {
+    const card_assignee_state = card.assignee
+    let isFilterActive = false
+    Assignees.forEach(assignee => {
+      if(assignee.assignee === card_assignee_state){
+        isFilterActive = assignee.isFilterActive
+      }
+    })
+    return isFilterActive
+  })
   
   return (
     <StyledTaskList 

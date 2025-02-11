@@ -47,6 +47,7 @@ function AddTaskDialog({ openModal, closeModal }) {
     const handleSubmit = (e) =>{
         e.preventDefault();
 
+        FormData.id = crypto.randomUUID()
         addCard(FormData, FormData.priority, 0)
         setFormData(initFormData());
         closeModal();
