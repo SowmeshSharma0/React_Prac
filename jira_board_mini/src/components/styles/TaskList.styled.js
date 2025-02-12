@@ -3,19 +3,20 @@ import styled from "styled-components";
 export const StyledTaskList = styled.div`
     display: flex;
     flex-direction: column;
-    height: 100%;
+    /* height: 100%; */
     /* flex: 1; */
     border-radius: 0.5rem;
     /* margin: 0.5rem 0; */
     margin-right: 0.5rem;
     overflow-y: auto;
-    min-width: 430px;
-    max-width: 430px;
-    flex-shrink: 0;
+    min-width: ${({ usable_card_width }) => usable_card_width}px;
+    max-width: ${({ usable_card_width }) => usable_card_width}px;
 
-    @media (max-width: 450px){
-        min-width: 100px;
-    }
+    min-height: ${({ usable_card_height }) => usable_card_height}px;
+    max-height: ${({ usable_card_height }) => usable_card_height}px;
+    
+    /* flex-shrink: 0; */
+
     background: ${({ main_state, cross_state, DraggableStates, isDragActive}) => {
     if (!DraggableStates || !DraggableStates[main_state] || !isDragActive) {
       return ' #f3f5f7';

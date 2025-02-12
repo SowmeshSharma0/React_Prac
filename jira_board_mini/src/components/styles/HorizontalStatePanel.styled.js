@@ -14,7 +14,11 @@ export const StyledHorizontalStatePanel = styled.header`
     box-shadow: 0 1px 2px rgba(0,0,0,0.1); */
     div{
         /* flex-grow: 1; */
-        min-width: 430px;
+        min-width: ${({ usable_card_width }) => {
+            console.log("usable_card_width: ", usable_card_width);
+            return usable_card_width
+        }}px;
+        max-width: ${({ usable_card_width }) => usable_card_width}px;
         margin-right: 0.5rem;
         text-align: center;
         font-weight: 600;
@@ -41,9 +45,9 @@ export const StyledHorizontalStatePanel = styled.header`
         }
     }
 
-    @media (max-width: 450px){
+    /* @media (max-width: 450px){
         div{
             min-width: 100px;
         }
-    }
+    } */
 `

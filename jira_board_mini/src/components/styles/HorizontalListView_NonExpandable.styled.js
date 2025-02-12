@@ -8,7 +8,6 @@ export const StyledHorizontalListView_NonExpandable = styled.div`
         margin: 0.5rem;
     }
     .task-list-wrapper{
-        height: 45vh;
         overflow-y: hidden;
         &::-webkit-scrollbar {
             height: 0.5rem;

@@ -17,6 +17,8 @@ function TaskList({main_state, cross_state}) {
     Assignees
   } = useContext(CardContext)
 
+  const {usable_card_width, usable_card_height} = useContext(GlobalContext)
+
   const handleDrop = (e) => {
     e.preventDefault();
     setIsDragActive(false)
@@ -54,6 +56,8 @@ function TaskList({main_state, cross_state}) {
       main_state={main_state} 
       cross_state={cross_state}
       isDragActive={IsDragActive}
+      usable_card_width={usable_card_width}
+      usable_card_height={usable_card_height}
     >
         {renderCards.map((card) => <TaskCard card={card} key={card.id}/>)}
     </StyledTaskList>

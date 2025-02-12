@@ -1,4 +1,5 @@
 import { createContext } from "react";
+import useScreenDetector from "./useScreenDetector";
 
 export const GlobalContext = createContext();
 
@@ -54,6 +55,8 @@ export const GlobalProvider = ({children}) => {
         2: [2],
         3: []
     }
+    
+    const {usable_card_width, usable_card_height} = useScreenDetector()
 
     return (<GlobalContext.Provider
         value={{
@@ -62,7 +65,9 @@ export const GlobalProvider = ({children}) => {
             main_axis_IsExpandable_init,
             can_delete_at_cross_axis_state,
             card_move_rules_horizontal,
-            card_move_rules_vertical_cross_state
+            card_move_rules_vertical_cross_state,
+            usable_card_width,
+            usable_card_height
         }}>
         {children}
     </GlobalContext.Provider>)

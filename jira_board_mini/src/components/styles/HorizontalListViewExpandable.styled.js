@@ -8,14 +8,13 @@ export const StyledHorizontalListViewExpandable = styled.section`
         margin: 0.5rem;
     }
     .task-list-wrapper{
-        height: 45vh;
         overflow-y: hidden;
         &::-webkit-scrollbar {
             height: 0.5rem;
         }
         transition: all 0.3s ease-in-out;
         transition-property: max-height;
-        max-height: ${({expanded}) => expanded ? "45vh" : "0"};
+        max-height: ${({expanded, usable_card_height}) => expanded ? `${usable_card_height}vh` : "0"};
         /* overflow-x: hidden; */
     }
     .task-list{

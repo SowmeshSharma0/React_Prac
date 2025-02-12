@@ -6,7 +6,7 @@ import { StyledHorizontalListViewExpandable } from "./styles/HorizontalListViewE
 
 function HorizontalListViewExpandable({state}) {
 
-  const {main_axis_state_mapping} = useContext(GlobalContext)
+  const {main_axis_state_mapping, usable_card_width, usable_card_height} = useContext(GlobalContext)
 
   const [isExpanded, setIsExpanded] = useState(false)
 
@@ -15,7 +15,7 @@ function HorizontalListViewExpandable({state}) {
   }
   
   return (
-    <StyledHorizontalListViewExpandable expanded={isExpanded}>
+    <StyledHorizontalListViewExpandable expanded={isExpanded} usable_card_width={usable_card_width} usable_card_height={usable_card_height}>
       <div className="section-header">
         <h2>{main_axis_state_mapping[state]}</h2>
         <button onClick={toggleExpand}>&#x25BC;</button>
