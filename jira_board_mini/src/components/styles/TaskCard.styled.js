@@ -18,6 +18,10 @@ export const StyledTaskCard = styled.div`
         h3{
             font-size: 1.5rem;
             margin: 0;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
         }
 
         .priority{

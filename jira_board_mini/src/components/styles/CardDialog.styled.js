@@ -40,5 +40,21 @@ export const StyledCardDialog = styled.div`
                 transition: all 0.3s;
             }
         }
+
+        .delete-wrapper{
+            margin: 1rem;
+            background-color: white;
+            border-radius: 40%;
+            text-align: center;
+            .delete-icon{
+                font-size: 1.5rem;
+                padding: 0.5rem;
+            }
+            &:hover{
+                color: #f00;
+                transform: scale(1.1);
+                transition: all 0.3s;
+            }
+        }
     }
 `

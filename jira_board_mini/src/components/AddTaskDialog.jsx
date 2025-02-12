@@ -1,17 +1,19 @@
-import { useEffect, useRef, useState, useContext} from "react";
+import { useEffect, useRef, useState, useContext, useCallback, useMemo} from "react";
 import { StyledForm } from "./styles/AddTaskDialog.styled";
 import { CardContext } from "../context/CardContext";
+import { use } from "react";
 
 function AddTaskDialog({ openModal, closeModal }) {
     const ref = useRef();
     const wrapperRef = useRef();
 
-    useEffect(() => {
-        const handleClickOutside = (e) => {
-            if (wrapperRef.current && !wrapperRef.current.contains(e.target)) {
-                closeModal();
-            }
+    const handleClickOutside = useCallback((e) => {
+        if (wrapperRef.current && !wrapperRef.current.contains(e.target)) {
+            closeModal();
         }
+    }, [wrapperRef, closeModal])
+
+    useEffect(() => {
         if (openModal) {
             ref.current?.showModal();
             document.addEventListener("mousedown", handleClickOutside);
@@ -21,9 +23,9 @@ function AddTaskDialog({ openModal, closeModal }) {
         return () => {
             document.removeEventListener("mousedown", handleClickOutside);
         }
-    }, [openModal]);
+    }, [handleClickOutside, openModal]);
 
-    const initFormData = () =>{
+    const initFormData = useMemo(() => {
         return {
             title: "",
             description: "",
@@ -32,26 +34,27 @@ function AddTaskDialog({ openModal, closeModal }) {
             reporter: "",
             due_date: new Date().toISOString().slice(0, 10)
         }
-    }
+    }, [])
 
     const [FormData, setFormData] = useState(initFormData)
+
     const {addCard}= useContext(CardContext)
 
-    const handleChange = (e) =>{
+    const handleChange = useCallback((e) =>{
         setFormData({
             ...FormData,
             [e.target.name]: e.target.value
         })
-    }
+    }, [FormData])
 
-    const handleSubmit = (e) =>{
+    const handleSubmit = useCallback((e) =>{
         e.preventDefault();
 
         FormData.id = crypto.randomUUID()
         addCard(FormData, FormData.priority, 0)
-        setFormData(initFormData());
+        setFormData(initFormData);
         closeModal();
-    }
+    }, [FormData, addCard, closeModal, initFormData])
   
     return (
       <dialog
@@ -87,12 +90,12 @@ function AddTaskDialog({ openModal, closeModal }) {
                 <label htmlFor="due_date">Due Date</label>
                 {/* <input type="date" name="due_date" id="due_date" value={FormData.due_date} onChange={handleChange}/> */}
                 <input type="date" onFocus = {
-                    (e) => {
+                    useCallback(e => {
                         e.currentTarget.setAttribute(
                             "min",
                             new Date().toISOString().slice(0, 10)
                         );
-                    }
+                    }, [])
                 }
                 name="due_date" id="due_date" value={FormData.due_date} onChange={handleChange}
                 />

@@ -16,7 +16,7 @@ const FilterHorizontalPanel = () => {
                         isToggleActive={assignee.isFilterActive}
                         onClick={() => {
                             toggleAssigneeFilter(assignee)
-                            console.log("Toggled: ", assignee)
+                            // console.log("Toggled: ", assignee)
                         }}
                     >
                         <p>{assignee.assignee}</p>

@@ -6,6 +6,9 @@ export const CardProvider = ({children}) => {
 
     const [Cards, setCards] = useState([])
     const [Assignees, setAssignees] = useState(new Set());
+    const [DraggedCard, setDraggedCard] = useState(null)
+    const [IsDragActive, setIsDragActive] = useState(false)
+    const [DraggableStates, setDraggableStates] = useState({})
 
     const addCard = (card, _priority, _cross_status) => {
         const newCard = {...card, priority: Number(_priority), cross_status: Number(_cross_status)}
@@ -29,19 +32,30 @@ export const CardProvider = ({children}) => {
         })
     }
 
-    const deleteCard = (id) => {
-        setCards(Cards.filter(card => card.id !== id))
-        const delVal = Cards.find(card => card.id === id).assignee
+    const checkForExistingAssignee = (checkVal, newCards) => {
+        return newCards.some(card => card.assignee === checkVal)
+    }
 
-        setAssignees(prevAssignees => {
-            const newAssignees = new Set([...prevAssignees])
-            newAssignees.forEach(assignee => {
-                if (assignee.assignee === delVal) {
-                    newAssignees.delete(assignee)
-                }
+    const deleteCard = (id) => {
+        const delVal = Cards.find(card => card.id === id).assignee
+        const newCards = Cards.filter(card => card.id !== id)
+
+        //check if there are any other cards with the same assignee
+        const moreCards = checkForExistingAssignee(delVal, newCards)
+
+        setCards(newCards)
+
+        if(!moreCards){
+            setAssignees(prevAssignees => {
+                const newAssignees = new Set([...prevAssignees])
+                newAssignees.forEach(assignee => {
+                    if (assignee.assignee === delVal) {
+                        newAssignees.delete(assignee)
+                    }
+                })
+                return newAssignees
             })
-            return newAssignees
-        })
+        }
     }
 
     const toggleAssigneeFilter = (toggleAssignee) => {
@@ -62,10 +76,6 @@ export const CardProvider = ({children}) => {
             return newAssignees
         })
     }
-
-    const [DraggedCard, setDraggedCard] = useState(null)
-    const [IsDragActive, setIsDragActive] = useState(false)
-    const [DraggableStates, setDraggableStates] = useState({})
 
     return (
         <CardContext.Provider
