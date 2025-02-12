@@ -4,6 +4,7 @@ import MiniCard from "./MiniCard";
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { CardContext } from "../context/CardContext";
+import Confirmation from "./Confirmation";
 
 const CardDialog = ({IsOpenModal, closeModal, card}) => {
     const ref = useRef();
@@ -16,7 +17,7 @@ const CardDialog = ({IsOpenModal, closeModal, card}) => {
 
     useEffect(() => {
         const handleClickOutside = (e) => {
-            if (wrapperRef.current && !wrapperRef.current.contains(e.target)) {
+            if (wrapperRef.current && !wrapperRef.current.contains(e.target) && !e.target.closest('.confirmation-dialog')) {
                 closeModal();
             }
         }
@@ -45,6 +46,35 @@ const CardDialog = ({IsOpenModal, closeModal, card}) => {
         addCard(EditingCard, EditingCard.priority, EditingCard.cross_status);
     }
 
+    const handleDelete = (e) => {
+        //this getting way too complex lmaoo
+        e.stopPropagation();
+        setIsConfirmOpen(true);
+        setCallBack(() => {
+            return () => {
+                deleteCard(card.id);
+                setIsConfirmOpen(false);
+                closeModal();
+            }
+        })
+    }
+
+    const handleEdit = (e) => {
+        e.stopPropagation();
+        setIsConfirmOpen(true);
+        setCallBack(() => {
+            return () => {
+                setIsConfirmOpen(false);
+                handleChangeSubmit(e);
+                setIsEditing(!isEditing);
+                closeModal();
+            }
+        })
+    }
+
+    const [isConfirmOpen, setIsConfirmOpen] = useState(false);
+    const [callBack, setCallBack] = useState(null);
+
     return (
         <>
             <dialog 
@@ -66,8 +96,7 @@ const CardDialog = ({IsOpenModal, closeModal, card}) => {
                                     <div className="edit-wrapper">
                                         <EditIcon 
                                             onClick={(e) => {
-                                                handleChangeSubmit(e)
-                                                setIsEditing(!isEditing)
+                                                handleEdit(e)
                                             }} 
                                             className="edit-icon"
                                         />
@@ -81,9 +110,8 @@ const CardDialog = ({IsOpenModal, closeModal, card}) => {
                                     </div>
                                     <div className="delete-wrapper">
                                         <DeleteIcon 
-                                            onClick={()=>{
-                                                deleteCard(card.id)
-                                                closeModal()
+                                            onClick={(e)=>{
+                                                handleDelete(e)
                                             }} 
                                             className="delete-icon"/>
                                     </div>
@@ -104,6 +132,16 @@ const CardDialog = ({IsOpenModal, closeModal, card}) => {
                 </div>
 
             </dialog>
+            <Confirmation 
+                isConfirmModalOpen={isConfirmOpen} 
+                closeConfirmModal={(e) => {
+                    setIsEditing(false)
+                    setIsConfirmOpen(false)
+                }} 
+                callBack={callBack} 
+                card={card}
+                setEditingCard={setEditingCard}
+            />
         </>
     )
 }

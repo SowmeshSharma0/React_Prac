@@ -72,7 +72,7 @@ function TaskCard({card}) {
                     <p>Due Date: {card.due_date}</p>
                 </div>
             </StyledTaskCard>
-            <CardDialog IsOpenModal={isExpanded} closeModal={() => setIsExpanded(!isExpanded)} card={card}/>
+            <CardDialog IsOpenModal={isExpanded} closeModal={() => setIsExpanded(false)} card={card}/>
         </>
     )
 }

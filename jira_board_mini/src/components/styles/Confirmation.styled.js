@@ -1,17 +1,19 @@
 import styled from "styled-components";
 
-export const StyledConfirmation = styled.div`
+export const StyledConfirmation = styled.dialog`
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 100vh;
-    background-color: rgba(0, 0, 0, 0.5);
+    height: 20vh;
+    width: 20vw;
+    background-color: white;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
+    top: 50%;
+    left: 50%;
     z-index: 1000;
+    border: none;
     .buttons{
         display: flex;
         justify-content: space-around;
