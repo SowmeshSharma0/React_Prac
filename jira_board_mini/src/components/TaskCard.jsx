@@ -63,11 +63,14 @@ function TaskCard({card}) {
                     <h3>{card.title}</h3>
                     <PriorityHighIcon className="priority" />
                 </div>
-                {/* <p>{card.description}</p>
-                <p>{card.assignee}</p>
+                {/* <p>{card.assignee}</p>
                 <p>{card.reporter}</p> */}
                 {/* opens when clicked */}
-                <p>Due Date: {card.due_date}</p>
+
+                <div className="content">
+                    <p className="description">{card.description}</p>
+                    <p>Due Date: {card.due_date}</p>
+                </div>
             </StyledTaskCard>
             <CardDialog IsOpenModal={isExpanded} closeModal={() => setIsExpanded(!isExpanded)} card={card}/>
         </>

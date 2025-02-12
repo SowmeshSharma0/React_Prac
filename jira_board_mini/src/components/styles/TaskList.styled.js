@@ -10,6 +10,7 @@ export const StyledTaskList = styled.div`
     margin-right: 0.5rem;
     overflow-y: auto;
     min-width: 430px;
+    max-width: 430px;
     flex-shrink: 0;
 
     @media (max-width: 450px){

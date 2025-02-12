@@ -28,6 +28,17 @@ export const StyledHorizontalStatePanel = styled.header`
         h2{
             margin: 0.8rem auto;
         }
+        box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+        &:hover{
+            cursor: pointer;
+            transform: scale(1.02);
+            transition: transform 0.2s ease-in-out;
+        }
+        &:active{
+            background-color: #0a5fa6;
+            transform: scale(0.98);
+            transition: transform 0.2s ease-in-out;
+        }
     }
 
     @media (max-width: 450px){
