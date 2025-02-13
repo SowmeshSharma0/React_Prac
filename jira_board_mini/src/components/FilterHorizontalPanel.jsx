@@ -7,20 +7,21 @@ import ToggleOffIcon from '@mui/icons-material/ToggleOff';
 const FilterHorizontalPanel = () => {
 
     const {Assignees, toggleAssigneeFilter} = useContext(CardContext)
+    // console.log("Assignees: ", Assignees)
     return (
         <StyledFilterHorizontalPanel len={Assignees.size}>
-            {Array.from(Assignees).map((assignee, idx) => {
+            {Object.entries(Assignees).map(([key, value], idx) => {
                 return (
                     <StyledFilterBox 
                         key={idx} 
-                        isToggleActive={assignee.isFilterActive}
+                        isToggleActive={value}
                         onClick={() => {
-                            toggleAssigneeFilter(assignee)
+                            toggleAssigneeFilter(key)
                             // console.log("Toggled: ", assignee)
                         }}
                     >
-                        <p>{assignee.assignee}</p>
-                        {assignee.isFilterActive ? <ToggleOnIcon id="toggle-on"/> : <ToggleOffIcon id="toggle-off"/>}
+                        <p>{key}</p>
+                        {value ? <ToggleOnIcon id="toggle-on"/> : <ToggleOffIcon id="toggle-off"/>}
                         {/* <label htmlFor={assignee.assignee}>{assignee.assignee}</label>
                         <input 
                             type="checkbox" 

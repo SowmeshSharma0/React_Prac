@@ -5,54 +5,83 @@ export const CardContext = createContext();
 export const CardProvider = ({children}) => {
 
     const [Cards, setCards] = useState([])
-    const [Assignees, setAssignees] = useState(new Set());
+    const [Assignees, setAssignees] = useState({});
     const [DraggedCard, setDraggedCard] = useState(null)
     const [IsDragActive, setIsDragActive] = useState(false)
     const [DraggableStates, setDraggableStates] = useState({})
 
+    //new format of Assignees:
+    // {
+    //     '<assignee>' : '<isFilterActive>'
+    // }
+
+    //index the cards by id for easy access
+    const [CardsIndex, setCardsIndex] = useState({})
+    //index the cards by assignee for easy access
+    const [AssigneesIndex, setAssigneesIndex] = useState({})
+
     const addCard = (card, _priority, _cross_status) => {
         const newCard = {...card, priority: Number(_priority), cross_status: Number(_cross_status)}
         setCards(prevCards => [...prevCards, newCard])
+        setCardsIndex(prevCardsIndex => {
+            const newCardsIndex = {...prevCardsIndex}
+            newCardsIndex[newCard.id] = newCard
+            return newCardsIndex
+        })
+        setAssigneesIndex(prevAssigneesIndex => {
+            const newAssigneesIndex = {...prevAssigneesIndex}
+            newAssigneesIndex[newCard.assignee] = newCard
+            return newAssigneesIndex
+        })
+        
         setAssignees(prevAssignees => {
-            let hasSameAssignee = false
-            prevAssignees.forEach(assignee => {
-                if (assignee.assignee === newCard.assignee) {
-                    hasSameAssignee = true
-                }
-            })
-            if (hasSameAssignee) 
+            if(newCard.assignee in prevAssignees) //O(1) : if already there don't add
                 return prevAssignees
 
-            const newAssignees = new Set([...prevAssignees])
-            newAssignees.add({
-                assignee: newCard.assignee,
-                isFilterActive: true
-            })
+            const newAssignees = {...prevAssignees} //O(n)
+            newAssignees[newCard.assignee] = true
+
             return newAssignees
         })
     }
 
-    const checkForExistingAssignee = (checkVal, newCards) => {
-        return newCards.some(card => card.assignee === checkVal)
+    // const checkForExistingAssignee = (checkVal, newCards) => {
+    //     return newCards.some(card => card.assignee === checkVal) //O(n)
+    // }
+
+    const checkForExistingAssignee = (checkVal) => {
+        return AssigneesIndex[checkVal] !== undefined //O(1)
     }
 
     const deleteCard = (id) => {
-        const delVal = Cards.find(card => card.id === id).assignee
-        const newCards = Cards.filter(card => card.id !== id)
+        const delAssigneeVal = CardsIndex[id].assignee //O(1)
+        const newCards = Cards.filter(card => card.id !== id) //O(n)
 
-        //check if there are any other cards with the same assignee
-        const moreCards = checkForExistingAssignee(delVal, newCards)
+        //gotta delete from cardsIndex as well:
+        setCardsIndex(prevCardsIndex => {
+            const newCardsIndex = {...prevCardsIndex} //O(n)
+            delete newCardsIndex[id] //O(1)
+            return newCardsIndex
+        })
+
+        //delete from assigneesIndex as well:
+        setAssigneesIndex(prevAssigneesIndex => {
+            const newAssigneesIndex = {...prevAssigneesIndex} //O(n)
+            delete newAssigneesIndex[delAssigneeVal] //O(1)
+
+            return newAssigneesIndex
+        })
 
         setCards(newCards)
 
-        if(!moreCards){
+        //check if there are any other cards with the same assignee
+        const AreThereMoreCards = checkForExistingAssignee(delAssigneeVal) //O(1)
+
+        if(!AreThereMoreCards){
             setAssignees(prevAssignees => {
-                const newAssignees = new Set([...prevAssignees])
-                newAssignees.forEach(assignee => {
-                    if (assignee.assignee === delVal) {
-                        newAssignees.delete(assignee)
-                    }
-                })
+                const newAssignees = {...prevAssignees} //O(n)
+                delete newAssignees[delAssigneeVal] //O(1)
+
                 return newAssignees
             })
         }
@@ -61,18 +90,9 @@ export const CardProvider = ({children}) => {
     const toggleAssigneeFilter = (toggleAssignee) => {
 
         setAssignees(prevAssignees => {
-            const newAssignees = new Set()
-            Array.from(prevAssignees).forEach(item => {
-                if(item.assignee === toggleAssignee.assignee){
-                    newAssignees.add({
-                        ...item,
-                        isFilterActive: !item.isFilterActive
-                    })
-                }
-                else{
-                    newAssignees.add(item)
-                }
-            })
+            const newAssignees = {...prevAssignees} //O(n)
+            newAssignees[toggleAssignee] = !newAssignees[toggleAssignee] //O(1)
+
             return newAssignees
         })
     }

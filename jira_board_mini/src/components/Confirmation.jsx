@@ -9,7 +9,6 @@ const Confirmation = ({isConfirmModalOpen, closeConfirmModal, callBack, card, se
         if (isConfirmModalOpen) {
             confRef.current.showModal();
         } else {
-            console.log("closing")
             confRef.current.close();
         }
     }, [isConfirmModalOpen]);

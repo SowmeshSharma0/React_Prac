@@ -41,6 +41,7 @@ const CardDialog = ({IsOpenModal, closeModal, card}) => {
     }
 
     const handleChangeSubmit = (e) => {
+        //edit is the only thing that breaks the flow of the app
         e.preventDefault();
         deleteCard(card.id);
         addCard(EditingCard, EditingCard.priority, EditingCard.cross_status);
