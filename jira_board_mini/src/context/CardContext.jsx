@@ -1,4 +1,4 @@
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 
 export const CardContext = createContext();
 
@@ -17,8 +17,10 @@ export const CardProvider = ({children}) => {
 
     //index the cards by id for easy access
     const [CardsIndex, setCardsIndex] = useState({})
+    // const CardsIndex = {}
     //index the cards by assignee for easy access
     const [AssigneesIndex, setAssigneesIndex] = useState({})
+    // const AssigneesIndex = {}
 
     const addCard = (card, _priority, _cross_status) => {
         const newCard = {...card, priority: Number(_priority), cross_status: Number(_cross_status)}
@@ -28,11 +30,16 @@ export const CardProvider = ({children}) => {
             newCardsIndex[newCard.id] = newCard
             return newCardsIndex
         })
+        // CardsIndex[newCard.id] = newCard
+        // console.log("In Add : CardsIndex: ", CardsIndex)
+        // console.log("In Add : Length of CardsIndex: ", Object.keys(CardsIndex).length)
+
         setAssigneesIndex(prevAssigneesIndex => {
             const newAssigneesIndex = {...prevAssigneesIndex}
             newAssigneesIndex[newCard.assignee] = newCard
             return newAssigneesIndex
         })
+        // AssigneesIndex[newCard.assignee] = newCard
         
         setAssignees(prevAssignees => {
             if(newCard.assignee in prevAssignees) //O(1) : if already there don't add
@@ -49,11 +56,35 @@ export const CardProvider = ({children}) => {
     //     return newCards.some(card => card.assignee === checkVal) //O(n)
     // }
 
-    const checkForExistingAssignee = (checkVal) => {
-        return AssigneesIndex[checkVal] !== undefined //O(1)
-    }
+    const [executeCheck, setExecuteCheck] = useState(null)
+
+    // const checkForExistingAssignee = (checkVal) => {
+    //     return AssigneesIndex[checkVal] !== undefined //O(1)
+    // }
+
+    useEffect(() => {
+        if(executeCheck === null) return
+
+        const AreThereMoreCards = (executeCheck) => {
+            return AssigneesIndex[executeCheck] !== undefined //O(1)
+        }
+
+        if(!AreThereMoreCards){
+            setAssignees(prevAssignees => {
+                const newAssignees = {...prevAssignees} //O(n)
+                delete newAssignees[executeCheck] //O(1)
+
+                return newAssignees
+            })
+        }
+        setExecuteCheck(null)
+    }, [executeCheck])
 
     const deleteCard = (id) => {
+
+        // console.log("In Del : CardsIndex: ", CardsIndex)
+        // console.log("In Del : Length of CardsIndex: ", Object.keys(CardsIndex).length)
+
         const delAssigneeVal = CardsIndex[id].assignee //O(1)
         const newCards = Cards.filter(card => card.id !== id) //O(n)
 
@@ -63,7 +94,7 @@ export const CardProvider = ({children}) => {
             delete newCardsIndex[id] //O(1)
             return newCardsIndex
         })
-
+        // delete CardsIndex[id]
         //delete from assigneesIndex as well:
         setAssigneesIndex(prevAssigneesIndex => {
             const newAssigneesIndex = {...prevAssigneesIndex} //O(n)
@@ -72,19 +103,23 @@ export const CardProvider = ({children}) => {
             return newAssigneesIndex
         })
 
-        setCards(newCards)
+        setExecuteCheck(delAssigneeVal)
+
+        // delete AssigneesIndex[delAssigneeVal]
 
         //check if there are any other cards with the same assignee
-        const AreThereMoreCards = checkForExistingAssignee(delAssigneeVal) //O(1)
+        // const AreThereMoreCards = checkForExistingAssignee(delAssigneeVal) //O(1)
 
-        if(!AreThereMoreCards){
-            setAssignees(prevAssignees => {
-                const newAssignees = {...prevAssignees} //O(n)
-                delete newAssignees[delAssigneeVal] //O(1)
+        setCards(newCards)
 
-                return newAssignees
-            })
-        }
+        // if(!AreThereMoreCards){
+        //     setAssignees(prevAssignees => {
+        //         const newAssignees = {...prevAssignees} //O(n)
+        //         delete newAssignees[delAssigneeVal] //O(1)
+
+        //         return newAssignees
+        //     })
+        // }
     }
 
     const toggleAssigneeFilter = (toggleAssignee) => {

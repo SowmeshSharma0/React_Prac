@@ -1,4 +1,4 @@
-import { useContext, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import { StyledTaskList } from "./styles/TaskList.styled"
 import TaskCard from "./TaskCard"
 import { CardContext } from "../context/CardContext"
@@ -29,6 +29,9 @@ function TaskList({main_state, cross_state}) {
 
     deleteCard(DraggedCard.id)
     addCard(DraggedCard, main_state, cross_state)
+
+    // addCard(DraggedCard, main_state, cross_state)
+    // deleteCard(DraggedCard.id)
 
 
     //i did addFirst and then delete it was behaving wierdly, but then then reversed the order and it worked fine
