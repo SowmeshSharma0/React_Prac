@@ -4,11 +4,32 @@ export const CardContext = createContext();
 
 export const CardProvider = ({children}) => {
 
-    const [Cards, setCards] = useState([])
-    const [Assignees, setAssignees] = useState({});
+    const [Cards, setCards] = useState(() => {
+        const savedCards = localStorage.getItem('cards')
+        return savedCards ? JSON.parse(savedCards) : []
+    })
+    const [Assignees, setAssignees] = useState(() => {
+        const savedAssignees = localStorage.getItem('assignees')
+        return savedAssignees ? JSON.parse(savedAssignees) : {}
+    });
     const [DraggedCard, setDraggedCard] = useState(null)
     const [IsDragActive, setIsDragActive] = useState(false)
     const [DraggableStates, setDraggableStates] = useState({})
+
+    useEffect(() => {
+        localStorage.setItem('cards', JSON.stringify(Cards))
+    }, [Cards])
+    
+    useEffect(() => {
+        localStorage.setItem('assignees', JSON.stringify(Assignees))
+    }, [Assignees])
+
+    // useEffect(() => {
+    //     const cards = localStorage.getItem('cards')
+    //     const assignees = localStorage.getItem('assignees')
+    //     if (cards) setCards(JSON.parse(cards))
+    //     if (assignees) setAssignees(JSON.parse(assignees))
+    // }, [])
 
     //new format of Assignees:
     // {
@@ -16,7 +37,14 @@ export const CardProvider = ({children}) => {
     // }
 
     //index the cards by id for easy access
-    const [CardsIndex, setCardsIndex] = useState({})
+    const [CardsIndex, setCardsIndex] = useState(() => {
+        const savedCardsIndex = localStorage.getItem('cardsIndex')
+        return savedCardsIndex ? JSON.parse(savedCardsIndex) : {}
+    })
+
+    useEffect(() => {
+        localStorage.setItem('cardsIndex', JSON.stringify(CardsIndex))
+    }, [CardsIndex])
 
     const addCard = (card, _priority, _cross_status) => {
         const newCard = {...card, priority: Number(_priority), cross_status: Number(_cross_status)}
@@ -57,7 +85,7 @@ export const CardProvider = ({children}) => {
         const delAssignee = CardsIndex[id].assignee
 
         setCardsIndex(prevCardsIndex => {
-            const {id, ...newCardsIndex} = prevCardsIndex //O(n)
+            const {[id]: _, ...newCardsIndex} = prevCardsIndex //O(n)
             return newCardsIndex
         })
 
