@@ -97,18 +97,20 @@ body{
   padding: 1rem;
   border-radius: 0.5rem;
 
-  animation: slide-down 0.5s ease;
+  animation: slide-down 0.5s ease-in-out;
 }
 
 .confirmation-dialog::backdrop {
   background-color: rgba(0, 0, 0, 0.5);
-  backdrop-filter: blur(1px);
+  /* backdrop-filter: blur(1px); */
 }
 
 .cardDialog::backdrop {
   background-color: rgba(0, 0, 0, 0.5);
-  backdrop-filter: blur(1px);
+  /* backdrop-filter: blur(1px); */ 
 }
+
+/* blur effect is causing performance issues and lag */
 
 @media (max-width: 768px) {
   .cardDialog {

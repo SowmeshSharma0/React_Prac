@@ -29,6 +29,10 @@ export const StyledHorizontalListViewExpandable = styled.section`
         align-items: center;
         /* background-color: #f4f5f7; */
         border-bottom: 1px solid #dfe1e6;
+
+        button{
+            cursor: pointer;
+        }
         
         button:active{
             transform: scale(0.9);

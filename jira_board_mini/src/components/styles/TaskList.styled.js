@@ -3,10 +3,7 @@ import styled from "styled-components";
 export const StyledTaskList = styled.div`
     display: flex;
     flex-direction: column;
-    /* height: 100%; */
-    /* flex: 1; */
     border-radius: 0.5rem;
-    /* margin: 0.5rem 0; */
     margin-right: 0.5rem;
     overflow-y: auto;
     min-width: ${({ usable_card_width }) => usable_card_width}px;
@@ -14,8 +11,6 @@ export const StyledTaskList = styled.div`
 
     min-height: ${({ usable_card_height }) => usable_card_height}px;
     max-height: ${({ usable_card_height }) => usable_card_height}px;
-    
-    /* flex-shrink: 0; */
 
     background: ${({ main_state, cross_state, DraggableStates, isDragActive}) => {
     if (!DraggableStates || !DraggableStates[main_state] || !isDragActive) {
@@ -45,14 +40,17 @@ export const StyledTaskList = styled.div`
   }};
   transition: all 0.3s ease;
   transition-property: background, border;
-  /* &:active:not(:focus-within) {
-    opacity: 0.8;
-    transform: scale(0.98);
-  } */
    ${({ isDragActive }) => isDragActive && `
     opacity: 0.8;
     transform: scale(0.98);
    `}
+
+  &:hover{
+    cursor: pointer;
+    background: #e8e8e8;
+    transition: all 0.3s ease;
+    transform: scale(1.02);
+  }
 `
 
 // learnt that completely conditional styling can be done in styled components
