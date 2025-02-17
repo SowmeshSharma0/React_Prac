@@ -1,28 +1,36 @@
 import { createContext } from "react";
+import useScreenDetector from "./useScreenDetector";
+import { main_axis_state_mapping, cross_axis_state_mapping, main_axis_IsExpandable_init, can_delete_at_cross_axis_state, card_move_rules_horizontal, card_move_rules_vertical_cross_state } from "./constants";
 
 export const GlobalContext = createContext();
 
 export const GlobalProvider = ({children}) => {
-    const cross_axis_states = ["To Do", "In Progress", "Review", "Done"]
-    const main_axis_states = ["High Priority", "Medium Priority", "Low Priority"]
-    const main_axis_state_mapping = {
-        "High Priority": 2, //high priority tasks
-        "Medium Priority": 1,
-        "Low Priority": 0
-    }
-    const cross_axis_state_mapping = {
-        "To Do": 0,
-        "In Progress": 1,
-        "Review": 2,
-        "Done": 3
-    }
+
+    // //"+x" means the card can move x states forward
+    // //"" means the card cannot move to any other state
+    // //"-x" means the card can move x states backward
+    // //"+*x" means the card can move 1-x states forward
+    // //"-*x" means the card can move 1-x states backward
+
+    // const card_move_rules = {
+    //     0: "+1",
+    //     1: "+1",
+    //     2: "+1",
+    //     3: ""
+    // }
+    
+    const {usable_card_width, usable_card_height} = useScreenDetector()
 
     return (<GlobalContext.Provider
         value={{
-            cross_axis_states,
-            main_axis_states,
             main_axis_state_mapping,
-            cross_axis_state_mapping
+            cross_axis_state_mapping,
+            main_axis_IsExpandable_init,
+            can_delete_at_cross_axis_state,
+            card_move_rules_horizontal,
+            card_move_rules_vertical_cross_state,
+            usable_card_width,
+            usable_card_height
         }}>
         {children}
     </GlobalContext.Provider>)

@@ -3,9 +3,19 @@ h1{
 }
 
 .App-container{
-  margin: 0.5em;
   height: 100%;
+  margin: 0;
+  padding: 1em;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: start;
+
+  .horizontal-scroll_wrapper{
+    flex: 1;
+    overflow-x: auto;
+    width: 100%;
+    min-width: min-content;
+    margin-bottom: 1rem;
+  }
 }

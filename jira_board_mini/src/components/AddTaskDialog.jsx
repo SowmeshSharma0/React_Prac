@@ -1,17 +1,19 @@
-import { useEffect, useRef, useState, useContext} from "react";
+import { useEffect, useRef, useState, useContext, useCallback, useMemo} from "react";
 import { StyledForm } from "./styles/AddTaskDialog.styled";
 import { CardContext } from "../context/CardContext";
+import { use } from "react";
 
 function AddTaskDialog({ openModal, closeModal }) {
     const ref = useRef();
     const wrapperRef = useRef();
 
-    useEffect(() => {
-        const handleClickOutside = (e) => {
-            if (wrapperRef.current && !wrapperRef.current.contains(e.target)) {
-                closeModal();
-            }
+    const handleClickOutside = useCallback((e) => {
+        if (wrapperRef.current && !wrapperRef.current.contains(e.target)) {
+            closeModal();
         }
+    }, [wrapperRef, closeModal])
+
+    useEffect(() => {
         if (openModal) {
             ref.current?.showModal();
             document.addEventListener("mousedown", handleClickOutside);
@@ -21,9 +23,9 @@ function AddTaskDialog({ openModal, closeModal }) {
         return () => {
             document.removeEventListener("mousedown", handleClickOutside);
         }
-    }, [openModal]);
+    }, [handleClickOutside, openModal]);
 
-    const initFormData = () =>{
+    const initFormData = useMemo(() => {
         return {
             title: "",
             description: "",
@@ -32,45 +34,35 @@ function AddTaskDialog({ openModal, closeModal }) {
             reporter: "",
             due_date: new Date().toISOString().slice(0, 10)
         }
-    }
+    }, [])
 
     const [FormData, setFormData] = useState(initFormData)
-    const {addHTodoCard, addMTodoCard, addLTodoCard}= useContext(CardContext)
 
-    const handleChange = (e) =>{
+    const {addCard}= useContext(CardContext)
+
+    const handleChange = useCallback((e) =>{
         setFormData({
             ...FormData,
             [e.target.name]: e.target.value
         })
-    }
+    }, [FormData])
 
-    const handleSubmit = (e) =>{
+    const handleSubmit = useCallback((e) =>{
         e.preventDefault();
-        FormData.priority = Number(FormData.priority);
-        FormData.id = crypto.randomUUID();
-        FormData.cross_status = 0;
 
-        console.log(FormData);
-
-        switch(FormData.priority){
-            case 2:
-                addHTodoCard(FormData);
-                break;
-            case 1:
-                addMTodoCard(FormData);
-                break;
-            case 0:
-                addLTodoCard(FormData);
-                break;
-        }
-        setFormData(initFormData());
+        FormData.id = crypto.randomUUID()
+        addCard(FormData, FormData.priority, 0)
+        setFormData(initFormData);
         closeModal();
-    }
+    }, [FormData, addCard, closeModal, initFormData])
   
     return (
       <dialog
         ref={ref}
         onCancel={closeModal}
+        style={
+            {border: "1px solid black", padding: "1rem", borderRadius: "0.5rem", width: "30%", height: "50%"}
+        }
       >
         <div ref={wrapperRef}>
             <StyledForm onSubmit={handleSubmit}>
@@ -79,7 +71,8 @@ function AddTaskDialog({ openModal, closeModal }) {
                 <input type="text" name="title" id="title" value={FormData.title} onChange={handleChange}/>
 
                 <label htmlFor="description">Description</label>
-                <input type="text" name="description" id="description" value={FormData.description} onChange={handleChange}/>
+                {/* <input type="text" name="description" id="description" value={FormData.description} onChange={handleChange}/> */}
+                <textarea name="description" id="description" value={FormData.description} onChange={handleChange} className="input"></textarea>
 
                 <label htmlFor="priority">Priority</label>
                 <select name="priority" id="priority" value={Number(FormData.priority)} onChange={handleChange}>
@@ -95,7 +88,17 @@ function AddTaskDialog({ openModal, closeModal }) {
                 <input type="text" name="reporter" id="reporter" value={FormData.reporter} onChange={handleChange}/>
 
                 <label htmlFor="due_date">Due Date</label>
-                <input type="date" name="due_date" id="due_date" value={FormData.due_date} onChange={handleChange}/>
+                {/* <input type="date" name="due_date" id="due_date" value={FormData.due_date} onChange={handleChange}/> */}
+                <input type="date" onFocus = {
+                    useCallback(e => {
+                        e.currentTarget.setAttribute(
+                            "min",
+                            new Date().toISOString().slice(0, 10)
+                        );
+                    }, [])
+                }
+                name="due_date" id="due_date" value={FormData.due_date} onChange={handleChange}
+                />
 
                 <button type="submit">Add Task</button>
             </StyledForm>
