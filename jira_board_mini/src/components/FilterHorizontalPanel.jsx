@@ -14,14 +14,14 @@ const FilterHorizontalPanel = () => {
                 return (
                     <StyledFilterBox 
                         key={idx} 
-                        isToggleActive={value}
+                        isToggleActive={value.isFilterActive}
                         onClick={() => {
                             toggleAssigneeFilter(key)
                             // console.log("Toggled: ", assignee)
                         }}
                     >
                         <p>{key}</p>
-                        {value ? <ToggleOnIcon id="toggle-on"/> : <ToggleOffIcon id="toggle-off"/>}
+                        {value.isFilterActive ? <ToggleOnIcon id="toggle-on"/> : <ToggleOffIcon id="toggle-off"/>}
                         {/* <label htmlFor={assignee.assignee}>{assignee.assignee}</label>
                         <input 
                             type="checkbox" 

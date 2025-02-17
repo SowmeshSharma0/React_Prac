@@ -40,7 +40,7 @@ function TaskList({main_state, cross_state}) {
   let renderCards = Cards.filter(card => card.cross_status === cross_state && card.priority === main_state)
 
   //go over assignees and see what all are active : filter stage 2
-  renderCards = renderCards.filter(card => Assignees[card.assignee])
+  renderCards = renderCards.filter(card => Assignees[card.assignee].isFilterActive)
   
   return (
     <StyledTaskList 
