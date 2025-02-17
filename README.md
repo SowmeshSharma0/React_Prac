@@ -65,3 +65,20 @@
    * explored storybook with a sample project
    
    * started jira_board_mini with basic update like working todo lists
+
+12. A Jira-like Task Management Board with drag-and-drop functionality and priority-based task organization.
+      * Built with React for the frontend, Styled-components for styling (material-icons used as well).
+      * State Management: Uses Context API (CardContext and GlobalContext) for centralized state management.
+      * Component Structure: [App], [HorizontalListView], [TaskList], [TaskCard], [AddTask], [AddTaskDialog], [FilterHorizontalPanel], [Confirmation]....and more
+      * Key Features:
+         * Drag-and-drop task management across different states
+         * Priority-based task organization (High, Medium, Low)
+         * Task status tracking (Todo, In Progress, Review, Done)
+         * Expandable/Non-expandable task lists
+         * Task filtering by assignee
+         * Modal dialog for adding new tasks
+         * Detailed task cards with descriptions and due dates
+         * Action confirmation dialog
+         * Centralized state management with 2 providers
+         * Animation for dialog box + hover, active effects
+      * 18 commits 😄
