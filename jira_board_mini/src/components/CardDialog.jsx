@@ -82,6 +82,21 @@ const CardDialog = ({IsOpenModal, closeModal, card}) => {
                 ref={ref}
                 onCancel={closeModal}
                 className="cardDialog"
+                style={{
+                    border: 'none',
+                    padding: '1rem',
+                    borderRadius: '0.5rem',
+                    width: '90%',
+                    maxWidth: '800px',
+                    height: 'auto',
+                    maxHeight: '90vh',
+                    position: 'fixed',
+                    top: '50%',
+                    left: '50%',
+                    transform: 'translate(-50%, -50%)',
+                    backgroundColor: 'white',
+                    overflowY: 'auto'
+                }}
             >
                 <div
                     ref={wrapperRef}

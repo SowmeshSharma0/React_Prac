@@ -66,17 +66,17 @@ button:focus-visible {
 
 body{
   height: 100vh;
-  weight: 100vw;
+  width: 100vw;
 
 }
 
 @keyframes slide-down {
   from {
-      transform: translateY(-100%);
+      transform: translate(-50%, -100%);
       opacity: 0;
   }
   to {
-      transform: translateY(0);
+      transform: translate(-50%, -50%);
       opacity: 1;
   }
 }
@@ -98,6 +98,30 @@ body{
   border-radius: 0.5rem;
 
   animation: slide-down 0.5s ease;
+}
+
+.confirmation-dialog::backdrop {
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(1px);
+}
+
+.cardDialog::backdrop {
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(1px);
+}
+
+@media (max-width: 768px) {
+  .cardDialog {
+      padding: 0.8rem;
+      width: 95%;
+  }
+}
+
+@media (max-width: 480px) {
+  .cardDialog {
+      padding: 0.6rem;
+      width: 98%;
+  }
 }
 
 /* .cardDialog[open]{

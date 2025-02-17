@@ -24,18 +24,6 @@ export const CardProvider = ({children}) => {
         localStorage.setItem('assignees', JSON.stringify(Assignees))
     }, [Assignees])
 
-    // useEffect(() => {
-    //     const cards = localStorage.getItem('cards')
-    //     const assignees = localStorage.getItem('assignees')
-    //     if (cards) setCards(JSON.parse(cards))
-    //     if (assignees) setAssignees(JSON.parse(assignees))
-    // }, [])
-
-    //new format of Assignees:
-    // {
-    //     '<assignee>' : '<isFilterActive>'
-    // }
-
     //index the cards by id for easy access
     const [CardsIndex, setCardsIndex] = useState(() => {
         const savedCardsIndex = localStorage.getItem('cardsIndex')
