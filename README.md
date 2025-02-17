@@ -51,3 +51,17 @@
       * C3: added more functionalities and more states;
       * C4: pushed all states to app.jsx and prop drilling states;
       * C5: Central context with 2 providers
+
+11. 
+   * A Todo List application built with TypeScript and React for managing daily tasks.
+   Built with React + TypeScript for the frontend, Styled-components for styling.
+   State Management: Uses React's useState for local state management with prop drilling.
+   Component Structure: [App], [InputForm], [TodoList], [TodoCard]
+   Key Features: Add, edit, delete todos; mark tasks as complete; styled UI with hover effects; type-safe props and state management.
+   Commits:
+   C1: Basic TodoApp with add feature
+   C2: Working todo app with Ts, React, Styled Components with all crud operations
+   
+   * explored storybook with a sample project
+   
+   * started jira_board_mini with basic update like working todo lists
