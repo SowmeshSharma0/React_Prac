@@ -1,13 +1,18 @@
 import { useCallback, useEffect, useState } from "react";
 
 const cardSizes = {
-    usableWidth:{
-        large: 430,
-        medium: 350,
-        small: 280,
-        mobile: 250
-    },
     breakpoints_Width:{
+        large: 900,
+        medium: 600,
+        small: 400,
+    },
+    usableWidth:{
+        large: 450,
+        medium: 400,
+        small: 350,
+        // mobile: 250
+    },
+    breakpoints_Height:{
         large: 900,
         medium: 600,
         small: 400,
@@ -17,11 +22,6 @@ const cardSizes = {
         medium: 500,
         small: 400,
         mobile: 400
-    },
-    breakpoints_Height:{
-        large: 900,
-        medium: 600,
-        small: 400,
     }
 };
 
@@ -37,7 +37,7 @@ const useScreenDetector = () => {
         else if(width > cardSizes.breakpoints_Width.small)
             return cardSizes.usableWidth.small;
         else
-            return cardSizes.usableWidth.mobile;
+            return width;
     });
     const [usable_card_height, setUsableCardHeight] = useState(() => {
         const height = window.screen.height;
@@ -63,7 +63,7 @@ const useScreenDetector = () => {
         else if(width > cardSizes.breakpoints_Width.small)
             setUsableCardWidth(cardSizes.usableWidth.small);
         else
-            setUsableCardWidth(cardSizes.usableWidth.mobile);
+            setUsableCardWidth(width);
 
         if(height > cardSizes.breakpoints_Height.large)
             setUsableCardHeight(cardSizes.usableHeight.large);
