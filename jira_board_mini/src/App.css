@@ -3,7 +3,7 @@ h1{
 }
 
 .App-container{
-  min-height: 100vh;
+  min-height: 100%;
   margin: 0;
   padding: 1em;
   display: flex;

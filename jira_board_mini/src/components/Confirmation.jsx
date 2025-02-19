@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react";
 import { StyledConfirmation } from "./styles/Confirmation.styled";
 
-const Confirmation = ({isConfirmModalOpen, closeConfirmModal, callBack, card, setEditingCard}) => {
+const Confirmation = ({isConfirmModalOpen, closeConfirmModal, callBack, card, setEditingCard, isEditing, setIsEditing=null}) => {
 
     const confRef = useRef();
 
@@ -44,6 +44,9 @@ const Confirmation = ({isConfirmModalOpen, closeConfirmModal, callBack, card, se
                         e.stopPropagation()
                         closeConfirmModal()
                         setEditingCard(card)
+                        if(isEditing){
+                            setIsEditing(!isEditing)
+                        }
                     }}>Cancel</button>
                 </div>
             </StyledConfirmation>

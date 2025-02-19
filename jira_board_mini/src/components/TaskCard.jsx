@@ -1,9 +1,9 @@
 import { useContext, useState } from "react"
 import { StyledTaskCard } from "./styles/TaskCard.styled"
 import { CardContext } from "../context/CardContext"
-import CardDialog from "./CardDialog"
 import PriorityHighIcon from '@mui/icons-material/PriorityHigh';
 import { GlobalContext } from "../context/GlobalContext";
+import AddTaskDialog from "./AddTaskDialog";
 
 function TaskCard({card}) {
 
@@ -63,16 +63,17 @@ function TaskCard({card}) {
                     <h3>{card.title}</h3>
                     <PriorityHighIcon className="priority" />
                 </div>
-                {/* <p>{card.assignee}</p>
-                <p>{card.reporter}</p> */}
-                {/* opens when clicked */}
 
                 <div className="content">
                     <p className="description">{card.description}</p>
                     <p>Due Date: {card.due_date}</p>
                 </div>
             </StyledTaskCard>
-            <CardDialog IsOpenModal={isExpanded} closeModal={() => setIsExpanded(false)} card={card}/>
+            <AddTaskDialog 
+                openModal={isExpanded} 
+                closeModal={() => setIsExpanded(false)} 
+                card={card}
+            />
         </>
     )
 }

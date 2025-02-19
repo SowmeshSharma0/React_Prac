@@ -4,6 +4,7 @@ import AddTaskDialog from "./AddTaskDialog";
 
 function AddTask() {
     const [modal, setModal] = useState(false);
+
     return (
         <>
             <StyledAddTask onClick={() => setModal(true)}>
