@@ -10,6 +10,7 @@ import FilterHorizontalPanel from './components/FilterHorizontalPanel'
 
 function App() {
   const {main_axis_IsExpandable_init} = useContext(GlobalContext)
+
   return (
     <CardProvider>
       <div className="App-container">

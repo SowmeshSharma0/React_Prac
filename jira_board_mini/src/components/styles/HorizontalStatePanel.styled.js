@@ -17,8 +17,8 @@ export const StyledHorizontalStatePanel = styled.header`
         min-width: ${({ usable_card_width }) => {
             // console.log("usable_card_width: ", usable_card_width);
             return usable_card_width
-        }}px;
-        max-width: ${({ usable_card_width }) => usable_card_width}px;
+        }};
+        max-width: ${({ usable_card_width }) => usable_card_width};
         margin-right: 0.5rem;
         text-align: center;
         font-weight: 600;

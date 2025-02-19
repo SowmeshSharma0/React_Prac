@@ -6,11 +6,12 @@ export const StyledTaskList = styled.div`
     border-radius: 0.5rem;
     margin-right: 0.5rem;
     overflow-y: auto;
-    min-width: ${({ usable_card_width }) => usable_card_width}px;
-    max-width: ${({ usable_card_width }) => usable_card_width}px;
+    
+    min-width: ${({ usable_card_width }) => usable_card_width};
+    max-width: ${({ usable_card_width }) => usable_card_width};
 
-    min-height: ${({ usable_card_height }) => usable_card_height}px;
-    max-height: ${({ usable_card_height }) => usable_card_height}px;
+    min-height: ${({ usable_card_height }) => usable_card_height.min};
+    max-height: ${({ usable_card_height }) => usable_card_height.max};
 
     background: ${({ main_state, cross_state, DraggableStates, isDragActive}) => {
     if (!DraggableStates || !DraggableStates[main_state] || !isDragActive) {

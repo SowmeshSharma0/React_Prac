@@ -14,7 +14,8 @@ export const StyledHorizontalListViewExpandable = styled.section`
         }
         transition: all 0.3s ease-in-out;
         transition-property: max-height;
-        max-height: ${({expanded, usable_card_height}) => expanded ? `${usable_card_height}vh` : "0"};
+        min-height: ${({expanded, usable_card_height}) => expanded ? `${usable_card_height.min}` : "0"};
+        max-height: ${({expanded, usable_card_height}) => expanded ? `${usable_card_height.max}` : "0"};
         /* overflow-x: hidden; */
     }
     .task-list{

@@ -7,22 +7,43 @@ const cardSizes = {
         small: 768,
     },
     usableWidth:{
-        large: 424,
-        medium: 450,
-        small: 340,
+        large: '424px',
+        medium: '450px',
+        small: '340px',
         // mobile: 250
     },
     breakpoints_Height:{
-        large: 900,
-        medium: 600,
-        small: 400,
+        xlarge: 1440,
+        large: 1024,
+        medium: 768,
+        small: 425,
     },
-    usableHeight:{
-        large: 500,
-        medium: 500,
-        small: 400,
-        mobile: 400
+    usableHeight: {
+        // Min-heights ensure consistent initial appearance
+        // max-height prevents cards from becoming too tall
+        xlarge: {
+            min: '150px',
+            max: '75vh'
+        },
+        large: {
+            min: '150px',
+            max: '75vh'
+        },
+        medium: {
+            min: '130px',
+            max: '80vh'
+        },
+        small: {
+            min: '120px',
+            max: '85vh'
+        }
     }
+    // usableHeight:{
+    //     large: 500,
+    //     medium: 500,
+    //     small: 400,
+    //     mobile: 400
+    // }
 };
 
 const useScreenDetector = () => {
@@ -40,13 +61,15 @@ const useScreenDetector = () => {
             return cardSizes.usableWidth.small;
         } else {
             // For mobile: single column with margins
-            return width/1.2;
+            return width/1.5 + 'px';
         }
     }, [])
 
     const calculateCardHeight = useCallback(() => {
         const height = window.screen.height;
-        if (height > cardSizes.breakpoints_Height.large) {
+        if (height > cardSizes.breakpoints_Height.xlarge) {
+            return cardSizes.usableHeight.xlarge;
+        } else if (height > cardSizes.breakpoints_Height.large) {
             return cardSizes.usableHeight.large;
         } else if (height > cardSizes.breakpoints_Height.medium) {
             return cardSizes.usableHeight.medium;
