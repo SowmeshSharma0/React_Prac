@@ -5,7 +5,6 @@ export const StyledTaskCard = styled.div`
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    width: 87%;
     .cardHeader{
         display: flex;
         justify-content: space-between;

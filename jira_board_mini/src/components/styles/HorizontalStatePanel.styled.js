@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const StyledHorizontalStatePanel = styled.header`
     display: flex;
     /* justify-content: space-between; */
-    justify-content: center;
+    /* justify-content: center; */
     align-items: baseline;
     margin-bottom: 1rem;
 

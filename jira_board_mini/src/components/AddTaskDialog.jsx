@@ -97,8 +97,32 @@ function AddTaskDialog({ openModal, closeModal, card=null }) {
             <dialog
                 ref={ref}
                 onCancel={closeModal}
+                // style = {
+                //     {
+                //         border: 'none',
+                //         padding: '1rem',
+                //         borderRadius: '0.5rem',
+                //         width: '90%',
+                //         maxWidth: '800px',
+                //         height: 'auto',
+                //         maxHeight: '90vh',
+                //         position: 'fixed',
+                //         top: '50%',
+                //         left: '50%',
+                //         transform: 'translate(-50%, -50%)',
+                //         backgroundColor: 'white',
+                //         overflowY: 'auto'
+                //     }
+                // }
                 style={
-                    {border: "1px solid black", padding: "1rem", borderRadius: "0.5rem", width: "30%", height: "50%"}
+                    {
+                        border: "1px solid black", 
+                        padding: "1rem", 
+                        borderRadius: "0.5rem", 
+                        width: "30%", 
+                        overflowY: "auto",
+                        position: "relative",
+                    }
                 }
             >
                 <div ref={wrapperRef}>
