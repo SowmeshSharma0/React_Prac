@@ -1,69 +1,3 @@
-/* :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
-}
-
-body {
-  margin: 0;
-  display: flex;
-}
-
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
-}
-
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-}
-
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
-} */
-
 html, body{
   height: 100%;
   margin: 0;
@@ -96,27 +30,22 @@ html, body{
   }
 } */
 
-.cardDialog{
+/* .cardDialog{
   border: 1px solid black;
   padding: 1rem;
   border-radius: 0.5rem;
 
   animation: slide-down 0.5s ease-in-out;
-}
+} */
 
 .confirmation-dialog::backdrop {
   background-color: rgba(0, 0, 0, 0.5);
   /* backdrop-filter: blur(1px); */
 }
 
-.cardDialog::backdrop {
-  background-color: rgba(0, 0, 0, 0.5);
-  /* backdrop-filter: blur(1px); */ 
-}
-
 /* blur effect is causing performance issues and lag */
 
-@media (max-width: 768px) {
+/* @media (max-width: 768px) {
   .cardDialog {
       padding: 0.8rem;
       width: 95%;
@@ -128,8 +57,80 @@ html, body{
       padding: 0.6rem;
       width: 98%;
   }
+} */
+
+.AddTaskDialog{
+  border: 1px solid black;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  width: 50%;
+  overflow-y: auto;
+  position: relative;
+
+  &::backdrop{
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+
+  .edit-delete-wrapper{
+    display: flex;
+    justify-content: flex-end;
+  
+    .delete-wrapper, .edit-wrapper{
+        margin: 0;
+        background-color: white;
+        border-radius: 40%;
+        padding: 0.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+  
+        svg {
+            font-size: 1.5rem;
+        }
+  
+        &:hover {
+            transform: scale(1.1);
+            transition: all 0.3s;
+        }
+    }
+  
+    .edit-wrapper:hover {
+        color: #00f;
+        cursor: pointer;
+    }
+  
+    .delete-wrapper:hover {
+        color: #f00;
+        cursor: pointer;
+    }
+
+    button{
+      background-color: transparent;
+      border: none;
+      cursor: pointer;
+      /* position: absolute;
+      left: 1rem; */
+
+      &:hover{
+        color: red;
+      }
+    }
+  }
 }
 
-/* .cardDialog[open]{
-  animation: slide-down 0.5s ease;
-} */
+.confirmation-dialog{
+  position: absolute;
+  border: none;
+  padding: 0;
+  background-color: transparent;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  width: 30%;
+
+  @media (max-width: 768px) {
+    width: 50%;
+  }
+
+  @media (max-width: 480px) {
+    width: 80%;
+  }
+}

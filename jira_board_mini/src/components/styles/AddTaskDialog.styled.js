@@ -24,15 +24,13 @@ export const StyledForm = styled.form`
     flex-direction: column;
     justify-content: center;
     padding: 0.5rem;
-    input, .input{
+    input, .input, select, option, textarea{
         margin: 0.5rem;
         padding: 0.5rem;
         border: 1px solid #dfe1e6;
     }
-    select{
+    label{
         margin: 0.5rem;
-        padding: 0.5rem;
-        border: 1px solid #dfe1e6;
     }
     button{
         margin: 0.5rem;

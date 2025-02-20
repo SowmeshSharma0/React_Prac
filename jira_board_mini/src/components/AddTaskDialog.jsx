@@ -3,6 +3,11 @@ import { StyledForm } from "./styles/AddTaskDialog.styled";
 import { CardContext } from "../context/CardContext";
 import { GlobalContext } from "../context/GlobalContext";
 import Confirmation from "./Confirmation";
+import EditIcon from '@mui/icons-material/Edit';
+import DeleteIcon from '@mui/icons-material/Delete'
+import CloseIcon from '@mui/icons-material/Close';
+
+
 function AddTaskDialog({ openModal, closeModal, card=null }) {
     const {main_axis_state_mapping} = useContext(GlobalContext)
 
@@ -114,35 +119,29 @@ function AddTaskDialog({ openModal, closeModal, card=null }) {
                 //         overflowY: 'auto'
                 //     }
                 // }
-                style={
-                    {
-                        border: "1px solid black", 
-                        padding: "1rem", 
-                        borderRadius: "0.5rem", 
-                        width: "30%", 
-                        overflowY: "auto",
-                        position: "relative",
-                    }
-                }
+                className="AddTaskDialog"
             >
                 <div ref={wrapperRef}>
-                    <div style={{display: "flex", justifyContent: "flex-end"}}>
+                    <div className="edit-delete-wrapper">
                         {card ?
                             <>
-                                <button 
-                                    onClick={handleDelete}
-                                >
-                                    Delete
-                                </button> 
-                                <button 
-                                    onClick={isEditing ? handleEdit : () => {
-                                        setIsEditing(!isEditing)
-                                        setFormData(card)
-                                    }}
-                                >Edit</button>
+                                <div className="delete-wrapper">
+                                    <DeleteIcon onClick={handleDelete}/>
+                                </div>
+                                <div className="edit-wrapper">
+                                    <EditIcon 
+                                        onClick={isEditing ? handleEdit : () => {
+                                            setIsEditing(!isEditing)
+                                            setFormData(card)
+                                        }}
+                                    />
+                                </div>
                             </>
                         : null
                         }
+                        <button type="button" onClick={closeModal}>
+                            <CloseIcon />
+                        </button>
                     </div>
                     <StyledForm onSubmit={handleSubmit}>
                         {/* gotta add value attr */}

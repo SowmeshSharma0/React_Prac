@@ -7,7 +7,7 @@ const cardSizes = {
         small: 768,
     },
     usableWidth:{
-        large: '424px',
+        large: '430px',
         medium: '450px',
         small: '340px',
         // mobile: 250

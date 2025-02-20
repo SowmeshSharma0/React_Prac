@@ -18,16 +18,6 @@ const Confirmation = ({isConfirmModalOpen, closeConfirmModal, callBack, card, se
             ref={confRef} 
             onCancel={closeConfirmModal}
             className="confirmation-dialog"
-            style={{
-                border: 'none',
-                padding: 0,
-                backgroundColor: 'transparent',
-                position: 'fixed',
-                top: '50%',
-                left: '50%',
-                transform: 'translate(-50%, -50%)',
-                boxShadow: 'rgba(0, 0, 0, 0.24) 0px 3px 8px'
-            }}
         >
             <StyledConfirmation>
                 <h2>Do you really want to proceed with this Action ?</h2>
