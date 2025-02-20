@@ -2,13 +2,18 @@ import { createContext, useEffect, useState } from "react";
 
 export const CardContext = createContext();
 
-export const CardProvider = ({children}) => {
+export const CardProvider = ({children, initialAssignees = {}}) => {
 
     const [Cards, setCards] = useState(() => {
         const savedCards = localStorage.getItem('cards')
         return savedCards ? JSON.parse(savedCards) : []
     })
     const [Assignees, setAssignees] = useState(() => {
+
+        if(initialAssignees.length > 0){
+            return initialAssignees
+        }
+
         const savedAssignees = localStorage.getItem('assignees')
         return savedAssignees ? JSON.parse(savedAssignees) : {}
     });

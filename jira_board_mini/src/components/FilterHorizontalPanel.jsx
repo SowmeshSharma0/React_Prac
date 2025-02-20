@@ -22,7 +22,6 @@ const FilterHorizontalPanel = () => {
                     >
                         <div className="filter-box-content">
                             <p>{key}</p>
-                            {/* {value.isFilterActive ? <ToggleOnIcon id="toggle-on"/> : <ToggleOffIcon id="toggle-off"/>} */}
                         </div>
                     </StyledFilterBox>
                 )
