@@ -8,7 +8,7 @@ import { main_axis_state_mapping } from "../context/constants";
 
 // Decorator to provide necessary contexts
 const withContexts = (Story) => (
-    <GlobalContext.Provider value={main_axis_state_mapping}>
+    <GlobalContext.Provider value={{main_axis_state_mapping}}>
         <CardProvider>
             <Story />
         </CardProvider>

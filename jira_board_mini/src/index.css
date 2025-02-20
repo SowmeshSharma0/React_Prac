@@ -74,6 +74,8 @@ html, body{
   .edit-delete-wrapper{
     display: flex;
     justify-content: flex-end;
+    width: 100%;
+    gap: 0.5rem;
   
     .delete-wrapper, .edit-wrapper{
         margin: 0;

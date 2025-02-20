@@ -8,7 +8,7 @@ import DeleteIcon from '@mui/icons-material/Delete'
 import CloseIcon from '@mui/icons-material/Close';
 
 
-function AddTaskDialog({ openModal, closeModal, card=null }) {
+function AddTaskDialog({ openModal, closeModal, card=null, initialEditMode=false }) {
     const {main_axis_state_mapping} = useContext(GlobalContext)
 
     const ref = useRef();
@@ -49,7 +49,7 @@ function AddTaskDialog({ openModal, closeModal, card=null }) {
     const [isConfirmOpen, setIsConfirmOpen] = useState(false);
     const [callBack, setCallBack] = useState(null);
 
-    const [isEditing, setIsEditing] = useState(false);
+    const [isEditing, setIsEditing] = useState(initialEditMode);
 
     const handleDelete = (e) => {
         e.stopPropagation();
@@ -66,7 +66,7 @@ function AddTaskDialog({ openModal, closeModal, card=null }) {
     const handleChangeSubmit = (e) => {
         e.preventDefault();
         deleteCard(card.id);
-        addCard(FormData, FormData.priority, 0)
+        addCard(FormData, FormData.priority, card.status)
     }
 
     const handleEdit = (e) => {
