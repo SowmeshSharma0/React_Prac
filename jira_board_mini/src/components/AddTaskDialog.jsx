@@ -66,7 +66,7 @@ function AddTaskDialog({ openModal, closeModal, card=null, initialEditMode=false
     const handleChangeSubmit = (e) => {
         e.preventDefault();
         deleteCard(card.id);
-        addCard(FormData, FormData.priority, card.status)
+        addCard(FormData, FormData.priority, FormData.cross_status)
     }
 
     const handleEdit = (e) => {
