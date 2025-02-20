@@ -1,7 +1,7 @@
 import { useContext, useState } from "react"
-import TaskList from "./TaskList"
-import { GlobalContext } from "../context/GlobalContext"
-import { StyledHorizontalListViewExpandable } from "./styles/HorizontalListViewExpandable.styled"
+import TaskList from "../TaskList"
+import { GlobalContext } from "../../context/GlobalContext"
+import { StyledHorizontalListViewExpandable } from "../styles/HorizontalListViewExpandable.styled"
 // import HorizontalStatePanel from "./HorizontalStatePanel"
 
 function HorizontalListViewExpandable({state}) {

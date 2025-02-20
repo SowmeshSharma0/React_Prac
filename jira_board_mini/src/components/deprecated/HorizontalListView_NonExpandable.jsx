@@ -1,8 +1,8 @@
 
 import { useContext } from 'react'
-import { StyledHorizontalListView_NonExpandable } from './styles/HorizontalListView_NonExpandable.styled'
-import TaskList from './TaskList'
-import { GlobalContext } from '../context/GlobalContext'
+import { StyledHorizontalListView_NonExpandable } from '../styles/HorizontalListView_NonExpandable.styled'
+import TaskList from '../TaskList'
+import { GlobalContext } from '../../context/GlobalContext'
 // import HorizontalStatePanel from './HorizontalStatePanel'
 
 const HorizontalListView_NonExpandable = ({state}) => {
