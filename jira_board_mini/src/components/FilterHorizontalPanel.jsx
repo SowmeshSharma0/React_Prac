@@ -20,9 +20,7 @@ const FilterHorizontalPanel = () => {
                             toggleAssigneeFilter(key)
                         }}
                     >
-                        <div className="filter-box-content">
-                            <p>{key}</p>
-                        </div>
+                        <p>{key}</p>
                     </StyledFilterBox>
                 )
             })}

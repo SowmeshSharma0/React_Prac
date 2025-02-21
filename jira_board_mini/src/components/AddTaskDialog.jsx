@@ -102,23 +102,6 @@ function AddTaskDialog({ openModal, closeModal, card=null, initialEditMode=false
             <dialog
                 ref={ref}
                 onCancel={closeModal}
-                // style = {
-                //     {
-                //         border: 'none',
-                //         padding: '1rem',
-                //         borderRadius: '0.5rem',
-                //         width: '90%',
-                //         maxWidth: '800px',
-                //         height: 'auto',
-                //         maxHeight: '90vh',
-                //         position: 'fixed',
-                //         top: '50%',
-                //         left: '50%',
-                //         transform: 'translate(-50%, -50%)',
-                //         backgroundColor: 'white',
-                //         overflowY: 'auto'
-                //     }
-                // }
                 className="AddTaskDialog"
             >
                 <div ref={wrapperRef}>
@@ -139,7 +122,10 @@ function AddTaskDialog({ openModal, closeModal, card=null, initialEditMode=false
                             </>
                         : null
                         }
-                        <button type="button" onClick={closeModal}>
+                        <button type="button" onClick={() => {
+                            setIsEditing(false)
+                            closeModal()
+                        }}>
                             <CloseIcon />
                         </button>
                     </div>

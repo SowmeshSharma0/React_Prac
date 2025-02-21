@@ -1,9 +1,17 @@
 import styled from 'styled-components';
 
 export const StyledFilterPanelContainer = styled.div`
+    width: 100%;
     display: flex;
     align-items: center;
-    justify-content: center;
+    overflow-x: auto;
+
+    &::-webkit-scrollbar {
+        display: none;
+    }
+    -ms-overflow-x: none;  // IE and Edge
+    scrollbar-width: none;  // Firefox
+    
     h2{
         font-size: 1.5rem;
         font-weight: 600;
@@ -12,45 +20,42 @@ export const StyledFilterPanelContainer = styled.div`
         margin-bottom: 1rem;
         color: #4a4a4a;
         text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+        white-space: nowrap;
+        flex-shrink: 0;
     }
 `
-
+//cant keep resizing the filter boxes; box widths should be fixed; and overflow-x should be auto
 export const StyledFilterHorizontalPanel = styled.div`
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
-    width: fit-content;
+    /* justify-content: space-between; */
+    justify-content: flex-start;
+    flex-wrap: nowrap;
+    min-width: min-content;
     padding: ${({len}) => len > 0 ? '1.2rem' : '0'};
-    /* background-color: #f1f1f1; */
     margin: 1rem;
     border-radius: 10px;
     box-shadow: 0px 0px 5px 0px rgb(67, 66, 66);
+    width: 100%;
 `
 
+
+//cant have more than 3 words in the filter box
 export const StyledFilterBox = styled.div`
-    display: flex;
-    flex-direction: row;
-    align-items: center;
+    align-self: center;
+    text-align: center;
     margin: 0.5rem;
-    /* padding: 0.5rem; */
+    padding: 0.5rem;
     border-radius: 5px;
     box-shadow: 0px 0px 5px 0px #000000;
     transition: all 0.3s ease;
-    .filter-box-content{
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        justify-content: center;
-        p{
-            margin: 0;
-            font-weight: ${({isToggleActive}) => isToggleActive ? '600' : '400'};
-            font-size: ${({isToggleActive}) => isToggleActive ? '1rem' : '1.06rem'};
-            color: white;
-        }
-        padding: 0.5rem;
-        border-radius: 5px;
-        background-color: ${({isToggleActive}) => isToggleActive ? 'green' : 'red'};
+    p{
+        margin: 0;
+        font-weight: ${({isToggleActive}) => isToggleActive ? '600' : '400'};
+        font-size: ${({isToggleActive}) => isToggleActive ? '1rem' : '1.06rem'};
+        color: white;
     }
+    background-color: ${({isToggleActive}) => isToggleActive ? 'green' : 'red'};
     &:hover{
         cursor: pointer;
         transform: translateY(-2px);
@@ -58,13 +63,13 @@ export const StyledFilterBox = styled.div`
     &:active{
         transform: scale(1.05);
     }
+    width: 190px;
 
-    /* #toggle-on{
-        color: green;
-        margin-left: 0.5rem;
+    @media (max-width: 768px) {
+        width: 150px;
     }
-    #toggle-off{
-        color: red;
-        margin-left: 0.5rem;
-    } */
+
+    @media (max-width: 480px) {
+        width: 100px;
+    }
 `
