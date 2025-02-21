@@ -5,6 +5,7 @@ export const StyledFilterPanelContainer = styled.div`
     display: flex;
     align-items: center;
     overflow-x: auto;
+    min-width: 0;
 
     &::-webkit-scrollbar {
         display: none;
@@ -28,10 +29,9 @@ export const StyledFilterPanelContainer = styled.div`
 export const StyledFilterHorizontalPanel = styled.div`
     display: flex;
     flex-direction: row;
-    /* justify-content: space-between; */
-    justify-content: flex-start;
+    align-items: center;
     flex-wrap: nowrap;
-    min-width: min-content;
+    min-width: fit-content;
     padding: ${({len}) => len > 0 ? '1.2rem' : '0'};
     margin: 1rem;
     border-radius: 10px;
@@ -41,8 +41,7 @@ export const StyledFilterHorizontalPanel = styled.div`
 
 
 //cant have more than 3 words in the filter box
-export const StyledFilterBox = styled.div`
-    align-self: center;
+export const StyledFilterBox = styled.div`   
     text-align: center;
     margin: 0.5rem;
     padding: 0.5rem;
@@ -54,6 +53,8 @@ export const StyledFilterBox = styled.div`
         font-weight: ${({isToggleActive}) => isToggleActive ? '600' : '400'};
         font-size: ${({isToggleActive}) => isToggleActive ? '1rem' : '1.06rem'};
         color: white;
+        /* overflow: hidden;
+        text-overflow: ellipsis; */
     }
     background-color: ${({isToggleActive}) => isToggleActive ? 'green' : 'red'};
     &:hover{
@@ -64,6 +65,7 @@ export const StyledFilterBox = styled.div`
         transform: scale(1.05);
     }
     width: 190px;
+    max-width: fit-content;
 
     @media (max-width: 768px) {
         width: 150px;
