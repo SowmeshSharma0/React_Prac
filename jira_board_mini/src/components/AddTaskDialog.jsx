@@ -6,6 +6,7 @@ import Confirmation from "./Confirmation";
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete'
 import CloseIcon from '@mui/icons-material/Close';
+import { memo } from "react";
 
 
 function AddTaskDialog({ openModal, closeModal, card=null, initialEditMode=false }) {
@@ -19,7 +20,7 @@ function AddTaskDialog({ openModal, closeModal, card=null, initialEditMode=false
             closeModal();
         }
     }, [wrapperRef, closeModal])
-
+    
     useEffect(() => {
         if (openModal) {
             ref.current?.showModal();
@@ -243,4 +244,4 @@ function AddTaskDialog({ openModal, closeModal, card=null, initialEditMode=false
     );
 }
 
-export default AddTaskDialog
+export default memo(AddTaskDialog)
