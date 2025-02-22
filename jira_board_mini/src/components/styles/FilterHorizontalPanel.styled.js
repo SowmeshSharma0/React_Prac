@@ -2,6 +2,8 @@ import styled from 'styled-components';
 
 export const StyledFilterPanelContainer = styled.div`
     /* width: 100%; */
+    position: sticky;
+    left: 0;
     display: flex;
     align-items: center;
     overflow-x: auto;

@@ -19,6 +19,8 @@
   }
 
   h1 {
+    position: sticky;
+    left: 0;
     text-align: center;
     white-space: nowrap;
     color: #1a76d3;
