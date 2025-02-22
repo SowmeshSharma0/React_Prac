@@ -54,8 +54,6 @@ function TaskCard({card}) {
         e.target.style.visibility = "visible";
     }, [])
 
-    console.log("TaskCard rendered")
-
     return (
         <>
             <StyledTaskCard 
@@ -79,13 +77,11 @@ function TaskCard({card}) {
                     <p>Due Date: {card.due_date}</p>
                 </div>
             </StyledTaskCard>
-            {isExpanded && (
-                <AddTaskDialog 
-                    openModal={isExpanded} 
-                    closeModal={() => setIsExpanded(false)} 
-                    card={card}
-                />
-            )}
+            <AddTaskDialog 
+                openModal={isExpanded} 
+                closeModal={() => setIsExpanded(false)} 
+                card={card}
+            />
         </>
     )
 }

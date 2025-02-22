@@ -17,10 +17,9 @@ export const StyledTaskCard = styled.div`
         h3{
             font-size: 1.5rem;
             margin: 0;
-            display: -webkit-box;
-            -webkit-line-clamp: 3;
-            -webkit-box-orient: vertical;
             overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
         }
 
         .priority{
@@ -56,12 +55,13 @@ export const StyledTaskCard = styled.div`
         display: flex;
         flex-direction: column; 
         justify-content: space-evenly;
+        width: 100%;
         p{
             font-size: 1.2rem;
             margin: 0.5rem;
         }
         .description{
-            width: 100%;
+            /* width: 100%; */
             display: -webkit-box;
             -webkit-line-clamp: 3;
             -webkit-box-orient: vertical;

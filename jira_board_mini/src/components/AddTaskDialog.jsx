@@ -75,6 +75,7 @@ function AddTaskDialog({ openModal, closeModal, card=null, initialEditMode=false
         setIsConfirmOpen(true);
         setCallBack(() => {
             return () => {
+                // console.log("handleEdit callback")
                 setIsConfirmOpen(false);
                 handleChangeSubmit(e);
                 setIsEditing(!isEditing);

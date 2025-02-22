@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react"
+import { useContext } from "react"
 import { StyledTaskList } from "./styles/TaskList.styled"
 import TaskCard from "./TaskCard"
 import { CardContext } from "../context/CardContext"
