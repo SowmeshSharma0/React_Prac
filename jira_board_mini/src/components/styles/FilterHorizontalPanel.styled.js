@@ -1,11 +1,12 @@
 import styled from 'styled-components';
 
 export const StyledFilterPanelContainer = styled.div`
-    width: 100%;
+    /* width: 100%; */
     display: flex;
     align-items: center;
     overflow-x: auto;
     min-width: 0;
+    max-width: 100%;
 
     &::-webkit-scrollbar {
         display: none;
