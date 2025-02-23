@@ -23,7 +23,12 @@ export const StyledTaskCard = styled.div`
         }
 
         .priority{
-            color: white;
+            color: ${({cardprio}) => {
+                if(cardprio === 1){
+                    return "#333333"
+                }
+                return "white"
+            }};
             background-color: ${({cardprio}) => {
                 if(cardprio === 2){
                     return "red"

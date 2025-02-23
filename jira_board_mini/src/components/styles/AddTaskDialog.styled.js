@@ -31,6 +31,8 @@ export const StyledForm = styled.form`
     }
     label{
         margin: 0.5rem;
+        font-size: 1.2rem;
+        font-weight: 600;
     }
     button{
         margin: 0.5rem;

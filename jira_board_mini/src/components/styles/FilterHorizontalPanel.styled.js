@@ -43,13 +43,31 @@ export const StyledFilterHorizontalPanel = styled.div`
 `
 
 
+const toggleActiveColor = (isToggleActive) => {
+    // if(isToggleActive){
+    //     return 'green'
+    // }
+    // return 'red'
+    // if(isToggleActive){
+    //     return 'linear-gradient(to right, #1D976C 0%, #1D976C  51%, #93F9B9 100%)'
+    // }
+    // return 'linear-gradient(to right, #e52d27 0%, #b31217  51%, #e52d27  100%)'
+
+    if(isToggleActive){
+        // Calming green gradient
+        return 'linear-gradient(to right, #2ecc71 0%, #27ae60 100%)'
+    }
+    // Softer red gradient
+    return 'linear-gradient(to right, #e74c3c 0%, #c0392b 100%)'
+}
+
 //cant have more than 3 words in the filter box
 export const StyledFilterBox = styled.div`   
     text-align: center;
     margin: 0.5rem;
     padding: 0.5rem;
     border-radius: 5px;
-    box-shadow: 0px 0px 5px 0px #000000;
+    box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.2);
     transition: all 0.3s ease;
     p{
         margin: 0;
@@ -59,10 +77,12 @@ export const StyledFilterBox = styled.div`
         /* overflow: hidden;
         text-overflow: ellipsis; */
     }
-    background-color: ${({isToggleActive}) => isToggleActive ? 'green' : 'red'};
+    background: ${({isToggleActive}) => toggleActiveColor(isToggleActive)};
     &:hover{
         cursor: pointer;
         transform: translateY(-2px);
+        /* box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.3); */
+        box-shadow: 0px 2px 8px 0px rgba(0, 0, 0, 0.15);
     }
     &:active{
         transform: scale(1.05);
