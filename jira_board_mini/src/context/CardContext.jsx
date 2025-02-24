@@ -21,6 +21,8 @@ export const CardProvider = ({children, initialAssignees = {}}) => {
     const [IsDragActive, setIsDragActive] = useState(false)
     const [DraggableStates, setDraggableStates] = useState({})
 
+    const [areFiltersActive, setAreFiltersActive] = useState(false)
+
     useEffect(() => {
         localStorage.setItem('cards', JSON.stringify(Cards))
     }, [Cards])
@@ -65,7 +67,8 @@ export const CardProvider = ({children, initialAssignees = {}}) => {
                     ...prevAssignees,
                     [newCard.assignee] : {
                         count: 1,
-                        isFilterActive: true
+                        // isFilterActive: true : has 3 states: "init", "true", "false" : lets see; this will break a lot of things
+                        isFilterActive: false
                     }
                 }
             }
@@ -106,6 +109,22 @@ export const CardProvider = ({children, initialAssignees = {}}) => {
 
     const toggleAssigneeFilter = (toggleAssignee) => {
 
+        if(Assignees[toggleAssignee].isFilterActive === false){
+            setAreFiltersActive(true)
+        }
+        else{
+            //basically u are toggling toggleAssignee off; check if all other filters are off as well
+            let allFiltersOff = true
+            Object.keys(Assignees).forEach(assigneeKey => {
+                if(assigneeKey !== toggleAssignee && Assignees[assigneeKey].isFilterActive === true){
+                    allFiltersOff = false
+                    return
+                }
+            })
+            if(allFiltersOff){
+                setAreFiltersActive(false)
+            }
+        }
         setAssignees(prevAssignees => {
             const newAssignees = {...prevAssignees} //O(n)
             newAssignees[toggleAssignee] = {
@@ -130,7 +149,8 @@ export const CardProvider = ({children, initialAssignees = {}}) => {
                 IsDragActive,
                 setIsDragActive,
                 Assignees,
-                toggleAssigneeFilter
+                toggleAssigneeFilter,
+                areFiltersActive,
             }}
         >
             {children}

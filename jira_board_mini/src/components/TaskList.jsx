@@ -1,4 +1,4 @@
-import { useContext } from "react"
+import { useContext, useState } from "react"
 import { StyledTaskList } from "./styles/TaskList.styled"
 import TaskCard from "./TaskCard"
 import { CardContext } from "../context/CardContext"
@@ -14,7 +14,8 @@ function TaskList({main_state, cross_state}) {
     DraggableStates,
     IsDragActive,
     setIsDragActive,
-    Assignees
+    Assignees,
+    areFiltersActive
   } = useContext(CardContext)
 
   const {usable_card_width, usable_card_height} = useContext(GlobalContext)
@@ -39,8 +40,10 @@ function TaskList({main_state, cross_state}) {
 
   let renderCards = Cards.filter(card => card.cross_status === cross_state && card.priority === main_state)
 
-  //go over assignees and see what all are active : filter stage 2
-  renderCards = renderCards.filter(card => Assignees[card.assignee].isFilterActive)
+  if(areFiltersActive){
+    //go over assignees and see what all are active : filter stage 2
+    renderCards = renderCards.filter(card => Assignees[card.assignee].isFilterActive)
+  }
   
   return (
     <StyledTaskList 

@@ -133,11 +133,13 @@ function AddTaskDialog({ openModal, closeModal, card=null, initialEditMode=false
                             value={!card ? FormData.title: isEditing ? FormData.title: card.title}  
                             disabled={!isEditing && card}
                             {...register("title", 
-                                {required: "Title is required",
-                                minLength: {
-                                    value: 5,
-                                    message: "Title must be at least 5 characters long"
-                                }
+                                {
+                                    required: "Title is required",
+                                    minLength: {
+                                        value: 5,
+                                        message: "Title must be at least 5 characters long"
+                                    },
+                                    validate: (value) => value[0] === value[0].toUpperCase() ? true : "Title must start with a capital letter"
                                 })}
                         />
                         {errors.title && <p className="error-message">{errors.title.message}</p>}
