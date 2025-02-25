@@ -1,21 +1,17 @@
 import { createContext, useEffect, useState } from "react";
 import getCardsAPI from "../services/getCards"
-import setCardsAPI from "../services/setCards"
+import {addCardsAPI, deleteCardsAPI} from "../services/setCards"
 
 export const CardContext = createContext();
 
 export const CardProvider = ({children, initialAssignees = {}}) => {
 
-    // const [batch, setBatch] = useState([])
-    // const [callCounter, setCallCounter] = useState(0)
-    //batch is an array of cards ; when it reaches size 5, we call the api;
-    //there are some issues with this: 
-    //1. if the call counter reaches 5, the api call is delayed by 1 second;
-    //2. if the call counter never reaches 5 in a particular session: then what ?
+    const [batchAdd, setBatchAdd] = useState(new Set())
+    const [batchDelete, setBatchDelete] = useState(new Set())
 
     useEffect(() => {
         const fetchCards = async () => {
-            const fetchedCards = await getCardsAPI()
+            const {cards: fetchedCards, isCached} = await getCardsAPI()
             setCards(fetchedCards)
             setCardsIndex(() => {
                 const cardsIndex = {}
@@ -24,6 +20,9 @@ export const CardProvider = ({children, initialAssignees = {}}) => {
                 })
                 return cardsIndex
             })
+            if(isCached){
+                return
+            }
             setAssignees(prevAssignees => {
                 const newAssignees = {...prevAssignees};
                 
@@ -61,6 +60,10 @@ export const CardProvider = ({children, initialAssignees = {}}) => {
     const [DraggableStates, setDraggableStates] = useState({})
 
     const [areFiltersActive, setAreFiltersActive] = useState(false)
+
+    useEffect(() => {
+        localStorage.setItem('cards', JSON.stringify(Cards))
+    }, [Cards])
     
     useEffect(() => {
         localStorage.setItem('assignees', JSON.stringify(Assignees))
@@ -102,15 +105,28 @@ export const CardProvider = ({children, initialAssignees = {}}) => {
                     ...prevAssignees,
                     [newCard.assignee] : {
                         count: 1,
-                        // isFilterActive: true : has 3 states: "init", "true", "false" : lets see; this will break a lot of things
                         isFilterActive: false
                     }
                 }
             }
         })
 
-        const response = await setCardsAPI([...Cards, newCard])
-        console.log(response)
+        let newBatchAdd = [...batchAdd, newCard]
+        //gotta verify whether newBatch card is not there in batchDelete set
+        newBatchAdd = newBatchAdd.filter(newBatchCard => !batchDelete.has(newBatchCard.id))
+        newBatchAdd = new Set(newBatchAdd)
+        console.log("newBatchAdd : \n")
+        console.log(newBatchAdd)
+        setBatchAdd(newBatchAdd)
+
+        if(newBatchAdd.size === 5){
+            console.log("Adding a batch consisting of : \n")
+            console.log(newBatchAdd.size)
+            console.log(newBatchAdd)
+            const response = await addCardsAPI(newBatchAdd)
+            console.log(response)
+            setBatchAdd(new Set())
+        }
     }
     const deleteCard = async (id) => {
         const newCards = Cards.filter(card => card.id !== id) //O(n)
@@ -142,8 +158,20 @@ export const CardProvider = ({children, initialAssignees = {}}) => {
 
         setCards(newCards)
 
-        const response = await setCardsAPI(newCards)
-        console.log(response)
+
+        const newBatchDelete = new Set([...batchDelete, id])
+        console.log("newBatchDelete : \n")
+        console.log(newBatchDelete)
+        setBatchDelete(newBatchDelete)
+
+        if(newBatchDelete.size === 5){
+            console.log("Deleting a batch consisting of : \n")
+            console.log(newBatchDelete.size)
+            console.log(newBatchDelete)
+            const response = await deleteCardsAPI(newBatchDelete)
+            console.log(response)
+            setBatchDelete(new Set())
+        }
     }
 
     const toggleAssigneeFilter = (toggleAssignee) => {
