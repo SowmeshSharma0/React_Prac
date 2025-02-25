@@ -1,13 +1,52 @@
 import { createContext, useEffect, useState } from "react";
+import getCardsAPI from "../services/getCards"
+import setCardsAPI from "../services/setCards"
 
 export const CardContext = createContext();
 
 export const CardProvider = ({children, initialAssignees = {}}) => {
 
-    const [Cards, setCards] = useState(() => {
-        const savedCards = localStorage.getItem('cards')
-        return savedCards ? JSON.parse(savedCards) : []
-    })
+    // const [batch, setBatch] = useState([])
+    // const [callCounter, setCallCounter] = useState(0)
+    //batch is an array of cards ; when it reaches size 5, we call the api;
+    //there are some issues with this: 
+    //1. if the call counter reaches 5, the api call is delayed by 1 second;
+    //2. if the call counter never reaches 5 in a particular session: then what ?
+
+    useEffect(() => {
+        const fetchCards = async () => {
+            const fetchedCards = await getCardsAPI()
+            setCards(fetchedCards)
+            setCardsIndex(() => {
+                const cardsIndex = {}
+                fetchedCards.forEach(card => {
+                    cardsIndex[card.id] = card
+                })
+                return cardsIndex
+            })
+            setAssignees(prevAssignees => {
+                const newAssignees = {...prevAssignees};
+                
+                fetchedCards.forEach(card => {
+                    if (card.assignee in newAssignees) {
+                        newAssignees[card.assignee] = {
+                            count: newAssignees[card.assignee].count + 1,
+                            isFilterActive: newAssignees[card.assignee].isFilterActive
+                        };
+                    } else {
+                        newAssignees[card.assignee] = {
+                            count: 1,
+                            isFilterActive: false
+                        };
+                    }
+                });
+                return newAssignees;
+            });
+        }
+        fetchCards()
+    }, [])
+
+    const [Cards, setCards] = useState([])
     const [Assignees, setAssignees] = useState(() => {
 
         if(initialAssignees.length > 0){
@@ -22,10 +61,6 @@ export const CardProvider = ({children, initialAssignees = {}}) => {
     const [DraggableStates, setDraggableStates] = useState({})
 
     const [areFiltersActive, setAreFiltersActive] = useState(false)
-
-    useEffect(() => {
-        localStorage.setItem('cards', JSON.stringify(Cards))
-    }, [Cards])
     
     useEffect(() => {
         localStorage.setItem('assignees', JSON.stringify(Assignees))
@@ -41,8 +76,9 @@ export const CardProvider = ({children, initialAssignees = {}}) => {
         localStorage.setItem('cardsIndex', JSON.stringify(CardsIndex))
     }, [CardsIndex])
 
-    const addCard = (card, _priority, _cross_status) => {
+    const addCard = async (card, _priority, _cross_status) => {
         const newCard = {...card, priority: Number(_priority), cross_status: Number(_cross_status)}
+
         setCards(prevCards => [...prevCards, newCard])
         setCardsIndex(prevCardsIndex => {
             const newCardsIndex = {...prevCardsIndex}
@@ -51,7 +87,6 @@ export const CardProvider = ({children, initialAssignees = {}}) => {
         })
         
         setAssignees(prevAssignees => {
-
             if(newCard.assignee in prevAssignees){
                 return {
                     ...prevAssignees,
@@ -73,10 +108,11 @@ export const CardProvider = ({children, initialAssignees = {}}) => {
                 }
             }
         })
+
+        const response = await setCardsAPI([...Cards, newCard])
+        console.log(response)
     }
-
-    const deleteCard = (id) => {
-
+    const deleteCard = async (id) => {
         const newCards = Cards.filter(card => card.id !== id) //O(n)
         const delAssignee = CardsIndex[id].assignee
 
@@ -87,7 +123,7 @@ export const CardProvider = ({children, initialAssignees = {}}) => {
 
         setAssignees(prevAssignees => {
             if (!prevAssignees[delAssignee]) return prevAssignees
-            
+
             if(prevAssignees[delAssignee].count > 1){
                 return {
                     ...prevAssignees,
@@ -105,6 +141,9 @@ export const CardProvider = ({children, initialAssignees = {}}) => {
         })
 
         setCards(newCards)
+
+        const response = await setCardsAPI(newCards)
+        console.log(response)
     }
 
     const toggleAssigneeFilter = (toggleAssignee) => {

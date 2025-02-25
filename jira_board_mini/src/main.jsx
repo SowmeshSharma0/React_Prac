@@ -3,11 +3,13 @@ import { createRoot } from 'react-dom/client'
 import './index.css'
 import App from './App.jsx'
 import { GlobalProvider } from './context/GlobalContext.jsx'
-
+import { CardProvider } from './context/CardContext.jsx'
 createRoot(document.getElementById('root')).render(
   <GlobalProvider>
-    <StrictMode>
-      <App />
-    </StrictMode>
+    <CardProvider>
+      <StrictMode>
+        <App />
+      </StrictMode>
+    </CardProvider>
   </GlobalProvider>
 )

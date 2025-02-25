@@ -58,7 +58,8 @@ const toggleActiveColor = (isToggleActive) => {
         return 'linear-gradient(to right, #2ecc71 0%, #27ae60 100%)'
     }
     // Softer red gradient
-    return 'linear-gradient(to right, #e74c3c 0%, #c0392b 100%)'
+    // return 'linear-gradient(to right, #e74c3c 0%, #c0392b 100%)'
+    return 'linear-gradient(to right,rgb(232, 231, 231) 0%,rgb(216, 219, 221) 100%)'
 }
 
 //cant have more than 3 words in the filter box
