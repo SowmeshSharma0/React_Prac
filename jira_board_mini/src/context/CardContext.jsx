@@ -1,6 +1,6 @@
 import { createContext, useEffect, useState } from "react";
 import getCardsAPI from "../services/getCards"
-import setCardsAPI from "../services/setCards"
+import { addCardAPI, deleteCardAPI } from "../services/setCards"
 
 export const CardContext = createContext();
 
@@ -61,6 +61,10 @@ export const CardProvider = ({children, initialAssignees = {}}) => {
     const [DraggableStates, setDraggableStates] = useState({})
 
     const [areFiltersActive, setAreFiltersActive] = useState(false)
+
+    useEffect(() => {
+        localStorage.setItem('cards', JSON.stringify(Cards))
+    }, [Cards])
     
     useEffect(() => {
         localStorage.setItem('assignees', JSON.stringify(Assignees))
@@ -109,7 +113,7 @@ export const CardProvider = ({children, initialAssignees = {}}) => {
             }
         })
 
-        const response = await setCardsAPI([...Cards, newCard])
+        const response = await addCardAPI(newCard)
         console.log(response)
     }
     const deleteCard = async (id) => {
@@ -142,7 +146,7 @@ export const CardProvider = ({children, initialAssignees = {}}) => {
 
         setCards(newCards)
 
-        const response = await setCardsAPI(newCards)
+        const response = await deleteCardAPI(id)
         console.log(response)
     }
 
