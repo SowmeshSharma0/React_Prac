@@ -5,6 +5,7 @@ import PriorityHighIcon from '@mui/icons-material/PriorityHigh';
 import { GlobalContext } from "../context/GlobalContext";
 import AddTaskDialog from "./AddTaskDialog";
 import { memo } from "react";
+
 function TaskCard({card}) {
 
     const {setDraggedCard, setDraggableStates, setIsDragActive} = useContext(CardContext)
@@ -62,9 +63,9 @@ function TaskCard({card}) {
                 onDragStart={handleOnDragStart}
                 onDragEnd={handleOnDragEnd}
                 cardprio = {card.priority}
-            onClick={(e) => {
-                setIsExpanded(!isExpanded)
-            }}
+                onClick={() => {
+                    setIsExpanded(!isExpanded)
+                }}
             >
                 <div className="cardHeader">
                     <div></div>

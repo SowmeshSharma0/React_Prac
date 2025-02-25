@@ -1,8 +1,6 @@
 import { useContext } from "react"
 import { CardContext } from "../context/CardContext"
 import { StyledFilterBox, StyledFilterHorizontalPanel, StyledFilterPanelContainer } from "./styles/FilterHorizontalPanel.styled"
-// import ToggleOnIcon from '@mui/icons-material/ToggleOn';
-// import ToggleOffIcon from '@mui/icons-material/ToggleOff';
 
 const FilterHorizontalPanel = () => {
 

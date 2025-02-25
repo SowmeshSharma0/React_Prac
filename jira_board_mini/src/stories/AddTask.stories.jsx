@@ -21,7 +21,6 @@ export default {
     tags: ['autodocs'],
     decorators: [withContexts],
     parameters: {
-        layout: 'centered',
         docs: {
             description: {
                 component: 'A floating action button that opens a dialog to add new tasks. The button is fixed to the bottom-right corner of the viewport.'

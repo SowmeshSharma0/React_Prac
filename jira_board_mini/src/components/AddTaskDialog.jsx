@@ -68,7 +68,6 @@ function AddTaskDialog({ openModal, closeModal, card=null, initialEditMode=false
     const handleChangeSubmit = (e) => {
         e.preventDefault();
         deleteCard(card.id);
-        // addCard(FormData, FormData.priority, FormData.cross_status)
         const data = getValues();
         addCard(data, data.priority, data.cross_status)
     }
@@ -101,7 +100,7 @@ function AddTaskDialog({ openModal, closeModal, card=null, initialEditMode=false
             >
                 <div ref={wrapperRef}>
                     <div className="edit-delete-wrapper">
-                        {card ?
+                        {card &&
                             <>
                                 <div className="delete-wrapper">
                                     <DeleteIcon onClick={handleDelete}/>
@@ -115,7 +114,6 @@ function AddTaskDialog({ openModal, closeModal, card=null, initialEditMode=false
                                     />
                                 </div>
                             </>
-                        : null
                         }
                         <button type="button" onClick={() => {
                             setIsEditing(false)
@@ -235,23 +233,21 @@ function AddTaskDialog({ openModal, closeModal, card=null, initialEditMode=false
                         />
                         {errors.due_date && <p className="error-message">{errors.due_date.message}</p>}
 
-                        {card ? isEditing ?<button type="button" onClick={handleEdit}>Save and Update</button> : null : <button type="submit">Add Task</button>}
+                        {card ? isEditing && <button type="button" onClick={handleEdit}>Save and Update</button> : <button type="submit">Add Task</button>}
                     </StyledForm>
                 </div>
             </dialog>
-            {card ? 
+            {card && 
                 <Confirmation 
                     isConfirmModalOpen={isConfirmOpen} 
                     closeConfirmModal={(e) => {
                         setIsConfirmOpen(false)
                     }} 
                     callBack={callBack} 
-                    card={card}
                     reset={reset}
                     isEditing={isEditing}
                     setIsEditing={setIsEditing}
                 /> 
-            : null
             }
         </>
     );
