@@ -4,7 +4,7 @@ export default async function getCardsAPI() {
     //mock an api call:
     const cachedCards = localStorage.getItem('cards')
     if(cachedCards){
-        return JSON.parse(cachedCards)
+        return {cards: JSON.parse(cachedCards), isCached: true}
     }
 
     try{
@@ -16,10 +16,10 @@ export default async function getCardsAPI() {
         const cards = response.initialTasks
         console.log(cards)
         localStorage.setItem('cards', JSON.stringify(cards))
-        return cards
+        return {cards: cards, isCached: false}
     }
     catch(error){
         console.error("Error fetching cards:", error)
-        return []
+        return {cards: [], isCached: false}
     }
 }

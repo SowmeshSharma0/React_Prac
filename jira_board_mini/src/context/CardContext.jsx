@@ -15,7 +15,7 @@ export const CardProvider = ({children, initialAssignees = {}}) => {
 
     useEffect(() => {
         const fetchCards = async () => {
-            const fetchedCards = await getCardsAPI()
+            const {cards: fetchedCards, isCached} = await getCardsAPI()
             setCards(fetchedCards)
             setCardsIndex(() => {
                 const cardsIndex = {}
@@ -24,6 +24,9 @@ export const CardProvider = ({children, initialAssignees = {}}) => {
                 })
                 return cardsIndex
             })
+
+            if(isCached)
+                return
             setAssignees(prevAssignees => {
                 const newAssignees = {...prevAssignees};
                 
