@@ -81,4 +81,20 @@
          * Action confirmation dialog
          * Centralized state management with 2 providers
          * Animation for dialog box + hover, active effects
-      * 18 commits 😄
+         * Visual feedback during drag operations (opacity and scale changes)
+         * Form Validation using react hook form
+         * Data Persistence:
+            * Local storage implementation for tasks and assignees
+            * State persistence across page refreshes
+         * Advanced Dialog Features:
+            * Click outside detection to close dialogs
+            * Confirmation dialogs for important actions
+            * Modal dialog with edit/delete capabilities
+         * Task indexing for quick access
+         * Color-coded priority indicators
+         * Memoization of components using React.memo; Optimized re-renders with useCallback and useMemo
+         * Storybook integration for component development
+         * Organized component structure with styled-components
+         * Deprecated component handling (with proper organization)
+          
+      * 69 commits 😄
