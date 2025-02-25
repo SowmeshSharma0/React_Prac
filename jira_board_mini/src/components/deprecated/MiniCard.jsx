@@ -1,4 +1,6 @@
-import { StyledMiniCard } from "./styles/MiniCard.styled"
+//@deprecated
+
+import { StyledMiniCard } from "./MiniCard.styled"
 
 const MiniCard = ({type, content, isEditing, EditingCard, handleChange}) => {
     return (

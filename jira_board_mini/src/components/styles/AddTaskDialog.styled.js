@@ -24,15 +24,15 @@ export const StyledForm = styled.form`
     flex-direction: column;
     justify-content: center;
     padding: 0.5rem;
-    input, .input{
+    input, .input, select, option, textarea, .error-message{
         margin: 0.5rem;
         padding: 0.5rem;
         border: 1px solid #dfe1e6;
     }
-    select{
+    label{
         margin: 0.5rem;
-        padding: 0.5rem;
-        border: 1px solid #dfe1e6;
+        font-size: 1.2rem;
+        font-weight: 600;
     }
     button{
         margin: 0.5rem;
@@ -46,5 +46,13 @@ export const StyledForm = styled.form`
             transform: scale(0.98);
             transition: all 0.2s;
         }
+    }
+
+    .error-message{
+        border: none;
+        padding: 0;
+        color: red;
+        font-size: 0.8rem;
+        font-weight: 600;
     }
 `

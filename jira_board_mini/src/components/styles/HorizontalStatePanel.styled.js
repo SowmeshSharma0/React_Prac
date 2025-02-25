@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const StyledHorizontalStatePanel = styled.header`
     display: flex;
     /* justify-content: space-between; */
-    justify-content: center;
+    /* justify-content: center; */
     align-items: baseline;
     margin-bottom: 1rem;
 
@@ -17,8 +17,8 @@ export const StyledHorizontalStatePanel = styled.header`
         min-width: ${({ usable_card_width }) => {
             // console.log("usable_card_width: ", usable_card_width);
             return usable_card_width
-        }}px;
-        max-width: ${({ usable_card_width }) => usable_card_width}px;
+        }};
+        max-width: ${({ usable_card_width }) => usable_card_width};
         margin-right: 0.5rem;
         text-align: center;
         font-weight: 600;

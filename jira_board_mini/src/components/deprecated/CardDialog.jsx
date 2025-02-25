@@ -1,11 +1,14 @@
+
+//@deprecated
+
+
 import { useContext, useEffect, useRef, useState } from "react";
-import { StyledCardDialog } from "./styles/CardDialog.styled";
-import MiniCard from "./MiniCard";
+import { StyledCardDialog } from "../styles/CardDialog.styled";
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
-import { CardContext } from "../context/CardContext";
-import Confirmation from "./Confirmation";
-
+import { CardContext } from "../../context/CardContext";
+import Confirmation from "../Confirmation";
+import MiniCard from "./MiniCard";
 const CardDialog = ({IsOpenModal, closeModal, card}) => {
     const ref = useRef();
     const wrapperRef = useRef();

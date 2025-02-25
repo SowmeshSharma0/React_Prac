@@ -1,87 +1,106 @@
 import { useCallback, useEffect, useState } from "react";
 
 const cardSizes = {
-    usableWidth:{
-        large: 430,
-        medium: 350,
-        small: 280,
-        mobile: 250
-    },
     breakpoints_Width:{
-        large: 900,
-        medium: 600,
-        small: 400,
+        large: 1440,
+        medium: 1024,
+        small: 768,
     },
-    usableHeight:{
-        large: 500,
-        medium: 500,
-        small: 400,
-        mobile: 400
+    usableWidth:{
+        large: '430px',
+        medium: '450px',
+        small: '340px',
+        // mobile: 250
     },
     breakpoints_Height:{
-        large: 900,
-        medium: 600,
-        small: 400,
+        xlarge: 1440,
+        large: 1024,
+        medium: 768,
+        small: 425,
+    },
+    usableHeight: {
+        // Min-heights ensure consistent initial appearance
+        // max-height prevents cards from becoming too tall
+        xlarge: {
+            min: '150px',
+            max: '75vh'
+        },
+        large: {
+            min: '150px',
+            max: '75vh'
+        },
+        medium: {
+            min: '130px',
+            max: '80vh'
+        },
+        small: {
+            min: '120px',
+            max: '85vh'
+        }
     }
+    // usableHeight:{
+    //     large: 500,
+    //     medium: 500,
+    //     small: 400,
+    //     mobile: 400
+    // }
 };
 
 const useScreenDetector = () => {
 
-    const [usable_card_width, setUsableCardWidth] = useState(() => {
+    const calculateCardWidth = useCallback(() => {
         const width = window.screen.width;
-        // console.log("resized to: ", width);
-        if(width > cardSizes.breakpoints_Width.large)
+        if (width > cardSizes.breakpoints_Width.large) {
+            // For large screens: divide available space for 4 columns with margins
             return cardSizes.usableWidth.large;
-        else if(width > cardSizes.breakpoints_Width.medium)
+        } else if (width > cardSizes.breakpoints_Width.medium) {
+            // For medium screens: divide available space for 3 columns
             return cardSizes.usableWidth.medium;
-        else if(width > cardSizes.breakpoints_Width.small)
+        } else if (width > cardSizes.breakpoints_Width.small) {
+            // For small screens: divide available space for 2 columns
             return cardSizes.usableWidth.small;
-        else
-            return cardSizes.usableWidth.mobile;
+        } else {
+            // For mobile: single column with margins
+            return width/1.5 + 'px';
+        }
+    }, [])
+
+    const calculateCardHeight = useCallback(() => {
+        const height = window.screen.height;
+        if (height > cardSizes.breakpoints_Height.xlarge) {
+            return cardSizes.usableHeight.xlarge;
+        } else if (height > cardSizes.breakpoints_Height.large) {
+            return cardSizes.usableHeight.large;
+        } else if (height > cardSizes.breakpoints_Height.medium) {
+            return cardSizes.usableHeight.medium;
+        } else if (height > cardSizes.breakpoints_Height.small) {
+            return cardSizes.usableHeight.small;
+        } else {
+            return cardSizes.usableHeight.mobile;
+        }
+    }, [])
+
+    const [usable_card_width, setUsableCardWidth] = useState(() => {
+        
+        return calculateCardWidth();
     });
     const [usable_card_height, setUsableCardHeight] = useState(() => {
-        const height = window.screen.height;
-        // console.log("resized to: ", height);
-        if(height > cardSizes.breakpoints_Height.large)
-            return cardSizes.usableHeight.large;
-        else if(height > cardSizes.breakpoints_Height.medium)
-            return cardSizes.usableHeight.medium;
-        else if(height > cardSizes.breakpoints_Height.small)
-            return cardSizes.usableHeight.small;
-        else
-            return cardSizes.usableHeight.mobile;
+        return calculateCardHeight();
     });
-
-    const memoized_handleResize = useCallback(() => {
-        const width = window.screen.width;
-        const height = window.screen.height;
-
-        if(width > cardSizes.breakpoints_Width.large)
-            setUsableCardWidth(cardSizes.usableWidth.large);
-        else if(width > cardSizes.breakpoints_Width.medium)
-            setUsableCardWidth(cardSizes.usableWidth.medium);
-        else if(width > cardSizes.breakpoints_Width.small)
-            setUsableCardWidth(cardSizes.usableWidth.small);
-        else
-            setUsableCardWidth(cardSizes.usableWidth.mobile);
-
-        if(height > cardSizes.breakpoints_Height.large)
-            setUsableCardHeight(cardSizes.usableHeight.large);
-        else if(height > cardSizes.breakpoints_Height.medium)
-            setUsableCardHeight(cardSizes.usableHeight.medium);
-        else if(height > cardSizes.breakpoints_Height.small)
-            setUsableCardHeight(cardSizes.usableHeight.small);
-        else
-            setUsableCardHeight(cardSizes.usableHeight.mobile);
-    }, [])
 
     useEffect(() => {
 
-        window.addEventListener('resize', memoized_handleResize);
-        memoized_handleResize();
+        const handleResize = () => {
 
-        return () => window.removeEventListener('resize', memoized_handleResize);
-    }, [memoized_handleResize]);
+            setUsableCardWidth(calculateCardWidth);
+            setUsableCardHeight(calculateCardHeight);
+        }
+
+        window.addEventListener('resize', handleResize);
+        handleResize();
+
+        return () => window.removeEventListener('resize', handleResize);
+    }, [calculateCardWidth, calculateCardHeight]);
 
     return {usable_card_width, usable_card_height};
 }

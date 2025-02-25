@@ -6,29 +6,23 @@ export const StyledConfirmation = styled.div`
     justify-content: space-between;
     align-items: center;
     padding: 2rem;
-    /* height: 20vh;
-    width: 20vw; */
     background-color: white;
-    /* box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px; */
     border-radius: 8px;
-    min-width: 400px;
-    min-height: 200px;
     
     h2 {
-        font-size: 1.5rem;
+        font-size: 1.5em;
         text-align: center;
         color: #333;
-        margin-bottom: 2rem;
+        margin-bottom: 4em;
     }
     
     .buttons{
         display: flex;
         justify-content: space-around;
-        width: 100%;
         gap: 1rem;
 
         button{
-            padding: 10px 20px;
+            padding: 0.5rem 1rem;
             border-radius: 5px;
             border: none;
             cursor: pointer;
