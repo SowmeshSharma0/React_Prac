@@ -27,7 +27,7 @@ function TaskList({main_state, cross_state}) {
     if((DraggedCard.cross_status === cross_state && DraggedCard.priority === main_state) 
       || !DraggableStates[main_state][cross_state]
     ) return
-
+    
     deleteCard(DraggedCard.id)
     addCard(DraggedCard, main_state, cross_state)
 

@@ -6,7 +6,7 @@ export const CardContext = createContext();
 
 export const CardProvider = ({children, initialAssignees = {}}) => {
 
-    const [batchAdd, setBatchAdd] = useState(new Set())
+    const [batchAdd, setBatchAdd] = useState([])
     const [batchDelete, setBatchDelete] = useState(new Set())
 
     useEffect(() => {
@@ -79,6 +79,16 @@ export const CardProvider = ({children, initialAssignees = {}}) => {
         localStorage.setItem('cardsIndex', JSON.stringify(CardsIndex))
     }, [CardsIndex])
 
+    useEffect(() => {
+        console.log("batchAdd updated : \n")
+        console.log(batchAdd)
+    }, [batchAdd])
+
+    useEffect(() => {
+        console.log("batchDelete updated : \n")
+        console.log(batchDelete)
+    }, [batchDelete])
+
     const addCard = async (card, _priority, _cross_status) => {
         const newCard = {...card, priority: Number(_priority), cross_status: Number(_cross_status)}
 
@@ -111,21 +121,25 @@ export const CardProvider = ({children, initialAssignees = {}}) => {
             }
         })
 
-        let newBatchAdd = [...batchAdd, newCard]
-        //gotta verify whether newBatch card is not there in batchDelete set
-        newBatchAdd = newBatchAdd.filter(newBatchCard => !batchDelete.has(newBatchCard.id))
-        newBatchAdd = new Set(newBatchAdd)
-        console.log("newBatchAdd : \n")
-        console.log(newBatchAdd)
-        setBatchAdd(newBatchAdd)
+        //if newCard id already exists in batchAdd, then remove it
+        let newBatchAdd = batchAdd.filter(card => card.id !== newCard.id)
+        newBatchAdd.push(newCard)
 
-        if(newBatchAdd.size === 5){
-            console.log("Adding a batch consisting of : \n")
-            console.log(newBatchAdd.size)
-            console.log(newBatchAdd)
+        if(newCard.id in batchDelete){ //race condition lmaoooo
+            console.log("newCard.id in batchDelete")
+            setBatchDelete(prevBatchDelete => prevBatchDelete.filter(id => id !== newCard.id))
+        }
+        setBatchAdd(newBatchAdd)
+        
+        // Add logging to visualize BatchAdd
+        console.log('BatchAdd current size:', newBatchAdd.length)
+        console.log('BatchAdd contents:', newBatchAdd)
+
+        if(newBatchAdd.length === 5){
             const response = await addCardsAPI(newBatchAdd)
             console.log(response)
-            setBatchAdd(new Set())
+            setBatchAdd([])
+            console.log('BatchAdd reset after reaching size 5')
         }
     }
     const deleteCard = async (id) => {
@@ -158,19 +172,19 @@ export const CardProvider = ({children, initialAssignees = {}}) => {
 
         setCards(newCards)
 
-
+        setBatchAdd(prevBatchAdd => prevBatchAdd.filter(card => card.id !== id))
         const newBatchDelete = new Set([...batchDelete, id])
-        console.log("newBatchDelete : \n")
-        console.log(newBatchDelete)
         setBatchDelete(newBatchDelete)
 
+        // Add logging to visualize BatchDelete
+        console.log('BatchDelete current size:', newBatchDelete.size)
+        console.log('BatchDelete contents:', Array.from(newBatchDelete))
+
         if(newBatchDelete.size === 5){
-            console.log("Deleting a batch consisting of : \n")
-            console.log(newBatchDelete.size)
-            console.log(newBatchDelete)
             const response = await deleteCardsAPI(newBatchDelete)
             console.log(response)
             setBatchDelete(new Set())
+            console.log('BatchDelete reset after reaching size 5')
         }
     }
 
