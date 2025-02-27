@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 
 export const StyledFilterPanelContainer = styled.div`
-    /* width: 100%; */
     position: sticky;
     left: 0;
     display: flex;
@@ -28,7 +27,7 @@ export const StyledFilterPanelContainer = styled.div`
         flex-shrink: 0;
     }
 `
-//cant keep resizing the filter boxes; box widths should be fixed; and overflow-x should be auto
+
 export const StyledFilterHorizontalPanel = styled.div`
     display: flex;
     flex-direction: row;
@@ -57,12 +56,10 @@ const toggleActiveColor = (isToggleActive) => {
         // Calming green gradient
         return 'linear-gradient(to right, #2ecc71 0%, #27ae60 100%)'
     }
-    // Softer red gradient
     // return 'linear-gradient(to right, #e74c3c 0%, #c0392b 100%)'
     return 'linear-gradient(to right,rgb(232, 231, 231) 0%,rgb(216, 219, 221) 100%)'
 }
 
-//cant have more than 3 words in the filter box
 export const StyledFilterBox = styled.div`   
     text-align: center;
     margin: 0.5rem;
@@ -75,14 +72,11 @@ export const StyledFilterBox = styled.div`
         font-weight: ${({isToggleActive}) => isToggleActive ? '600' : '400'};
         font-size: ${({isToggleActive}) => isToggleActive ? '1rem' : '1.06rem'};
         color: white;
-        /* overflow: hidden;
-        text-overflow: ellipsis; */
     }
     background: ${({isToggleActive}) => toggleActiveColor(isToggleActive)};
     &:hover{
         cursor: pointer;
         transform: translateY(-2px);
-        /* box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.3); */
         box-shadow: 0px 2px 8px 0px rgba(0, 0, 0, 0.15);
     }
     &:active{

@@ -16,7 +16,6 @@ export const StyledHorizontalListView = styled.section`
         transition-property: max-height;
         min-height: ${({isExpandable, expanded, usable_card_height}) => !isExpandable ? "auto" : expanded ? `${usable_card_height.min}` : "0"};
         max-height: ${({isExpandable, expanded, usable_card_height}) => !isExpandable ? "auto" : expanded ? `${usable_card_height.max}` : "0"};
-        /* overflow-x: hidden; */
     }
 
     .task-list{
@@ -30,7 +29,6 @@ export const StyledHorizontalListView = styled.section`
         display: flex;
         flex-direction: row;
         align-items: center;
-        /* background-color: #f4f5f7; */
         border-bottom: 1px solid #dfe1e6;
 
         button{

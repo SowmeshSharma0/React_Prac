@@ -33,6 +33,9 @@ export default {
 };
 
 export const AddTaskDialogStory = {
+    args: {
+        initialEditMode: false,
+    },
     render: (args) => <AddTaskDialog {...args} />
 }
 
@@ -46,7 +49,8 @@ export const ViewTaskDialogStory = {
             priority: 2,
             dueDate: "2024-01-01",
             assignee: "John Doe",
-        }
+        },
+        initialEditMode: false,
     },
     render: (args) => <AddTaskDialog {...args} />
 }

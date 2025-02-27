@@ -6,16 +6,9 @@ export const CardContext = createContext();
 
 export const CardProvider = ({children, initialAssignees = {}}) => {
 
-    // const [batch, setBatch] = useState([])
-    // const [callCounter, setCallCounter] = useState(0)
-    //batch is an array of cards ; when it reaches size 5, we call the api;
-    //there are some issues with this: 
-    //1. if the call counter reaches 5, the api call is delayed by 1 second;
-    //2. if the call counter never reaches 5 in a particular session: then what ?
-
     useEffect(() => {
         const fetchCards = async () => {
-            const fetchedCards = await getCardsAPI()
+            const {cards: fetchedCards, isCached} = await getCardsAPI()
             setCards(fetchedCards)
             setCardsIndex(() => {
                 const cardsIndex = {}
@@ -24,6 +17,9 @@ export const CardProvider = ({children, initialAssignees = {}}) => {
                 })
                 return cardsIndex
             })
+
+            if(isCached)
+                return
             setAssignees(prevAssignees => {
                 const newAssignees = {...prevAssignees};
                 
@@ -106,7 +102,6 @@ export const CardProvider = ({children, initialAssignees = {}}) => {
                     ...prevAssignees,
                     [newCard.assignee] : {
                         count: 1,
-                        // isFilterActive: true : has 3 states: "init", "true", "false" : lets see; this will break a lot of things
                         isFilterActive: false
                     }
                 }

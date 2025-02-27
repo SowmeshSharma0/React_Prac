@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react";
 import { StyledConfirmation } from "./styles/Confirmation.styled";
 
-const Confirmation = ({isConfirmModalOpen, closeConfirmModal, callBack, card, reset, isEditing, setIsEditing=null}) => {
+const Confirmation = ({isConfirmModalOpen, closeConfirmModal, callBack, reset, isEditing, setIsEditing=null}) => {
 
     const confRef = useRef();
 

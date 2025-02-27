@@ -4,12 +4,16 @@ import './index.css'
 import App from './App.jsx'
 import { GlobalProvider } from './context/GlobalContext.jsx'
 import { CardProvider } from './context/CardContext.jsx'
+import { ThemeProvider } from './context/ThemeContext.jsx'
+
 createRoot(document.getElementById('root')).render(
-  <GlobalProvider>
-    <CardProvider>
-      <StrictMode>
+  <ThemeProvider>
+    <GlobalProvider>
+      <CardProvider>
+        <StrictMode>
         <App />
-      </StrictMode>
-    </CardProvider>
-  </GlobalProvider>
+        </StrictMode>
+      </CardProvider>
+    </GlobalProvider>
+  </ThemeProvider>
 )

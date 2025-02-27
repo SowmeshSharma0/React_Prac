@@ -5,7 +5,6 @@ import { CardContext } from "../context/CardContext"
 import { GlobalContext } from "../context/GlobalContext"
 
 function TaskList({main_state, cross_state}) {
-  //priority based adding to task list
   const {
     DraggedCard,
     Cards,
@@ -27,6 +26,9 @@ function TaskList({main_state, cross_state}) {
     if((DraggedCard.cross_status === cross_state && DraggedCard.priority === main_state) 
       || !DraggableStates[main_state][cross_state]
     ) return
+
+    //another way to do it:
+    // just update DraggedCard.priority and DraggedCard.cross_status using setDraggedCard
 
     deleteCard(DraggedCard.id)
     addCard(DraggedCard, main_state, cross_state)
