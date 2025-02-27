@@ -27,9 +27,9 @@ export default {
 }
 
 export const TaskListStory = {
-    args: {
-        main_state: 1,
-        cross_state: 0,
-    },
+    // args: {
+    //     main_state: 1,
+    //     cross_state: 0,
+    // },
     render: (args) => <TaskList {...args} />
 }

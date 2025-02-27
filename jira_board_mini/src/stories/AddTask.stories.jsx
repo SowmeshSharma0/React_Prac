@@ -29,6 +29,7 @@ export default {
     },
     args: {
         onClick: fn(),
+        BtnTxt: '+'
     },
 };
 

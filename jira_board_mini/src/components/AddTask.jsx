@@ -2,7 +2,7 @@ import { useCallback, useState } from "react";
 import { StyledAddTask } from "./styles/AddTask.styled"
 import AddTaskDialog from "./AddTaskDialog";
 
-function AddTask() {
+function AddTask({BtnTxt = '+'}) {
     const [modal, setModal] = useState(false);
     // conditional rendering of dialog: instead of rendering the dialog twice; i render the dialog only once;
 
@@ -13,7 +13,7 @@ function AddTask() {
     return (
         <>
             <StyledAddTask onClick={updateModal}>
-                +
+                {BtnTxt}
             </StyledAddTask>
             {modal && <AddTaskDialog 
                 openModal={modal}
