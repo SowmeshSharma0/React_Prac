@@ -5,27 +5,15 @@ import HorizontalStatePanel from './components/HorizontalStatePanel'
 import { GlobalContext } from './context/GlobalContext'
 import FilterHorizontalPanel from './components/FilterHorizontalPanel'
 import HorizontalListView from './components/HorizontalListView'
-import { ThemeContext } from './context/ThemeContext'
+// import useTheme from './components/useTheme'
 // import ToggleOnIcon from '@mui/icons-material/ToggleOn';
 // import ToggleOffIcon from '@mui/icons-material/ToggleOff';
 
+
 function App() {
   const {main_axis_IsExpandable_init} = useContext(GlobalContext)
-  // const {isDark, setIsDark} = useContext(ThemeContext)
 
-  // const toggleTheme = () => setIsDark(!isDark)
-
-  // useEffect(() => {
-  //   const app_container = document.querySelector('html')
-  //   if(isDark){
-  //     app_container.classList.remove('light')
-  //     app_container.classList.add('dark')
-  //   }
-  //   else{
-  //     app_container.classList.remove('dark')
-  //     app_container.classList.add('light')
-  //   }
-  // }, [isDark])
+  // const {isDark, toggleTheme} = useTheme()
 
   return (
       <div className="App-container">
@@ -39,11 +27,10 @@ function App() {
         <FilterHorizontalPanel/>
         <div className="horizontal-scroll_wrapper">
           <HorizontalStatePanel/> 
-          {Array.from(Object.keys(main_axis_IsExpandable_init).reverse()).map((state, idx) => {
+          {/* maintain insertion order */}
+          {Array.from(Object.keys(main_axis_IsExpandable_init)).map((state, idx) => {
             state = parseInt(state)
-            return main_axis_IsExpandable_init[state] ? 
-              <HorizontalListView key={idx} state={state} isExpandable={true}/> 
-              : <HorizontalListView key={idx} state={state} isExpandable={false}/>
+            return <HorizontalListView key={idx} state={state} isExpandable={main_axis_IsExpandable_init[state] }/>
           })}
         </div>
         <AddTask/>

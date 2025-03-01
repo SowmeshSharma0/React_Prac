@@ -20,12 +20,11 @@ function TaskList({main_state, cross_state}) {
   const {usable_card_width, usable_card_height} = useContext(GlobalContext)
 
   const handleDrop = (e) => {
+    // why prevent default here
     e.preventDefault();
     setIsDragActive(false)
 
-    if((DraggedCard.cross_status === cross_state && DraggedCard.priority === main_state) 
-      || !DraggableStates[main_state][cross_state]
-    ) return
+    if(!DraggableStates[main_state][cross_state]) return
 
     //another way to do it:
     // just update DraggedCard.priority and DraggedCard.cross_status using setDraggedCard

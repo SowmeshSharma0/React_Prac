@@ -19,6 +19,8 @@ const HorizontalListView = ({state, isExpandable}) => {
             </div>
             <div className="task-list-wrapper">
                 <div className="task-list">
+                {/* make this dynamic */}
+                {/* why we shuld not use index as key in react */}
                 {Array.from({length: 4}).map((_, idx) => 
                     <TaskList key={idx} main_state={state} cross_state={idx}/>
                 )}

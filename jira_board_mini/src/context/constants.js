@@ -11,9 +11,9 @@ export const cross_axis_state_mapping = {
 }
 
 export const main_axis_IsExpandable_init = {
-    2: false,
     1: false,
-    0: true
+    0: true,
+    2: false,
 }
 
 export const can_delete_at_cross_axis_state = {

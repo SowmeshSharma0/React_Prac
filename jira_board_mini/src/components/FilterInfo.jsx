@@ -4,23 +4,29 @@ const FilterInfo = ({isOpen, setIsOpen}) => {
 
     const ref = useRef();
 
-    const handleClickOutside =  useCallback((e) => {
-        if (ref.current && !ref.current.contains(e.target)) {
-            setIsOpen(false);
-        }
-    }, [ref, setIsOpen]);
+    // const handleClickOutside =  useCallback((e) => {
+    //     if (ref.current && !ref.current.contains(e.target)) {
+    //         setIsOpen(false);
+    //     }
+    // }, [ref, setIsOpen]);
 
-    useEffect(() => {
-        if(isOpen){
-            document.addEventListener("mousedown", handleClickOutside);
-        }
-        else{
-            document.removeEventListener("mousedown", handleClickOutside);
-        }
-    }, [isOpen, handleClickOutside])
+    // useEffect(() => {
+    //     if(isOpen){
+    //         // ref.current?.showModal();
+    //         document.addEventListener("mouseenter", handleClickOutside);
+    //     }
+    //     else{
+    //         // ref.current?.close();
+    //         document.removeEventListener("mouseenter", handleClickOutside);
+    //     }
+
+    //     return () => {
+    //         document.removeEventListener("mouseenter", handleClickOutside);
+    //     }
+    // }, [isOpen, handleClickOutside])
 
     return (
-        <FilterInfoContainer ref={ref} open={isOpen} onClose={() => setIsOpen(false)}>
+        <FilterInfoContainer ref={ref} open={isOpen} onCancel={() => setIsOpen(false)}>
             {/* <button onClick={() => setIsOpen(false)}>X</button> */}
             <p>This is the Quick Filter Panel</p>
             <p>Filtering is based on Assignee</p>
