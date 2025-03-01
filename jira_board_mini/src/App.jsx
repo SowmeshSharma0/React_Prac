@@ -1,4 +1,4 @@
-import { useContext, useEffect } from 'react'
+import { useContext} from 'react'
 import './App.css'
 import AddTask from './components/AddTask'
 import HorizontalStatePanel from './components/HorizontalStatePanel'
@@ -28,9 +28,10 @@ function App() {
         <div className="horizontal-scroll_wrapper">
           <HorizontalStatePanel/> 
           {/* maintain insertion order */}
-          {Array.from(Object.keys(main_axis_IsExpandable_init)).map((state, idx) => {
+          {Array.from(Object.keys(main_axis_IsExpandable_init)).reverse().map((state) => {
             state = parseInt(state)
-            return <HorizontalListView key={idx} state={state} isExpandable={main_axis_IsExpandable_init[state] }/>
+            const key_main_axis_state = crypto.randomUUID()
+            return <HorizontalListView key={key_main_axis_state} state={state} isExpandable={main_axis_IsExpandable_init[state] }/>
           })}
         </div>
         <AddTask/>

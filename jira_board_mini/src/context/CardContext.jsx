@@ -10,13 +10,6 @@ export const CardProvider = ({children, initialAssignees = {}}) => {
         const fetchCards = async () => {
             const {cards: fetchedCards, isCached} = await getCardsAPI()
             setCards(fetchedCards)
-            setCardsIndex(() => {
-                const cardsIndex = {}
-                fetchedCards.forEach(card => {
-                    cardsIndex[card.id] = card
-                })
-                return cardsIndex
-            })
 
             if(isCached)
                 return
@@ -66,25 +59,10 @@ export const CardProvider = ({children, initialAssignees = {}}) => {
         localStorage.setItem('assignees', JSON.stringify(Assignees))
     }, [Assignees])
 
-    //index the cards by id for easy access
-    const [CardsIndex, setCardsIndex] = useState(() => {
-        const savedCardsIndex = localStorage.getItem('cardsIndex')
-        return savedCardsIndex ? JSON.parse(savedCardsIndex) : {}
-    })
-
-    useEffect(() => {
-        localStorage.setItem('cardsIndex', JSON.stringify(CardsIndex))
-    }, [CardsIndex])
-
     const addCard = async (card, _priority, _cross_status) => {
         const newCard = {...card, priority: Number(_priority), cross_status: Number(_cross_status)}
 
         setCards(prevCards => [...prevCards, newCard])
-        setCardsIndex(prevCardsIndex => {
-            const newCardsIndex = {...prevCardsIndex}
-            newCardsIndex[newCard.id] = newCard
-            return newCardsIndex
-        })
         
         setAssignees(prevAssignees => {
             if(newCard.assignee in prevAssignees){
@@ -113,12 +91,7 @@ export const CardProvider = ({children, initialAssignees = {}}) => {
     }
     const deleteCard = async (id) => {
         const newCards = Cards.filter(card => card.id !== id) //O(n)
-        const delAssignee = CardsIndex[id].assignee
-
-        setCardsIndex(prevCardsIndex => {
-            const {[id]: _, ...newCardsIndex} = prevCardsIndex //O(n)
-            return newCardsIndex
-        })
+        const delAssignee = Cards.find(card => card.id === id).assignee //O(n) ; earlier using CardsIndex[id].assignee, it was O(1)
 
         setAssignees(prevAssignees => {
             if (!prevAssignees[delAssignee]) return prevAssignees

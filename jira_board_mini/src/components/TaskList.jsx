@@ -3,6 +3,7 @@ import { StyledTaskList } from "./styles/TaskList.styled"
 import TaskCard from "./TaskCard"
 import { CardContext } from "../context/CardContext"
 import { GlobalContext } from "../context/GlobalContext"
+import useCalculateDraggableStates from "../hooks/useCalculateDraggableStates"
 
 function TaskList({main_state, cross_state}) {
   const {
@@ -18,6 +19,9 @@ function TaskList({main_state, cross_state}) {
   } = useContext(CardContext)
 
   const {usable_card_width, usable_card_height} = useContext(GlobalContext)
+
+  // console.log(main_state, cross_state)
+  // console.log(DraggableStates)
 
   const handleDrop = (e) => {
     // why prevent default here

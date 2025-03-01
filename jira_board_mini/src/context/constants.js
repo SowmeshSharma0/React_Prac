@@ -1,3 +1,4 @@
+
 export const main_axis_state_mapping = {
     2: "High Priority", //high priority tasks
     1: "Medium Priority",
@@ -16,13 +17,6 @@ export const main_axis_IsExpandable_init = {
     2: false,
 }
 
-export const can_delete_at_cross_axis_state = {
-    0: true,
-    1: false,
-    2: true,
-    3: true
-}
-
 //can change drag rules here; convenient way to change the rules; no merge conflicts
 export const card_move_rules_horizontal = {
     0: [1],
@@ -31,9 +25,8 @@ export const card_move_rules_horizontal = {
     3: [2]
 }
 
-export const card_move_rules_vertical_cross_state = {
-    0: [0],
-    1: [1],
-    2: [2],
-    3: []
+export const card_move_rules_vertical= {
+    0: [1,2],
+    1: [0,2],
+    2: [0,1]
 }

@@ -4,7 +4,7 @@ import { GlobalContext } from '../context/GlobalContext'
 import { StyledHorizontalListView } from './styles/HorizontalListView.styled'
 const HorizontalListView = ({state, isExpandable}) => {
 
-    const {main_axis_state_mapping, usable_card_height} = useContext(GlobalContext)
+    const {main_axis_state_mapping, usable_card_height, cross_axis_state_mapping} = useContext(GlobalContext)
     const [isExpanded, setIsExpanded] = useState(false)
 
     const toggleExpand = () => {
@@ -19,10 +19,11 @@ const HorizontalListView = ({state, isExpandable}) => {
             </div>
             <div className="task-list-wrapper">
                 <div className="task-list">
-                {/* make this dynamic */}
-                {/* why we shuld not use index as key in react */}
-                {Array.from({length: 4}).map((_, idx) => 
-                    <TaskList key={idx} main_state={state} cross_state={idx}/>
+                {Array.from(Object.keys(cross_axis_state_mapping)).map((cross_state) => {
+                    cross_state = parseInt(cross_state)
+                    const key_cross_axis_state = crypto.randomUUID()
+                    return <TaskList key={key_cross_axis_state} main_state={state} cross_state={cross_state}/>
+                }
                 )}
                 </div>
             </div>
