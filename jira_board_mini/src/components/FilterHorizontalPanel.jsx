@@ -7,7 +7,6 @@ const FilterHorizontalPanel = () => {
 
     const {Assignees, toggleAssigneeFilter} = useContext(CardContext)
     const [isOpen, setIsOpen] = useState(false)
-
     return (
         <>
             <StyledFilterPanelContainer>
