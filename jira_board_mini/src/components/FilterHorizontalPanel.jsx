@@ -10,7 +10,7 @@ const FilterHorizontalPanel = () => {
     return (
         <>
             <StyledFilterPanelContainer>
-            <h2 onMouseEnter={() => setIsOpen(true)} onMouseLeave={() => setIsOpen(false)}>Quick Filters :</h2>
+            <h2 onMouseEnter={() => setIsOpen(true)} onMouseLeave={() => setIsOpen(false)} onClick={() => setIsOpen(true)}>Quick Filters :</h2>
             {/* <h2 onClick={() => setIsOpen(!isOpen)}>Quick Filters :</h2> */}
             <StyledFilterHorizontalPanel len={Assignees.size}>
                 {Object.entries(Assignees).map(([key, value], idx) => {

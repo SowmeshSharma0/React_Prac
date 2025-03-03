@@ -16,19 +16,6 @@ export const FilterInfoContainer = styled.dialog`
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     width: 20%;
 
-    button{
-        position: absolute;
-        top: 3%;
-        right: 2%;
-        background-color: transparent;
-        cursor: pointer;
-        border: none;
-
-        &:hover{
-            color: red;
-        }
-    }
-
     @media (max-width: 768px) {
         width: 35%;
     }

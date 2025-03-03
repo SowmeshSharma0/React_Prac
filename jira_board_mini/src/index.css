@@ -47,16 +47,13 @@ html, body{
   width: 50%;
   overflow-y: auto;
   position: relative;
-  height: 78%;
+  /* height: 78%; */
 
   @media (max-width: 768px) {
     width: 80%;
+    height: 80%;
   }
-
-  /* @media (max-width: 480px) {
-    width: 98%;
-  } */
-
+  
   &::backdrop{
     background-color: rgba(0, 0, 0, 0.5);
   }

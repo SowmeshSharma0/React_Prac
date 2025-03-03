@@ -8,10 +8,20 @@ import DeleteIcon from '@mui/icons-material/Delete'
 import CloseIcon from '@mui/icons-material/Close';
 import { memo } from "react";
 import { useForm } from "react-hook-form";
+import { useClickOutside } from "../hooks/useClickOutside";
 
 
 function AddTaskDialog({ openModal, closeModal, card=null, initialEditMode=false }) {
+
     const {main_axis_state_mapping} = useContext(GlobalContext)
+    const {addCard, deleteCard}= useContext(CardContext)
+
+    const ref = useRef();
+
+    const [isConfirmOpen, setIsConfirmOpen] = useState(false);
+    const [callBack, setCallBack] = useState(null);
+
+    const [isEditing, setIsEditing] = useState(initialEditMode);
 
     const {register, handleSubmit, formState: {errors}, reset, getValues} = useForm({
         defaultValues: {
@@ -26,32 +36,15 @@ function AddTaskDialog({ openModal, closeModal, card=null, initialEditMode=false
         }
     })
 
-    const ref = useRef();
-    const wrapperRef = useRef();
-
-    const handleClickOutside = useCallback((e) => {
-        if (wrapperRef.current && !wrapperRef.current.contains(e.target)) {
-            closeModal();
-        }
-    }, [wrapperRef, closeModal])
-    
     useEffect(() => {
         if (openModal) {
             ref.current?.showModal();
-            document.addEventListener("mousedown", handleClickOutside);
         } else {
             ref.current?.close();
         }
-        return () => {
-            document.removeEventListener("mousedown", handleClickOutside);
-        }
-    }, [handleClickOutside, openModal]);
+    }, [openModal]);
 
-    const {addCard, deleteCard}= useContext(CardContext)
-    const [isConfirmOpen, setIsConfirmOpen] = useState(false);
-    const [callBack, setCallBack] = useState(null);
-
-    const [isEditing, setIsEditing] = useState(initialEditMode);
+    const wrapperRef = useClickOutside(() => closeModal());
 
     const handleDelete = (e) => {
         e.stopPropagation();
@@ -128,7 +121,6 @@ function AddTaskDialog({ openModal, closeModal, card=null, initialEditMode=false
                             type="text" 
                             name="title" 
                             id="title" 
-                            value={!card ? FormData.title: isEditing ? FormData.title: card.title}  
                             disabled={!isEditing && card}
                             {...register("title", 
                                 {
@@ -148,7 +140,6 @@ function AddTaskDialog({ openModal, closeModal, card=null, initialEditMode=false
                             name="description" 
                             id="description" 
                             className="input" 
-                            value={!card ? FormData.description : isEditing ? FormData.description : card.description} 
                             disabled={!isEditing && card}
                             {...register("description", {
                                 minLength: {
@@ -164,7 +155,6 @@ function AddTaskDialog({ openModal, closeModal, card=null, initialEditMode=false
                         <select 
                             name="priority" 
                             id="priority" 
-                            value={!card ? FormData.priority : isEditing ? FormData.priority : card.priority} 
                             disabled={!isEditing && card}
                             {...register("priority", {
                                 required: "Priority is required"
@@ -189,7 +179,6 @@ function AddTaskDialog({ openModal, closeModal, card=null, initialEditMode=false
                             type="text" 
                             name="assignee" 
                             id="assignee" 
-                            value={!card ? FormData.assignee : isEditing ? FormData.assignee : card.assignee} 
                             disabled={!isEditing && card}
                             {...register("assignee", {
                                 required: "Assignee is required"
@@ -203,7 +192,6 @@ function AddTaskDialog({ openModal, closeModal, card=null, initialEditMode=false
                             type="text" 
                             name="reporter" 
                             id="reporter" 
-                            value={!card ? FormData.reporter : isEditing ? FormData.reporter : card.reporter} 
                             disabled={!isEditing && card}
                             {...register("reporter", {
                                 required: "Reporter is required"
@@ -225,7 +213,6 @@ function AddTaskDialog({ openModal, closeModal, card=null, initialEditMode=false
                             }
                             name="due_date" 
                             id="due_date" 
-                            value={!card ? FormData.due_date : isEditing ? FormData.due_date : card.due_date} 
                             disabled={!isEditing && card}
                             {...register("due_date", {
                                 required: "Due date is required",
