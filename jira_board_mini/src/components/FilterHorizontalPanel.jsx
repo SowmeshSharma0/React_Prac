@@ -1,13 +1,17 @@
-import { useContext } from "react"
+import { useContext, useState } from "react"
 import { CardContext } from "../context/CardContext"
 import { StyledFilterBox, StyledFilterHorizontalPanel, StyledFilterPanelContainer } from "./styles/FilterHorizontalPanel.styled"
+import FilterInfo from "./FilterInfo"
 
 const FilterHorizontalPanel = () => {
 
     const {Assignees, toggleAssigneeFilter} = useContext(CardContext)
+    const [isOpen, setIsOpen] = useState(false)
     return (
-        <StyledFilterPanelContainer>
-            <h2>Quick Filters :</h2>
+        <>
+            <StyledFilterPanelContainer>
+            <h2 onMouseEnter={() => setIsOpen(true)} onMouseLeave={() => setIsOpen(false)} onClick={() => setIsOpen(true)}>Quick Filters :</h2>
+            {/* <h2 onClick={() => setIsOpen(!isOpen)}>Quick Filters :</h2> */}
             <StyledFilterHorizontalPanel len={Assignees.size}>
                 {Object.entries(Assignees).map(([key, value], idx) => {
                     return (
@@ -22,8 +26,10 @@ const FilterHorizontalPanel = () => {
                     </StyledFilterBox>
                 )
             })}
-            </StyledFilterHorizontalPanel>
-        </StyledFilterPanelContainer>
+                </StyledFilterHorizontalPanel>
+            </StyledFilterPanelContainer>
+            <FilterInfo isOpen={isOpen} setIsOpen={setIsOpen}/>
+        </>
     )
 }
 

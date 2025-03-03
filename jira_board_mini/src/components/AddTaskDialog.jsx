@@ -8,10 +8,20 @@ import DeleteIcon from '@mui/icons-material/Delete'
 import CloseIcon from '@mui/icons-material/Close';
 import { memo } from "react";
 import { useForm } from "react-hook-form";
+import { useClickOutside } from "../hooks/useClickOutside";
 
 
 function AddTaskDialog({ openModal, closeModal, card=null, initialEditMode=false }) {
+
     const {main_axis_state_mapping} = useContext(GlobalContext)
+    const {addCard, deleteCard}= useContext(CardContext)
+
+    const ref = useRef();
+
+    const [isConfirmOpen, setIsConfirmOpen] = useState(false);
+    const [callBack, setCallBack] = useState(null);
+
+    const [isEditing, setIsEditing] = useState(initialEditMode);
 
     const {register, handleSubmit, formState: {errors}, reset, getValues} = useForm({
         defaultValues: {
@@ -26,32 +36,15 @@ function AddTaskDialog({ openModal, closeModal, card=null, initialEditMode=false
         }
     })
 
-    const ref = useRef();
-    const wrapperRef = useRef();
-
-    const handleClickOutside = useCallback((e) => {
-        if (wrapperRef.current && !wrapperRef.current.contains(e.target)) {
-            closeModal();
-        }
-    }, [wrapperRef, closeModal])
-    
     useEffect(() => {
         if (openModal) {
             ref.current?.showModal();
-            document.addEventListener("mousedown", handleClickOutside);
         } else {
             ref.current?.close();
         }
-        return () => {
-            document.removeEventListener("mousedown", handleClickOutside);
-        }
-    }, [handleClickOutside, openModal]);
+    }, [openModal]);
 
-    const {addCard, deleteCard}= useContext(CardContext)
-    const [isConfirmOpen, setIsConfirmOpen] = useState(false);
-    const [callBack, setCallBack] = useState(null);
-
-    const [isEditing, setIsEditing] = useState(initialEditMode);
+    const wrapperRef = useClickOutside(() => closeModal());
 
     const handleDelete = (e) => {
         e.stopPropagation();
@@ -128,7 +121,6 @@ function AddTaskDialog({ openModal, closeModal, card=null, initialEditMode=false
                             type="text" 
                             name="title" 
                             id="title" 
-                            value={!card ? FormData.title: isEditing ? FormData.title: card.title}  
                             disabled={!isEditing && card}
                             {...register("title", 
                                 {
@@ -140,14 +132,14 @@ function AddTaskDialog({ openModal, closeModal, card=null, initialEditMode=false
                                     validate: (value) => value[0] === value[0].toUpperCase() ? true : "Title must start with a capital letter"
                                 })}
                         />
-                        {errors.title && <p className="error-message">{errors.title.message}</p>}
+                        {/* {errors.title && <p className="error-message">{errors.title.message}</p>} */}
+                        {errorMsg({msg: errors.title?.message, isError: errors.title})}
 
                         <label htmlFor="description">Description</label>
                         <textarea 
                             name="description" 
                             id="description" 
                             className="input" 
-                            value={!card ? FormData.description : isEditing ? FormData.description : card.description} 
                             disabled={!isEditing && card}
                             {...register("description", {
                                 minLength: {
@@ -156,13 +148,13 @@ function AddTaskDialog({ openModal, closeModal, card=null, initialEditMode=false
                                 },
                             })}
                         ></textarea>
-                        {errors.description && <p className="error-message">{errors.description.message}</p>}
+                        {/* {errors.description && <p className="error-message">{errors.description.message}</p>} */}
+                        {errorMsg({msg: errors.description?.message, isError: errors.description})}
 
                         <label htmlFor="priority">Priority</label>
                         <select 
                             name="priority" 
                             id="priority" 
-                            value={!card ? FormData.priority : isEditing ? FormData.priority : card.priority} 
                             disabled={!isEditing && card}
                             {...register("priority", {
                                 required: "Priority is required"
@@ -178,32 +170,36 @@ function AddTaskDialog({ openModal, closeModal, card=null, initialEditMode=false
                                 : <option value={card.priority}>{main_axis_state_mapping[card.priority]}</option>
                             }
                         </select>
-                        {errors.priority && <p className="error-message">{errors.priority.message}</p>}
+                        {/* {errors.priority && <p className="error-message">{errors.priority.message}</p>} */}
+                        {errorMsg({msg: errors.priority?.message, isError: errors.priority})}
+
+
                         <label htmlFor="assignee">Assignee</label>
                         <input 
                             type="text" 
                             name="assignee" 
                             id="assignee" 
-                            value={!card ? FormData.assignee : isEditing ? FormData.assignee : card.assignee} 
                             disabled={!isEditing && card}
                             {...register("assignee", {
                                 required: "Assignee is required"
                             })}
                         />
-                        {errors.assignee && <p className="error-message">{errors.assignee.message}</p>}
+                        {/* {errors.assignee && <p className="error-message">{errors.assignee.message}</p>} */}
+                        {errorMsg({msg: errors.assignee?.message, isError: errors.assignee})}
 
                         <label htmlFor="reporter">Reporter</label>
                         <input 
                             type="text" 
                             name="reporter" 
                             id="reporter" 
-                            value={!card ? FormData.reporter : isEditing ? FormData.reporter : card.reporter} 
                             disabled={!isEditing && card}
                             {...register("reporter", {
                                 required: "Reporter is required"
                             })}
                         />
-                        {errors.reporter && <p className="error-message">{errors.reporter.message}</p>}
+                        {/* {errors.reporter && <p className="error-message">{errors.reporter.message}</p>} */}
+                        {errorMsg({msg: errors.reporter?.message, isError: errors.reporter})}
+
                         <label htmlFor="due_date">Due Date</label>
                         <input 
                             type="date" 
@@ -217,7 +213,6 @@ function AddTaskDialog({ openModal, closeModal, card=null, initialEditMode=false
                             }
                             name="due_date" 
                             id="due_date" 
-                            value={!card ? FormData.due_date : isEditing ? FormData.due_date : card.due_date} 
                             disabled={!isEditing && card}
                             {...register("due_date", {
                                 required: "Due date is required",
@@ -231,7 +226,8 @@ function AddTaskDialog({ openModal, closeModal, card=null, initialEditMode=false
                                 }
                             })}
                         />
-                        {errors.due_date && <p className="error-message">{errors.due_date.message}</p>}
+                        {/* {errors.due_date && <p className="error-message">{errors.due_date.message}</p>} */}
+                        {errorMsg({msg: errors.due_date?.message, isError: errors.due_date})}
 
                         {card ? isEditing && <button type="button" onClick={handleEdit}>Save and Update</button> : <button type="submit">Add Task</button>}
                     </StyledForm>
@@ -251,6 +247,13 @@ function AddTaskDialog({ openModal, closeModal, card=null, initialEditMode=false
             }
         </>
     );
+}
+
+const errorMsg = ({msg, isError}) => {
+    if (isError) {
+        return <p className="error-message">{msg}</p>
+    }
+    return <p className="error-message hidden">Title is required</p>
 }
 
 export default memo(AddTaskDialog)

@@ -1,4 +1,4 @@
-import { useContext, useState } from "react"
+import { useContext } from "react"
 import { StyledTaskList } from "./styles/TaskList.styled"
 import TaskCard from "./TaskCard"
 import { CardContext } from "../context/CardContext"
@@ -17,15 +17,18 @@ function TaskList({main_state, cross_state}) {
     areFiltersActive
   } = useContext(CardContext)
 
+
   const {usable_card_width, usable_card_height} = useContext(GlobalContext)
 
+  // console.log(main_state, cross_state)
+  // console.log(DraggableStates)
+
   const handleDrop = (e) => {
+    // why prevent default here
     e.preventDefault();
     setIsDragActive(false)
 
-    if((DraggedCard.cross_status === cross_state && DraggedCard.priority === main_state) 
-      || !DraggableStates[main_state][cross_state]
-    ) return
+    if(!DraggableStates[main_state][cross_state]) return
 
     //another way to do it:
     // just update DraggedCard.priority and DraggedCard.cross_status using setDraggedCard

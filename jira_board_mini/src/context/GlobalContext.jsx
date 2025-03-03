@@ -1,6 +1,6 @@
 import { createContext } from "react";
-import useScreenDetector from "./useScreenDetector";
-import { main_axis_state_mapping, cross_axis_state_mapping, main_axis_IsExpandable_init, can_delete_at_cross_axis_state, card_move_rules_horizontal, card_move_rules_vertical_cross_state } from "./constants";
+import useScreenDetector from "../hooks/useScreenDetector";
+import { main_axis_state_mapping, cross_axis_state_mapping, main_axis_IsExpandable_init, card_move_rules_horizontal, card_move_rules_vertical } from "./constants";
 
 export const GlobalContext = createContext();
 
@@ -13,9 +13,8 @@ export const GlobalProvider = ({children}) => {
             main_axis_state_mapping,
             cross_axis_state_mapping,
             main_axis_IsExpandable_init,
-            can_delete_at_cross_axis_state,
             card_move_rules_horizontal,
-            card_move_rules_vertical_cross_state,
+            card_move_rules_vertical,
             usable_card_width,
             usable_card_height
         }}>

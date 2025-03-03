@@ -52,7 +52,12 @@ export const StyledForm = styled.form`
         border: none;
         padding: 0;
         color: red;
-        font-size: 0.8rem;
+        font-size: 0.7rem;
         font-weight: 600;
+        margin-top: 0;
+        margin-bottom: 0;
+    }
+    .hidden{
+        visibility: hidden;
     }
 `

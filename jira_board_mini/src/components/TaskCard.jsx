@@ -2,42 +2,16 @@ import { useCallback, useContext, useState } from "react"
 import { StyledTaskCard } from "./styles/TaskCard.styled"
 import { CardContext } from "../context/CardContext"
 import PriorityHighIcon from '@mui/icons-material/PriorityHigh';
-import { GlobalContext } from "../context/GlobalContext";
 import AddTaskDialog from "./AddTaskDialog";
 import { memo } from "react";
+import useCalculateDraggableStates from "../hooks/useCalculateDraggableStates";
 
 function TaskCard({card}) {
 
-    const {setDraggedCard, setDraggableStates, setIsDragActive} = useContext(CardContext)
-    const {card_move_rules_horizontal, card_move_rules_vertical_cross_state} = useContext(GlobalContext)
+    const {setDraggedCard, setIsDragActive} = useContext(CardContext)
     const [isExpanded, setIsExpanded] = useState(false)
 
-    const calculateDraggableStates = useCallback((card) => {
-        const DraggableStates = {}
-        for (let i = 0; i < 3; i++) {
-            DraggableStates[i] = {}
-            for (let j = 0; j < 4; j++) {
-                DraggableStates[i][j] = false
-            }
-        }
-        for(let i=0; i < 3; i++)
-        {
-            for(let j=0; j < 4; j++)
-            {
-                if( i === card.priority){
-                    if(card_move_rules_horizontal[card.cross_status].includes(j)){
-                        DraggableStates[i][j] = true
-                    }
-                }
-                else{
-                    if(card_move_rules_vertical_cross_state[card.cross_status].includes(j)){
-                        DraggableStates[i][j] = true
-                    }
-                }
-            }   
-        }
-        setDraggableStates(DraggableStates)
-    }, [card_move_rules_horizontal, card_move_rules_vertical_cross_state, setDraggableStates])
+    const calculateDraggableStates = useCalculateDraggableStates({main_state: card.priority, cross_state: card.cross_status})
 
     const handleOnDrag = useCallback((e) => {
         setDraggedCard(card)
@@ -48,8 +22,8 @@ function TaskCard({card}) {
         setTimeout(() => {
             e.target.style.visibility = "hidden";
         }, 0);
-        calculateDraggableStates(card);
-    }, [card, setIsDragActive, calculateDraggableStates])
+        calculateDraggableStates();
+    }, [setIsDragActive])
 
     const handleOnDragEnd = useCallback((e) => {
         e.target.style.visibility = "visible";

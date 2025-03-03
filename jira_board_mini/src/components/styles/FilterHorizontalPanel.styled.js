@@ -71,7 +71,7 @@ export const StyledFilterBox = styled.div`
         margin: 0;
         font-weight: ${({isToggleActive}) => isToggleActive ? '600' : '400'};
         font-size: ${({isToggleActive}) => isToggleActive ? '1rem' : '1.06rem'};
-        color: white;
+        color: ${({isToggleActive}) => isToggleActive ? 'white' : 'black'};
     }
     background: ${({isToggleActive}) => toggleActiveColor(isToggleActive)};
     &:hover{
