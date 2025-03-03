@@ -2,15 +2,13 @@ import { useCallback, useContext, useState } from "react"
 import { StyledTaskCard } from "./styles/TaskCard.styled"
 import { CardContext } from "../context/CardContext"
 import PriorityHighIcon from '@mui/icons-material/PriorityHigh';
-import { GlobalContext } from "../context/GlobalContext";
 import AddTaskDialog from "./AddTaskDialog";
 import { memo } from "react";
 import useCalculateDraggableStates from "../hooks/useCalculateDraggableStates";
 
 function TaskCard({card}) {
 
-    const {setDraggedCard, setDraggableStates, setIsDragActive} = useContext(CardContext)
-    const {card_move_rules_horizontal, card_move_rules_vertical_cross_state} = useContext(GlobalContext)
+    const {setDraggedCard, setIsDragActive} = useContext(CardContext)
     const [isExpanded, setIsExpanded] = useState(false)
 
     const calculateDraggableStates = useCalculateDraggableStates({main_state: card.priority, cross_state: card.cross_status})

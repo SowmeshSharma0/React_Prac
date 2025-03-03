@@ -1,6 +1,5 @@
-import { use, useEffect } from "react";
+import { useEffect } from "react";
 import { useState } from "react";
-import { set } from "react-hook-form";
 
 export const useAssignee = (initialAssignees = {}) => {
     const [Assignees, setAssignees] = useState(() => {
@@ -80,7 +79,6 @@ export const useAssignee = (initialAssignees = {}) => {
                 setAreFiltersActive(false)
             }
         }
-        console.log(areFiltersActive)
         setAssignees(prevAssignees => {
             const newAssignees = {...prevAssignees} //O(n)
             newAssignees[toggleAssignee] = {
