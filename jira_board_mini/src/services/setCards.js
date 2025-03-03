@@ -3,7 +3,6 @@ export const addCardAPI = async (card) => {
     try{
         const response = await new Promise((resolve) => {
             setTimeout(() => {
-                // localStorage.setItem('cards', JSON.stringify(cards))
                 resolve("Card added successfully")
             }, 1000)
         })

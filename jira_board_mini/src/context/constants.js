@@ -11,11 +11,19 @@ export const cross_axis_state_mapping = {
     3: "Done"
 }
 
-export const main_axis_IsExpandable_init = {
-    1: false,
-    0: true,
-    2: false,
-}
+// maintains insertion order
+export const main_axis_IsExpandable_init = new Map();
+main_axis_IsExpandable_init.set(2, false);
+main_axis_IsExpandable_init.set(1, false);
+main_axis_IsExpandable_init.set(0, true);
+
+//set and get methods can be used
+
+// export const main_axis_IsExpandable_init = {
+//     1: false,
+//     0: true,
+//     2: false,
+// }
 
 //can change drag rules here; convenient way to change the rules; no merge conflicts
 export const card_move_rules_horizontal = {

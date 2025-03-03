@@ -27,11 +27,10 @@ function App() {
         <FilterHorizontalPanel/>
         <div className="horizontal-scroll_wrapper">
           <HorizontalStatePanel/> 
-          {/* maintain insertion order */}
-          {Array.from(Object.keys(main_axis_IsExpandable_init)).reverse().map((state) => {
+          {Array.from(main_axis_IsExpandable_init.keys()).map((state) => {
             state = parseInt(state)
             const key_main_axis_state = crypto.randomUUID()
-            return <HorizontalListView key={key_main_axis_state} state={state} isExpandable={main_axis_IsExpandable_init[state] }/>
+            return <HorizontalListView key={key_main_axis_state} state={state} isExpandable={main_axis_IsExpandable_init.get(state) }/>
           })}
         </div>
         <AddTask/>

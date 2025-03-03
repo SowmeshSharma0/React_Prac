@@ -7,6 +7,12 @@ export const CardContext = createContext();
 
 export const CardProvider = ({children, initialAssignees = {}}) => {
 
+    const [Cards, setCards] = useState([])
+
+    const [DraggedCard, setDraggedCard] = useState(null)
+    const [IsDragActive, setIsDragActive] = useState(false)
+    const [DraggableStates, setDraggableStates] = useState({})
+    
     const {Assignees, addAssignee, removeAssignee, toggleAssigneeFilter, areFiltersActive} = useAssignee()
 
     useEffect(() => {
@@ -23,12 +29,6 @@ export const CardProvider = ({children, initialAssignees = {}}) => {
         }
         fetchCards()
     }, [])
-
-    const [Cards, setCards] = useState([])
-
-    const [DraggedCard, setDraggedCard] = useState(null)
-    const [IsDragActive, setIsDragActive] = useState(false)
-    const [DraggableStates, setDraggableStates] = useState({})
 
     useEffect(() => {
         localStorage.setItem('cards', JSON.stringify(Cards))
