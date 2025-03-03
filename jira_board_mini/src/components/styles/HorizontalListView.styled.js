@@ -36,7 +36,9 @@ export const StyledHorizontalListView = styled.section`
             &:active{
                 transform: scale(0.9);
                 transition: transform 0.1s;
-            }
+            };
+            transform : ${({expanded}) => expanded ? "rotate(180deg)" : "rotate(0deg)"};
+            transition: transform 0.3s;
         }
     }
 `

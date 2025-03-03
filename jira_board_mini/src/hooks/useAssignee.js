@@ -90,5 +90,5 @@ export const useAssignee = (initialAssignees = {}) => {
         })
     }
 
-    return {Assignees, setAssignees, addAssignee, removeAssignee, toggleAssigneeFilter, areFiltersActive}
+    return {Assignees, addAssignee, removeAssignee, toggleAssigneeFilter, areFiltersActive}
 }
