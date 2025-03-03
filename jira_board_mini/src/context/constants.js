@@ -12,10 +12,11 @@ export const cross_axis_state_mapping = {
 }
 
 // maintains insertion order
-export const main_axis_IsExpandable_init = new Map();
-main_axis_IsExpandable_init.set(2, false);
-main_axis_IsExpandable_init.set(1, false);
-main_axis_IsExpandable_init.set(0, true);
+export const main_axis_IsExpandable_init = new Map([
+    [2, false],
+    [1, false],
+    [0, true]
+]);
 
 //set and get methods can be used
 
