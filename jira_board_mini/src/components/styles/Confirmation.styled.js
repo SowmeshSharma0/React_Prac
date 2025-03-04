@@ -52,3 +52,27 @@ export const StyledConfirmation = styled.div`
         }
     }
 `
+
+export const StyledConfirmationWrapper = styled.dialog`
+    position: absolute;
+    border: none;
+    padding: 0;
+    background-color: transparent;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    width: 25%;
+
+    @media (max-width: 1024px) {
+        width: 30%;
+    }
+
+    @media (max-width: 768px) {
+        width: 60%;
+    }
+
+    @media (max-width: 480px) {
+        width: 80%;
+    }
+    ::backdrop {
+        background-color: rgba(0, 0, 0, 0.6);
+    }
+`

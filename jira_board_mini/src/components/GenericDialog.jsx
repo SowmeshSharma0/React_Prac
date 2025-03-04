@@ -1,21 +1,23 @@
 import { useEffect, useRef } from "react";
 
-const GenericDialog = ({children, openModal, closeModal}) => {
+const GenericDialog = ({children, openModal, closeModal, Component="dialog", ...props}) => {
 
     const dialogRef = useRef(null);
-
+    
     useEffect(() => {
         if (openModal) {
-            dialogRef.current?.showModal();
+            if (dialogRef.current && !dialogRef.current.open) {
+                dialogRef.current.showModal();
+            }
         } else {
             dialogRef.current?.close();
         }
     }, [openModal]);
     
     return (
-        <dialog ref={dialogRef} open={open} onCancel={closeModal}>
+        <Component ref={dialogRef} open={open} onCancel={closeModal} {...props}>
             {children}
-        </dialog>
+        </Component>
     )
 }
 
