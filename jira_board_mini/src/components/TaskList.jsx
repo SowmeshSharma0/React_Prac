@@ -43,6 +43,9 @@ function TaskList({main_state, cross_state}) {
     //i did addFirst and then delete it was behaving wierdly, but then then reversed the order and it worked fine
   }
 
+  if(Cards === null)
+    return <div></div>
+
   let renderCards = Cards.filter(card => card.cross_status === cross_state && card.priority === main_state)
 
   if(areFiltersActive){

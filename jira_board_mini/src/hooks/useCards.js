@@ -5,7 +5,7 @@ import getCardsAPI from "../services/getCards"
 
 
 export const useCards = () => {
-    const [Cards, setCards] = useState([])
+    const [Cards, setCards] = useState(null)
     const [DraggedCard, setDraggedCard] = useState(null)
     const [IsDragActive, setIsDragActive] = useState(false)
     const [DraggableStates, setDraggableStates] = useState({})
@@ -13,7 +13,7 @@ export const useCards = () => {
     const {addAssignee, removeAssignee, Assignees, toggleAssigneeFilter, areFiltersActive} = useAssignee()
 
     useEffect(() => {
-        if(Cards.length === 0)
+        if(Cards === null)
             return
         localStorage.setItem('cards', JSON.stringify(Cards))
     }, [Cards])

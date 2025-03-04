@@ -8,10 +8,9 @@ export const useAssignee = (initialAssignees = {}) => {
             return initialAssignees
         }
         const savedAssignees = localStorage.getItem('assignees')
-        return savedAssignees ? JSON.parse(savedAssignees) : {}
+        return savedAssignees ? JSON.parse(savedAssignees) : null
     });
-
-    // const [areFiltersActive, setAreFiltersActive] = useState(false)
+    
     const [areFiltersActive, setAreFiltersActive] = useState(() => {
         const savedAssignees = localStorage.getItem('assignees');
         if (!savedAssignees) return false;
@@ -21,14 +20,23 @@ export const useAssignee = (initialAssignees = {}) => {
     });
 
     useEffect(() => {
-        if(Object.keys(Assignees).length === 0)
+        if(Assignees === null)
             return
         localStorage.setItem('assignees', JSON.stringify(Assignees))
     }, [Assignees])
 
     const addAssignee = (assignee) => {
         setAssignees(prevAssignees => {
-            if (assignee in prevAssignees) {
+            if (prevAssignees === null) {
+                // console.log('prevAssignees is null')
+                return {
+                    [assignee]: {
+                        count: 1,
+                        isFilterActive: false
+                    }
+                }
+            }
+            else if (assignee in prevAssignees) {
                 return {
                     ...prevAssignees,
                     [assignee]: {

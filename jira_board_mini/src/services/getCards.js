@@ -3,9 +3,9 @@ import mockApiResponse from "./mockApi_response.json"
 export default async function getCardsAPI() {
     //mock an api call:
     let cachedCards = localStorage.getItem('cards')
-    if(cachedCards !== null){
-        cachedCards = cachedCards && JSON.parse(cachedCards)
-        if(cachedCards && cachedCards.length > 0){
+    if(cachedCards){
+        cachedCards = JSON.parse(cachedCards)
+        if(cachedCards.length > 0){
             console.log("Fetched cards from cache")
             return {cards: cachedCards, isCached: true}
         }
