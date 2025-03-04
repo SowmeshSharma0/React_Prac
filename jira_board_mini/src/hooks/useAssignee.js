@@ -11,9 +11,18 @@ export const useAssignee = (initialAssignees = {}) => {
         return savedAssignees ? JSON.parse(savedAssignees) : {}
     });
 
-    const [areFiltersActive, setAreFiltersActive] = useState(false)
+    // const [areFiltersActive, setAreFiltersActive] = useState(false)
+    const [areFiltersActive, setAreFiltersActive] = useState(() => {
+        const savedAssignees = localStorage.getItem('assignees');
+        if (!savedAssignees) return false;
+        
+        const parsedAssignees = JSON.parse(savedAssignees);
+        return Object.values(parsedAssignees).some(assignee => assignee.isFilterActive);
+    });
 
     useEffect(() => {
+        if(Object.keys(Assignees).length === 0)
+            return
         localStorage.setItem('assignees', JSON.stringify(Assignees))
     }, [Assignees])
 

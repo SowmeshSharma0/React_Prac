@@ -2,15 +2,20 @@ import mockApiResponse from "./mockApi_response.json"
 
 export default async function getCardsAPI() {
     //mock an api call:
-    const cachedCards = localStorage.getItem('cards')
-    if(cachedCards){
-        return {cards: JSON.parse(cachedCards), isCached: true}
+    let cachedCards = localStorage.getItem('cards')
+    if(cachedCards !== null){
+        cachedCards = cachedCards && JSON.parse(cachedCards)
+        if(cachedCards && cachedCards.length > 0){
+            console.log("Fetched cards from cache")
+            return {cards: cachedCards, isCached: true}
+        }
     }
 
     try{
         const response = await new Promise((resolve) => {
             setTimeout(() => {
                 resolve(mockApiResponse)
+                console.log("Fetched cards from API")
             }, 1000)
         })
         const cards = response.initialTasks

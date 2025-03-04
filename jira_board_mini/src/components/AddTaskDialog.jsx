@@ -19,6 +19,7 @@ function AddTaskDialog({ openModal, closeModal, card=null, initialEditMode=false
     const ref = useRef();
 
     const [isConfirmOpen, setIsConfirmOpen] = useState(false);
+    //understand callbacks better
     const [callBack, setCallBack] = useState(null);
 
     const [isEditing, setIsEditing] = useState(initialEditMode);
@@ -49,6 +50,9 @@ function AddTaskDialog({ openModal, closeModal, card=null, initialEditMode=false
     const handleDelete = (e) => {
         e.stopPropagation();
         setIsConfirmOpen(true);
+
+        //state must be something be something that changes the ui; not a function
+        //use callback must be used instead of this state.
         setCallBack(() => {
             return () => {
                 deleteCard(card.id);
@@ -83,6 +87,8 @@ function AddTaskDialog({ openModal, closeModal, card=null, initialEditMode=false
         addCard(data, data.priority, 0)
         closeModal();
     }
+
+    // generic component for a dialog box {children}
   
     return (
         <>
@@ -249,6 +255,7 @@ function AddTaskDialog({ openModal, closeModal, card=null, initialEditMode=false
     );
 }
 
+//add fnc to the component on top; convention: 1 comp per file
 const errorMsg = ({msg, isError}) => {
     if (isError) {
         return <p className="error-message">{msg}</p>

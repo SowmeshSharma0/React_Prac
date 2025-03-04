@@ -13,11 +13,8 @@ function TaskCard({card}) {
 
     const calculateDraggableStates = useCalculateDraggableStates({main_state: card.priority, cross_state: card.cross_status})
 
-    const handleOnDrag = useCallback((e) => {
-        setDraggedCard(card)
-    }, [card, setDraggedCard])
-
     const handleOnDragStart = useCallback((e) => {
+        setDraggedCard(card)
         setIsDragActive(true)
         setTimeout(() => {
             e.target.style.visibility = "hidden";
@@ -33,7 +30,6 @@ function TaskCard({card}) {
         <>
             <StyledTaskCard 
                 draggable 
-                onDrag={handleOnDrag} 
                 onDragStart={handleOnDragStart}
                 onDragEnd={handleOnDragEnd}
                 cardprio = {card.priority}

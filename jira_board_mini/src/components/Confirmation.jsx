@@ -30,8 +30,8 @@ const Confirmation = ({isConfirmModalOpen, closeConfirmModal, callBack, reset, i
                         }}
                     >Confirm</button>
                     <button className="cancel" onClick={(e) => {
-                        e.preventDefault()
-                        e.stopPropagation()
+                        // e.preventDefault()
+                        // e.stopPropagation() : see how the behaviour changes
                         closeConfirmModal()
                         reset()
                         if(isEditing){
@@ -45,3 +45,8 @@ const Confirmation = ({isConfirmModalOpen, closeConfirmModal, callBack, reset, i
 }
 
 export default Confirmation
+
+// logic optimizations : reduce re-renders, make the code more readable, etc : very imp, make sure you are sure of the code : no changes in the code review : 
+//think why race conditions , with this mind-map method u can figure out
+//if probs : stash the change.
+// think very high level, think where it can be simple; whiteboard things out;
