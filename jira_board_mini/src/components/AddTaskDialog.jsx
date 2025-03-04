@@ -9,6 +9,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import { memo } from "react";
 import { useForm } from "react-hook-form";
 import { useClickOutside } from "../hooks/useClickOutside";
+import GenericDialog from "./GenericDialog";
 
 
 function AddTaskDialog({ openModal, closeModal, card=null, initialEditMode=false }) {
@@ -16,7 +17,7 @@ function AddTaskDialog({ openModal, closeModal, card=null, initialEditMode=false
     const {main_axis_state_mapping} = useContext(GlobalContext)
     const {addCard, deleteCard}= useContext(CardContext)
 
-    const ref = useRef();
+    // const ref = useRef();
 
     const [isConfirmOpen, setIsConfirmOpen] = useState(false);
     //understand callbacks better
@@ -38,13 +39,13 @@ function AddTaskDialog({ openModal, closeModal, card=null, initialEditMode=false
         }
     })
 
-    useEffect(() => {
-        if (openModal) {
-            ref.current?.showModal();
-        } else {
-            ref.current?.close();
-        }
-    }, [openModal]);
+    // useEffect(() => {
+    //     if (openModal) {
+    //         ref.current?.showModal();
+    //     } else {
+    //         ref.current?.close();
+    //     }
+    // }, [openModal]);
 
     const wrapperRef = useClickOutside(() => closeModal());
     const handleDelete = (e) => {
@@ -89,11 +90,12 @@ function AddTaskDialog({ openModal, closeModal, card=null, initialEditMode=false
   
     return (
         <>
-            <dialog
+            {/* <dialog
                 ref={ref}
                 onCancel={closeModal}
                 className="AddTaskDialog"
-            >
+            > */}
+            <GenericDialog openModal={openModal} closeModal={closeModal}>
                 <div ref={wrapperRef}>
                     <div className="edit-delete-wrapper">
                         {card &&
@@ -235,11 +237,12 @@ function AddTaskDialog({ openModal, closeModal, card=null, initialEditMode=false
                         {card ? isEditing && <button type="button" onClick={handleEdit}>Save and Update</button> : <button type="submit">Add Task</button>}
                     </StyledForm>
                 </div>
-            </dialog>
+            </GenericDialog>
+            {/* </dialog> */}
             {card && 
                 <Confirmation 
                     isConfirmModalOpen={isConfirmOpen} 
-                    closeConfirmModal={(e) => {
+                    closeConfirmModal={() => {
                         setIsConfirmOpen(false)
                     }} 
                     callBack={callBackRef.current} 

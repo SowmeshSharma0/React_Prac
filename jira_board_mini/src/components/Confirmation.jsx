@@ -1,24 +1,26 @@
 import { useEffect, useRef } from "react";
 import { StyledConfirmation } from "./styles/Confirmation.styled";
+import GenericDialog from "./GenericDialog";
 
 const Confirmation = ({isConfirmModalOpen, closeConfirmModal, callBack, reset, isEditing, setIsEditing=null}) => {
 
-    const confRef = useRef();
+    // const confRef = useRef();
 
-    useEffect(() => {
-        if (isConfirmModalOpen) {
-            confRef.current.showModal();
-        } else {
-            confRef.current.close();
-        }
-    }, [isConfirmModalOpen]);
+    // useEffect(() => {
+    //     if (isConfirmModalOpen) {
+    //         confRef.current.showModal();
+    //     } else {
+    //         confRef.current.close();
+    //     }
+    // }, [isConfirmModalOpen]);
 
     return (
-        <dialog 
-            ref={confRef} 
-            onCancel={closeConfirmModal}
-            className="confirmation-dialog"
-        >
+        // <dialog 
+        //     ref={confRef} 
+        //     onCancel={closeConfirmModal}
+        //     className="confirmation-dialog"
+        // >
+        <GenericDialog openModal={isConfirmModalOpen} closeModal={closeConfirmModal}>
             <StyledConfirmation>
                 <h2>Do you really want to proceed with this Action ?</h2>
                 <div className="buttons">
@@ -37,7 +39,8 @@ const Confirmation = ({isConfirmModalOpen, closeConfirmModal, callBack, reset, i
                     }}>Cancel</button>
                 </div>
             </StyledConfirmation>
-        </dialog>
+        </GenericDialog>
+        // </dialog>
     )
 }
 

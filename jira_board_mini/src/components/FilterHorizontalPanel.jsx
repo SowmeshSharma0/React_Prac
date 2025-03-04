@@ -28,7 +28,7 @@ const FilterHorizontalPanel = () => {
             })}
                 </StyledFilterHorizontalPanel>}
             </StyledFilterPanelContainer>
-            <FilterInfo isOpen={isOpen} setIsOpen={setIsOpen}/>
+            <FilterInfo isOpen={isOpen} closeModal={() => setIsOpen(false)}/>
         </>
     )
 }
