@@ -24,14 +24,11 @@ const Confirmation = ({isConfirmModalOpen, closeConfirmModal, callBack, reset, i
                 <div className="buttons">
                     <button 
                         className="confirm"
-                        onClick={(e) => {
-                            e.preventDefault();
+                        onClick={() => {
                             callBack();
                         }}
                     >Confirm</button>
-                    <button className="cancel" onClick={(e) => {
-                        // e.preventDefault()
-                        // e.stopPropagation() : see how the behaviour changes
+                    <button className="cancel" onClick={() => {
                         closeConfirmModal()
                         reset()
                         if(isEditing){

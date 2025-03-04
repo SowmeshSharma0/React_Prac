@@ -7,7 +7,7 @@ const useCalculateDraggableStates = ({main_state, cross_state}) => {
     const {card_move_rules_horizontal, card_move_rules_vertical} = useContext(GlobalContext)
     const {setDraggableStates} = useContext(CardContext)
 
-    console.log("main_state", main_state, "cross_state", cross_state)
+    // console.log("main_state", main_state, "cross_state", cross_state)
 
     //pure vs impure functions
     //use memo always uses pure functions
@@ -37,7 +37,7 @@ const useCalculateDraggableStates = ({main_state, cross_state}) => {
             newDraggableStates[i][cross_state] = true
         }
 
-        console.log("Calculating Draggable States:", main_state, cross_state, newDraggableStates)
+        // console.log("Calculating Draggable States:", main_state, cross_state, newDraggableStates)
         return newDraggableStates
     }, [main_state, cross_state])
 

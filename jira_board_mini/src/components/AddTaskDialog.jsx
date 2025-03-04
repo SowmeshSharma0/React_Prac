@@ -20,7 +20,8 @@ function AddTaskDialog({ openModal, closeModal, card=null, initialEditMode=false
 
     const [isConfirmOpen, setIsConfirmOpen] = useState(false);
     //understand callbacks better
-    const [callBack, setCallBack] = useState(null);
+
+    const callBackRef = useRef(null);
 
     const [isEditing, setIsEditing] = useState(initialEditMode);
 
@@ -46,20 +47,18 @@ function AddTaskDialog({ openModal, closeModal, card=null, initialEditMode=false
     }, [openModal]);
 
     const wrapperRef = useClickOutside(() => closeModal());
-
     const handleDelete = (e) => {
         e.stopPropagation();
         setIsConfirmOpen(true);
 
         //state must be something be something that changes the ui; not a function
         //use callback must be used instead of this state.
-        setCallBack(() => {
-            return () => {
-                deleteCard(card.id);
-                setIsConfirmOpen(false);
-                closeModal();
-            }
-        })
+
+        callBackRef.current = () => {
+            deleteCard(card.id);
+            setIsConfirmOpen(false);
+            closeModal();
+        }
     }
 
     const handleChangeSubmit = (e) => {
@@ -72,14 +71,12 @@ function AddTaskDialog({ openModal, closeModal, card=null, initialEditMode=false
     const handleEdit = (e) => {
         e.stopPropagation();
         setIsConfirmOpen(true);
-        setCallBack(() => {
-            return () => {
-                setIsConfirmOpen(false);
-                handleChangeSubmit(e);
-                setIsEditing(!isEditing);
-                closeModal();
-            }
-        })
+        callBackRef.current = () => {
+            setIsConfirmOpen(false);
+            handleChangeSubmit(e);
+            setIsEditing(!isEditing);
+            closeModal();
+        }
     }
 
     const OnSubmit = (data) =>{
@@ -245,7 +242,7 @@ function AddTaskDialog({ openModal, closeModal, card=null, initialEditMode=false
                     closeConfirmModal={(e) => {
                         setIsConfirmOpen(false)
                     }} 
-                    callBack={callBack} 
+                    callBack={callBackRef.current} 
                     reset={reset}
                     isEditing={isEditing}
                     setIsEditing={setIsEditing}
