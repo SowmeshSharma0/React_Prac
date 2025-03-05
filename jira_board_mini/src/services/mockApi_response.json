@@ -5,6 +5,7 @@
             "title": "Task 1",
             "description": "Description 1",
             "assignee": "John Doe",
+            "reporter": "Jane Smith",
             "priority": 2,
             "due_date": "2025-03-01",
             "cross_status": 1
@@ -14,6 +15,7 @@
             "title": "Task 2",
             "description": "Description 2",
             "assignee": "Jane Smith",
+            "reporter": "John Doe",
             "priority": 2,
             "due_date": "2024-03-02",
             "cross_status": 3
@@ -23,6 +25,7 @@
             "title": "Task 3",
             "description": "Description 3",
             "assignee": "John Doe",
+            "reporter": "James",
             "priority": 1,
             "due_date": "2025-03-03",
             "cross_status": 2
@@ -32,6 +35,7 @@
             "title": "Task 4",
             "description": "Description 4",
             "assignee": "Jane Smith",
+            "reporter": "John Doe",
             "priority": 1,
             "due_date": "2025-03-04",
             "cross_status": 3
@@ -41,6 +45,7 @@
             "title": "Task 5",
             "description": "Description 5",
             "assignee": "John Doe",
+            "reporter": "John Doe",
             "priority": 1,
             "due_date": "2025-03-05",
             "cross_status": 3
@@ -50,6 +55,7 @@
             "title": "Task 6",
             "description": "Description 6",
             "assignee": "Jane Smith",
+            "reporter": "James",
             "priority": 1,
             "due_date": "2025-03-06",
             "cross_status": 3

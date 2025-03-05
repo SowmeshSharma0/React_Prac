@@ -7,7 +7,6 @@ export const StyledWrapper = styled.dialog`
     width: 50%;
     overflow-y: auto;
     position: relative;
-    /* height: 78%; */
 
     @media (max-width: 768px) {
         width: 80%;

@@ -1,5 +1,4 @@
 import { useContext, useMemo } from "react"
-// import { GlobalContext } from "../context/GlobalContext"
 import { CardContext } from "../context/CardContext"
 import { GlobalContext } from "../context/GlobalContext"
 

@@ -5,7 +5,6 @@ export const StyledAddTask = styled.div`
     color: white;
     padding: 0.8rem;
     width: 3%;
-    /* height: 3%; */
     border-radius: 30%;
     text-align: center;
     align-self: flex-end;

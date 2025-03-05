@@ -8,7 +8,6 @@ export const useCards = () => {
     const [Cards, setCards] = useState(null)
     const [DraggedCard, setDraggedCard] = useState(null)
     const [IsDragActive, setIsDragActive] = useState(false)
-    // const [DraggableStates, setDraggableStates] = useState({})
     const DraggableStates = useRef({})
 
     const {addAssignee, removeAssignee, Assignees, toggleAssigneeFilter, areFiltersActive} = useAssignee()

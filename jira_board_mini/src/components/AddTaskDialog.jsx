@@ -18,7 +18,6 @@ function AddTaskDialog({ openModal, closeModal, card=null, initialEditMode=false
     const {addCard, deleteCard,updateCard}= useContext(CardContext)
 
     const [isConfirmOpen, setIsConfirmOpen] = useState(false);
-    //understand callbacks better
 
     const callBackRef = useRef(null);
 
@@ -56,8 +55,6 @@ function AddTaskDialog({ openModal, closeModal, card=null, initialEditMode=false
         e.preventDefault();
         const data = getValues();
         updateCard(card.id, data)
-        // deleteCard(card.id);
-        // addCard(data, data.priority, data.cross_status)
     }
 
     const handleEdit = (e) => {

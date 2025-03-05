@@ -20,26 +20,12 @@ function TaskList({main_state, cross_state}) {
   const {usable_card_width, usable_card_height} = useContext(GlobalContext)
 
   const handleDrop = (e) => {
-    // why prevent default here
     e.preventDefault();
     setIsDragActive(false)
 
     if(!DraggableStates.current[main_state][cross_state]) return
     
     updateCard(DraggedCard.id, {priority: main_state, cross_status: cross_state})
-    // DraggedCard.priority = main_state
-    // DraggedCard.cross_status = cross_state
-
-    //make an update card api call here
-
-    // deleteCard(DraggedCard.id)
-    // addCard(DraggedCard, main_state, cross_state)
-
-    // addCard(DraggedCard, main_state, cross_state)
-    // deleteCard(DraggedCard.id)
-
-
-    //i did addFirst and then delete it was behaving wierdly, but then then reversed the order and it worked fine
   }
 
   if(Cards === null)

@@ -28,7 +28,6 @@ export const useAssignee = (initialAssignees = {}) => {
     const addAssignee = (assignee) => {
         setAssignees(prevAssignees => {
             if (prevAssignees === null) {
-                // console.log('prevAssignees is null')
                 return {
                     [assignee]: {
                         count: 1,
@@ -97,7 +96,7 @@ export const useAssignee = (initialAssignees = {}) => {
             }
         }
         setAssignees(prevAssignees => {
-            const newAssignees = {...prevAssignees} //O(n)
+            const newAssignees = {...prevAssignees}
             newAssignees[toggleAssignee] = {
                 ...newAssignees[toggleAssignee],
                 isFilterActive: !newAssignees[toggleAssignee].isFilterActive

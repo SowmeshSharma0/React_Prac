@@ -1,4 +1,3 @@
-import { useContext } from "react"
 import FilterHorizontalPanel from "../components/FilterHorizontalPanel"
 import { CardProvider } from "../context/CardContext"
 
