@@ -54,6 +54,7 @@ function AddTaskDialog({ openModal, closeModal, card=null, initialEditMode=false
     const handleChangeSubmit = (e) => {
         e.preventDefault();
         const data = getValues();
+        
         updateCard(card.id, data)
     }
 
