@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react"
-import { addCardAPI, deleteCardAPI } from "../services/setCards"
+import { addCardAPI, deleteCardAPI, updateCardAPI } from "../services/setCards"
 import { useAssignee } from "../hooks/useAssignee";
 import getCardsAPI from "../services/getCards"
 
@@ -57,9 +57,6 @@ export const useCards = () => {
     }
 
     const updateCard = async (id, updateObject) => {
-        console.log(Cards)
-        console.log(id)
-        console.log(updateObject)
         setCards(prevCards => prevCards.map(card => {
             if(card.id === id)
             {
@@ -67,6 +64,9 @@ export const useCards = () => {
             }
             return card
         }))
+
+        const response = await updateCardAPI({...updateObject, id})
+        console.log(response)
     }
 
     return {Cards, DraggedCard, setDraggedCard, IsDragActive, setIsDragActive, DraggableStates, addCard, deleteCard, updateCard, Assignees, toggleAssigneeFilter, areFiltersActive}
