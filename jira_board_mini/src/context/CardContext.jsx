@@ -16,6 +16,7 @@ export const CardProvider = ({children, initialAssignees = {}}) => {
         setDraggableStates, 
         addCard, 
         deleteCard, 
+        updateCard,
         Assignees, 
         toggleAssigneeFilter, 
         areFiltersActive
@@ -32,6 +33,7 @@ export const CardProvider = ({children, initialAssignees = {}}) => {
                 Cards,
                 addCard,
                 deleteCard,
+                updateCard,
                 DraggableStates,
                 setDraggableStates,
                 IsDragActive,

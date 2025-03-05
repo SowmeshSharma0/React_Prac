@@ -8,8 +8,7 @@ function TaskList({main_state, cross_state}) {
   const {
     DraggedCard,
     Cards,
-    addCard,
-    deleteCard,
+    updateCard,
     DraggableStates,
     IsDragActive,
     setIsDragActive,
@@ -20,21 +19,21 @@ function TaskList({main_state, cross_state}) {
 
   const {usable_card_width, usable_card_height} = useContext(GlobalContext)
 
-  // console.log(main_state, cross_state)
-  // console.log(DraggableStates)
-
   const handleDrop = (e) => {
     // why prevent default here
     e.preventDefault();
     setIsDragActive(false)
 
-    if(!DraggableStates[main_state][cross_state]) return
+    if(!DraggableStates.current[main_state][cross_state]) return
+    
+    updateCard(DraggedCard.id, {priority: main_state, cross_status: cross_state})
+    // DraggedCard.priority = main_state
+    // DraggedCard.cross_status = cross_state
 
-    //another way to do it:
-    // just update DraggedCard.priority and DraggedCard.cross_status using setDraggedCard
+    //make an update card api call here
 
-    deleteCard(DraggedCard.id)
-    addCard(DraggedCard, main_state, cross_state)
+    // deleteCard(DraggedCard.id)
+    // addCard(DraggedCard, main_state, cross_state)
 
     // addCard(DraggedCard, main_state, cross_state)
     // deleteCard(DraggedCard.id)
@@ -57,7 +56,7 @@ function TaskList({main_state, cross_state}) {
     <StyledTaskList 
       onDragOver={(e) => e.preventDefault()} 
       onDrop={handleDrop} 
-      DraggableStates={DraggableStates} 
+      DraggableStates={DraggableStates.current} 
       main_state={main_state} 
       cross_state={cross_state}
       isDragActive={IsDragActive}

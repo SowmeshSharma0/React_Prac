@@ -1,20 +1,20 @@
 import { useContext, useMemo } from "react"
-import { GlobalContext } from "../context/GlobalContext"
+// import { GlobalContext } from "../context/GlobalContext"
 import { CardContext } from "../context/CardContext"
+import { GlobalContext } from "../context/GlobalContext"
 
-const useCalculateDraggableStates = ({main_state, cross_state}) => {
+const useCalculateDraggableStates = (main_state, cross_state) => {
 
     const {card_move_rules_horizontal, card_move_rules_vertical} = useContext(GlobalContext)
-    const {setDraggableStates} = useContext(CardContext)
-
-    // console.log("main_state", main_state, "cross_state", cross_state)
+    const {DraggableStates} = useContext(CardContext)
 
     //pure vs impure functions
     //use memo always uses pure functions
 
     //what kind of function to use in useMemo ; ask gpt
 
-    const DraggableStates = useMemo(() => {
+    const newDraggableStates = useMemo(() => {
+        console.log('useMemo recalculating with:', main_state, cross_state);
         const newDraggableStates = {}
 
         // Initialize all states as false
@@ -41,13 +41,9 @@ const useCalculateDraggableStates = ({main_state, cross_state}) => {
         return newDraggableStates
     }, [main_state, cross_state])
 
-    
-    //useCallback use properly; 
-    //callback fncs
-    // useFncs read again
     // pure, impure fncs
     return () => {
-        setDraggableStates(DraggableStates)
+        DraggableStates.current = newDraggableStates
     }
 }
 

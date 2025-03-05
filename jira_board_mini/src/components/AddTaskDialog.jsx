@@ -15,7 +15,7 @@ import GenericDialog from "./GenericDialog";
 function AddTaskDialog({ openModal, closeModal, card=null, initialEditMode=false }) {
 
     const {main_axis_state_mapping} = useContext(GlobalContext)
-    const {addCard, deleteCard}= useContext(CardContext)
+    const {addCard, deleteCard,updateCard}= useContext(CardContext)
 
     const [isConfirmOpen, setIsConfirmOpen] = useState(false);
     //understand callbacks better
@@ -54,9 +54,10 @@ function AddTaskDialog({ openModal, closeModal, card=null, initialEditMode=false
 
     const handleChangeSubmit = (e) => {
         e.preventDefault();
-        deleteCard(card.id);
         const data = getValues();
-        addCard(data, data.priority, data.cross_status)
+        updateCard(card.id, data)
+        // deleteCard(card.id);
+        // addCard(data, data.priority, data.cross_status)
     }
 
     const handleEdit = (e) => {
@@ -150,7 +151,8 @@ function AddTaskDialog({ openModal, closeModal, card=null, initialEditMode=false
                             id="priority" 
                             disabled={!isEditing && card}
                             {...register("priority", {
-                                required: "Priority is required"
+                                required: "Priority is required",
+                                valueAsNumber: true
                             })}
                         >
                             {

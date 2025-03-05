@@ -11,7 +11,7 @@ function TaskCard({card}) {
     const {setDraggedCard, setIsDragActive} = useContext(CardContext)
     const [isExpanded, setIsExpanded] = useState(false)
 
-    const calculateDraggableStates = useCalculateDraggableStates({main_state: card.priority, cross_state: card.cross_status})
+    const calculateDraggableStates = useCalculateDraggableStates(card.priority, card.cross_status)
 
     const handleOnDragStart = useCallback((e) => {
         setDraggedCard(card)
@@ -21,7 +21,7 @@ function TaskCard({card}) {
         }, 0);
         calculateDraggableStates();
     }, [setIsDragActive])
-
+    
     const handleOnDragEnd = useCallback((e) => {
         e.target.style.visibility = "visible";
     }, [])

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import { addCardAPI, deleteCardAPI } from "../services/setCards"
 import { useAssignee } from "../hooks/useAssignee";
 import getCardsAPI from "../services/getCards"
@@ -8,7 +8,8 @@ export const useCards = () => {
     const [Cards, setCards] = useState(null)
     const [DraggedCard, setDraggedCard] = useState(null)
     const [IsDragActive, setIsDragActive] = useState(false)
-    const [DraggableStates, setDraggableStates] = useState({})
+    // const [DraggableStates, setDraggableStates] = useState({})
+    const DraggableStates = useRef({})
 
     const {addAssignee, removeAssignee, Assignees, toggleAssigneeFilter, areFiltersActive} = useAssignee()
 
@@ -44,8 +45,8 @@ export const useCards = () => {
         console.log(response)
     }
     const deleteCard = async (id) => {
-        const newCards = Cards.filter(card => card.id !== id) //O(n)
-        const delAssignee = Cards.find(card => card.id === id).assignee //O(n) ; earlier using CardsIndex[id].assignee, it was O(1)
+        const newCards = Cards.filter(card => card.id !== id)
+        const delAssignee = Cards.find(card => card.id === id).assignee
 
         removeAssignee(delAssignee)
 
@@ -55,5 +56,18 @@ export const useCards = () => {
         console.log(response)
     }
 
-    return {Cards, DraggedCard, setDraggedCard, IsDragActive, setIsDragActive, DraggableStates, setDraggableStates, addCard, deleteCard, Assignees, toggleAssigneeFilter, areFiltersActive}
+    const updateCard = async (id, updateObject) => {
+        console.log(Cards)
+        console.log(id)
+        console.log(updateObject)
+        setCards(prevCards => prevCards.map(card => {
+            if(card.id === id)
+            {
+                return {...card, ...updateObject}
+            }
+            return card
+        }))
+    }
+
+    return {Cards, DraggedCard, setDraggedCard, IsDragActive, setIsDragActive, DraggableStates, addCard, deleteCard, updateCard, Assignees, toggleAssigneeFilter, areFiltersActive}
 }
