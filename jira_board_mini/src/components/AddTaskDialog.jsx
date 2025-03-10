@@ -10,6 +10,7 @@ import { memo } from "react";
 import { useForm } from "react-hook-form";
 import { useClickOutside } from "../hooks/useClickOutside";
 import GenericDialog from "./GenericDialog";
+import { useToggle } from "../hooks/useToggle";
 
 
 function AddTaskDialog({ openModal, closeModal, card=null, initialEditMode=false }) {
@@ -18,6 +19,8 @@ function AddTaskDialog({ openModal, closeModal, card=null, initialEditMode=false
     const {addCard, deleteCard,updateCard}= useContext(CardContext)
 
     const [isConfirmOpen, setIsConfirmOpen] = useState(false);
+
+    // const [isConfirmModalOpen, toggleConfirmModal] = useToggle(false);
 
     const callBackRef = useRef(null);
 

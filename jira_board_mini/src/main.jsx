@@ -10,6 +10,7 @@ createRoot(document.getElementById('root')).render(
   <ThemeProvider>
     <GlobalProvider>
       <CardProvider>
+        
         <StrictMode>
         <App />
         </StrictMode>

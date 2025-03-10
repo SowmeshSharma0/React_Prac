@@ -1,15 +1,16 @@
-import { useCallback, useContext, useState } from "react"
+import { useCallback, useContext } from "react"
 import { StyledTaskCard } from "./styles/TaskCard.styled"
 import { CardContext } from "../context/CardContext"
 import PriorityHighIcon from '@mui/icons-material/PriorityHigh';
 import AddTaskDialog from "./AddTaskDialog";
 import { memo } from "react";
 import useCalculateDraggableStates from "../hooks/useCalculateDraggableStates";
+import { useToggle } from "../hooks/useToggle";
 
 function TaskCard({card}) {
 
     const {setDraggedCard, setIsDragActive} = useContext(CardContext)
-    const [isExpanded, setIsExpanded] = useState(false)
+    const [isModalOpen, toggleModal] = useToggle(false)
 
     const calculateDraggableStates = useCalculateDraggableStates(card.priority, card.cross_status)
 
@@ -33,9 +34,7 @@ function TaskCard({card}) {
                 onDragStart={handleOnDragStart}
                 onDragEnd={handleOnDragEnd}
                 cardprio = {card.priority}
-                onClick={() => {
-                    setIsExpanded(!isExpanded)
-                }}
+                onClick={toggleModal}
             >
                 <div className="cardHeader">
                     <div></div>
@@ -49,8 +48,8 @@ function TaskCard({card}) {
                 </div>
             </StyledTaskCard>
             <AddTaskDialog 
-                openModal={isExpanded} 
-                closeModal={() => setIsExpanded(false)} 
+                openModal={isModalOpen} 
+                closeModal={() => toggleModal(false)} 
                 card={card}
             />
         </>

@@ -1,23 +1,20 @@
-import { useCallback, useState } from "react";
 import { StyledAddTask } from "./styles/AddTask.styled"
 import AddTaskDialog from "./AddTaskDialog";
+import { useToggle } from "../hooks/useToggle";
 
 function AddTask({BtnTxt = '+'}) {
-    const [modal, setModal] = useState(false);
     // conditional rendering of dialog: instead of rendering the dialog twice; i render the dialog only once;
 
-    const updateModal = useCallback(() => {
-        setModal(prev => !prev)
-    }, [])
+    const [modal, toggleModal] = useToggle(false)
 
     return (
         <>
-            <StyledAddTask onClick={updateModal}>
+            <StyledAddTask onClick={toggleModal}>
                 {BtnTxt}
             </StyledAddTask>
             {modal && <AddTaskDialog 
                 openModal={modal}
-                closeModal={updateModal}
+                closeModal={toggleModal}
             />
             }
         </>

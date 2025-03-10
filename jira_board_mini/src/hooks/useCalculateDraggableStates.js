@@ -13,7 +13,7 @@ const useCalculateDraggableStates = (main_state, cross_state) => {
     //what kind of function to use in useMemo ; ask gpt
 
     const newDraggableStates = useMemo(() => {
-        console.log('useMemo recalculating with:', main_state, cross_state);
+        // console.log('useMemo recalculating with:', main_state, cross_state);
         const newDraggableStates = {}
 
         // Initialize all states as false
