@@ -96,10 +96,23 @@ const useScreenDetector = () => {
             setUsableCardHeight(calculateCardHeight);
         }
 
-        window.addEventListener('resize', handleResize);
+        // Throttle the resize event to prevent excessive re-renders: big performance boost
+        const throttleHandleResize = (func, delay) => {
+            let lastCall = 0;
+            return function(...args){
+                const now = new Date().getTime();
+                if(now - lastCall < delay){
+                    return;
+                }
+                lastCall = now;
+                func(...args);
+            }
+        }
+
+        window.addEventListener('resize', throttleHandleResize(handleResize, 500));
         handleResize();
 
-        return () => window.removeEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', throttleHandleResize(handleResize, 200));
     }, [calculateCardWidth, calculateCardHeight]);
 
     return {usable_card_width, usable_card_height};
