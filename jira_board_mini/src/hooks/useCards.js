@@ -58,7 +58,7 @@ export const useCards = () => {
     const updateCard = async (id, updateObject) => {
         // console.log(updateObject)
         const checkCard = Cards.find(card => card.id === id)
-        if(checkCard.assignee !== updateObject.assignee)
+        if(updateObject.assignee !== undefined && checkCard.assignee !== updateObject.assignee)
         {
             removeAssignee(checkCard.assignee)
             addAssignee(updateObject.assignee)
