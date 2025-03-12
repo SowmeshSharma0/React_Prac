@@ -18,9 +18,7 @@ function AddTaskDialog({ openModal, closeModal, card=null, initialEditMode=false
     const {main_axis_state_mapping} = useContext(GlobalContext)
     const {addCard, deleteCard,updateCard}= useContext(CardContext)
 
-    const [isConfirmOpen, setIsConfirmOpen] = useState(false);
-
-    // const [isConfirmModalOpen, toggleConfirmModal] = useToggle(false);
+    const [isConfirmModalOpen, toggleConfirmModal] = useToggle(false);
 
     const callBackRef = useRef(null);
 
@@ -42,14 +40,14 @@ function AddTaskDialog({ openModal, closeModal, card=null, initialEditMode=false
     const wrapperRef = useClickOutside(() => closeModal());
     const handleDelete = (e) => {
         e.stopPropagation();
-        setIsConfirmOpen(true);
+        toggleConfirmModal(true);
 
         //state must be something be something that changes the ui; not a function
         //use callback must be used instead of this state.
 
         callBackRef.current = () => {
             deleteCard(card.id);
-            setIsConfirmOpen(false);
+            toggleConfirmModal(false);
             closeModal();
         }
     }
@@ -63,9 +61,9 @@ function AddTaskDialog({ openModal, closeModal, card=null, initialEditMode=false
 
     const handleEdit = (e) => {
         e.stopPropagation();
-        setIsConfirmOpen(true);
+        toggleConfirmModal(true);
         callBackRef.current = () => {
-            setIsConfirmOpen(false);
+            toggleConfirmModal(false);
             handleChangeSubmit(e);
             setIsEditing(!isEditing);
             closeModal();
@@ -227,10 +225,8 @@ function AddTaskDialog({ openModal, closeModal, card=null, initialEditMode=false
             </GenericDialog>
             {card && 
                 <Confirmation 
-                    isConfirmModalOpen={isConfirmOpen} 
-                    closeConfirmModal={() => {
-                        setIsConfirmOpen(false)
-                    }} 
+                    isConfirmModalOpen={isConfirmModalOpen} 
+                    closeConfirmModal={() => toggleConfirmModal(false)} 
                     callBack={callBackRef.current} 
                     reset={reset}
                     isEditing={isEditing}
