@@ -1,4 +1,4 @@
-import { useRef, useState, useContext, useCallback} from "react";
+import { useRef, useContext, useCallback} from "react";
 import { StyledForm, StyledWrapper } from "./styles/AddTaskDialog.styled";
 import { CardContext } from "../context/CardContext";
 import { GlobalContext } from "../context/GlobalContext";
@@ -22,7 +22,7 @@ function AddTaskDialog({ openModal, closeModal, card=null, initialEditMode=false
 
     const callBackRef = useRef(null);
 
-    const [isEditing, setIsEditing] = useState(initialEditMode);
+    const [isEditing, toggleIsEditing] = useToggle(initialEditMode);
 
     const {register, handleSubmit, formState: {errors}, reset, getValues} = useForm({
         defaultValues: {
@@ -65,7 +65,7 @@ function AddTaskDialog({ openModal, closeModal, card=null, initialEditMode=false
         callBackRef.current = () => {
             toggleConfirmModal(false);
             handleChangeSubmit(e);
-            setIsEditing(!isEditing);
+            toggleIsEditing();
             closeModal();
         }
     }
@@ -96,7 +96,7 @@ function AddTaskDialog({ openModal, closeModal, card=null, initialEditMode=false
                                 <div className="edit-wrapper">
                                     <EditIcon 
                                         onClick={isEditing ? handleEdit : () => {
-                                            setIsEditing(!isEditing)
+                                            toggleIsEditing()
                                             handleSubmit(handleEdit)
                                         }}
                                     />
@@ -104,7 +104,7 @@ function AddTaskDialog({ openModal, closeModal, card=null, initialEditMode=false
                             </>
                         }
                         <button type="button" onClick={() => {
-                            setIsEditing(false)
+                            toggleIsEditing(false)
                             closeModal()
                         }}>
                             <CloseIcon />
@@ -223,14 +223,14 @@ function AddTaskDialog({ openModal, closeModal, card=null, initialEditMode=false
                     </StyledForm>
                 </div>
             </GenericDialog>
-            {card && 
+            {card && isConfirmModalOpen &&
                 <Confirmation 
                     isConfirmModalOpen={isConfirmModalOpen} 
                     closeConfirmModal={() => toggleConfirmModal(false)} 
                     callBack={callBackRef.current} 
                     reset={reset}
                     isEditing={isEditing}
-                    setIsEditing={setIsEditing}
+                    toggleIsEditing={toggleIsEditing}
                 /> 
             }
         </>

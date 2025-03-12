@@ -1,21 +1,19 @@
-import { useContext, useState } from 'react'
+import { useContext } from 'react'
 import TaskList from './TaskList'
 import { GlobalContext } from '../context/GlobalContext'
 import { StyledHorizontalListView } from './styles/HorizontalListView.styled'
+import { useToggle } from '../hooks/useToggle'
 const HorizontalListView = ({state, isExpandable}) => {
 
     const {main_axis_state_mapping, usable_card_height, cross_axis_state_mapping} = useContext(GlobalContext)
-    const [isExpanded, setIsExpanded] = useState(false)
 
-    const toggleExpand = () => {
-        setIsExpanded(!isExpanded)
-    }
+    const [isExpanded, toggleExpand] = useToggle(false)
 
     return (
         <StyledHorizontalListView isExpandable={isExpandable} expanded={isExpanded} usable_card_height={usable_card_height}>
             <div className="section-header">
                 <h2>{main_axis_state_mapping[state]}</h2>
-                {isExpandable && <button onClick={toggleExpand}>&#x25BC;</button>}
+                {isExpandable && <button onClick={() => toggleExpand()}>&#x25BC;</button>}
             </div>
             <div className="task-list-wrapper">
                 <div className="task-list">

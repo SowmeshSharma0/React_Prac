@@ -1,7 +1,7 @@
 import { StyledConfirmation, StyledConfirmationWrapper } from "./styles/Confirmation.styled";
 import GenericDialog from "./GenericDialog";
 
-const Confirmation = ({isConfirmModalOpen, closeConfirmModal, callBack, reset, isEditing, setIsEditing=null}) => {
+const Confirmation = ({isConfirmModalOpen, closeConfirmModal, callBack, reset, isEditing, toggleIsEditing=null}) => {
 
     return (
         <GenericDialog openModal={isConfirmModalOpen} closeModal={closeConfirmModal} Component={StyledConfirmationWrapper}>
@@ -19,7 +19,7 @@ const Confirmation = ({isConfirmModalOpen, closeConfirmModal, callBack, reset, i
                         closeConfirmModal()
                         reset()
                         if(isEditing){
-                            setIsEditing(!isEditing)
+                            toggleIsEditing()
                         }
                     }}>Cancel</button>
                 </div>

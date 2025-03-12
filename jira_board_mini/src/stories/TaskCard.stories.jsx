@@ -1,10 +1,10 @@
 import TaskCard from "../components/TaskCard";
 import { CardProvider } from "../context/CardContext";
 import { GlobalContext } from "../context/GlobalContext";
-import {card_move_rules_horizontal, card_move_rules_vertical_cross_state, main_axis_state_mapping} from "../context/constants";
+import {card_move_rules_horizontal, card_move_rules_vertical, main_axis_state_mapping} from "../context/constants";
 
 const withContexts = (Story) => (
-    <GlobalContext.Provider value={{card_move_rules_horizontal, card_move_rules_vertical_cross_state, main_axis_state_mapping}}>
+    <GlobalContext.Provider value={{card_move_rules_horizontal, card_move_rules_vertical, main_axis_state_mapping}}>
         <CardProvider>
             <Story />
         </CardProvider>
@@ -34,6 +34,7 @@ export const TaskCardStoryHighPriority = {
             description: "Task 1 description",
             status: "To Do",
             priority: 2,
+            cross_status: 0,
             dueDate: "2024-01-01",
             assignee: "John Doe",
         }
@@ -49,6 +50,7 @@ export const TaskCardStoryMediumPriority = {
             description: "Task 1 description",
             status: "To Do",
             priority: 1,
+            cross_status: 2,
             dueDate: "2024-01-01",
             assignee: "John Doe",
         }
@@ -64,6 +66,7 @@ export const TaskCardStoryLowPriority = {
             description: "Task 1 description",
             status: "To Do",
             priority: 0,
+            cross_status: 3,
             dueDate: "2024-01-01",
             assignee: "John Doe",
         }
